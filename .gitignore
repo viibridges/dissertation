@@ -1,0 +1,11 @@
+*.aux
+*.bbl
+*.blg
+*.lof
+*.log
+*.lot
+*.brf
+*.toc
+*.fdb_latexmk
+*.fls
+/dissertation.pdf

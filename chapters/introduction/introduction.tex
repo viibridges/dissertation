@@ -1,0 +1,104 @@
+\chapter{Introduction}
+\label{chap:intro}
+
+\makeatletter
+\newenvironment{chapquote}[2][2em]
+{\setlength{\@tempdima}{#1} \def\chapquote@author{#2} \parshape 1
+  \@tempdima \dimexpr\textwidth-2\@tempdima\relax \itshape}
+{\par\normalfont\hfill--\
+\chapquote@author\hspace*{\@tempdima}\par\bigskip}
+\makeatother
+
+%\begin{chapquote}{Walt Disney}
+  %``Of all of our inventions for mass communication, pictures still
+  %speak the most universally understood language.''
+%\end{chapquote}
+
+%Outline:
+\begin{itemize}
+  \item sliver bullet and ``summer project'' story
+  \item ``summer project'' is still going on
+  \item tranditional CV methods and emerge of deep learning (gamer changer)
+  \item geometry information are useful for applications, how to learn them
+  \item geometry information are useful for image understanding (training), how to use them
+  \item overhead image (encoding location) as type of geometry information are useful
+  \item growing, densely available in space and time
+\end{itemize}
+
+The topic of understanding images has been around for half a century.
+A well known [annodose] in computer vision community is set in the
+60s. The MIT professor Dr. Marvin Minsky assigned a couple of
+undergrads to spend the summer programming a computer to recognize
+objects in the scene~\cite{boden2006mind}. Quite like the attempts of
+proving the famous ``Four color theorem'', [[story about a prof claim
+he can prove it in a class]]. Fortunate for the mathematicans, the
+``Four color theorem'' has been proved by using powerful computational
+resources, while the computer scientists are still trapped in Dr.
+Marvin Minsky's summer program (not fully solved yet).
+
+The ultimate goal of image understanding is to extract high-level
+understanding from digital images or videos. The task seems natural
+and easy for an adult human, but it is difficult for machines. 1) Silver
+bullet does not exist \todo{cite}, no general algorithm, we do things
+in a ad-hoc manner.
+
+The emerge of deep neural network brings light to the dream. The
+neural network is a biological design, just like our brains. [history
+of neural network]. Data and computational power bring us here.
+
+Lots algorithm focus on extract high-level info from the images. More
+and more deep learning algorithm start identifying lower-level info
+from the image like edge extracting and vanishing point detection.
+(geometric info). Identifying geometric information is useful for many
+applications.
+
+Geometric information can help training neural network to extract
+high-level information.
+
+Specifically, Use of overhead image (or map layout) is useful.
+overhead imagery are useful and easy to access, gowing densely
+available in space and time.
+
+We use geometric information and DL to solve computer vision problems.
+
+
+\section{Our Approach}
+Our approach conver the following area:
+
+\begin{itemize}[noitemsep]
+
+  \item \textbf{Extract Geometric Info from Image using DL}
+
+  \item \textbf{Overhead Image for Image Understanding}
+
+  \item \textbf{Extract High-Level Feature by Learning When and Where.}
+
+\end{itemize}
+
+
+\section{Synopsis}
+
+The remainder of this work is organized as follows:
+  
+\begin{itemize}[noitemsep]
+
+  \item \textbf{\chapref{dependence} - Are Deep Image Representations
+    Geo-Informative?} \newline \newline In this chapter, we
+    investigate the usefulness of deep image representations,
+    extracted from convolutional neural networks applied to
+    traditional vision tasks, for problems in geospatial image
+    analysis. In particular, we analyze their discriminative ability
+    with regard to location through several problem settings,
+    including region identification in ground-level imagery,
+    understanding and interpreting overhead images, and cross-view
+    image matching.  Our results demonstrate the effectiveness of deep
+    image representations extracted from CNNs, on both ground-level
+    and overhead imagery, for capturing geographically discriminative
+    features relating image appearance to geographic location.  This
+    points to a promising direction for future research in building
+    deep-learning based models that are directly targeted at problems
+    of localization and location-related feature extraction from
+    ground-level and overhead imagery.  This work was originally
+    reported in~\cite{workman2015geocnn}. \newline
+
+\end{itemize}
