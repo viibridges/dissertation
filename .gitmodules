@@ -1,0 +1,3 @@
+[submodule "scott"]
+	path = scott
+	url = git@bitbucket.org:ted_zhai/dissertation_scott.git
