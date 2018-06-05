@@ -12,7 +12,7 @@
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{lipsum}
-\usepackage{color}
+\usepackage{mystyle}
 
 \usepackage[resetlabels]{multibib}
 \newcites{journal,conference,workshop,abstracts}{Refereed
@@ -35,19 +35,6 @@
 
 \DeclareGraphicsExtensions{.pdf,.jpg,.png}
 \graphicspath{{images/}}
-
-\newcommand{\inject}[1]{\includefrom{chapters/#1/}{#1}}
-\newcommand{\todo}[1]{\textcolor{red}{todo: {\em #1}} }
-\newcommand{\chapref}[1]{Chapter~\ref{chap:#1}}
-\newcommand{\secref}[1]{Section~\ref{sec:#1}}
-\newcommand{\figref}[1]{Figure~\ref{fig:#1}}
-\newcommand{\tblref}[1]{Table~\ref{tbl:#1}}
-\newcommand{\trans}{\mathsf{T}}
-\newcommand{\inv}[1]{\ensuremath{{#1}^{\mathsf{-1}}}}
-\newcommand{\Tr}{\operatorname{Tr}}
-\newcommand*{\eg}{e.g.\@\xspace}
-\newcommand*{\ie}{i.e.\@\xspace}
-\newcommand{\ditem}[1]{\item {\sc #1}\hspace{.1in}}
 
 \begin{document}
 \emergencystretch 3em

@@ -55,9 +55,34 @@ applications.
 Geometric information can help training neural network to extract
 high-level information.
 
-Specifically, Use of overhead image (or map layout) is useful.
+\brief{Specifically, Use of overhead image (or map layout) is useful.
 overhead imagery are useful and easy to access, gowing densely
-available in space and time.
+available in space and time.}
+The use of overhead imagery has been proved useful for image
+understanding.
+Several methods have been recently proposed to jointly reason about
+co-located aerial and ground image pairs. Luo
+\etal~\cite{luo2008event} demonstrate that aerial imagery can aid
+in recognizing the visual content of a geo-tagged ground image.
+M{\'a}ttyus \etal~\cite{mattyus2016hd} perform joint inference over
+monocular aerial imagery and stereo ground images for fine-grained
+road segmentation. Wegner \etal~\cite{wegner2016cataloging} build a
+map of street trees. Given the horizon line and the camera intrinsics,
+Ghouaiel and Lef{\`e}vre~\cite{ghouaiel2016coupling} transform
+geo-tagged ground-level panoramas to a top-down view to enable
+comparisons with aerial imagery for the task of change detection.
+Recent work on cross-view image
+geolocalization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
+ has shown that convolutional neural
+networks are capable of extracting features from aerial imagery
+that can be matched to features extracted from ground imagery.
+Vo \etal~\cite{vo2016localizing} extend this line of work,
+demonstrating improved geolocalization performance by applying an
+auxiliary loss function to regress the ground-level camera orientation
+with respect to the aerial image. To our knowledge, our work is the
+first work to explore predicting the semantic layout of a ground
+image from an aerial image.
+
 
 We use geometric information and DL to solve computer vision problems.
 
@@ -98,7 +123,6 @@ The remainder of this work is organized as follows:
     points to a promising direction for future research in building
     deep-learning based models that are directly targeted at problems
     of localization and location-related feature extraction from
-    ground-level and overhead imagery.  This work was originally
-    reported in~\cite{workman2015geocnn}. \newline
+    ground-level and overhead imagery. \newline
 
 \end{itemize}
