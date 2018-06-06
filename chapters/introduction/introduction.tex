@@ -46,11 +46,31 @@ The emerge of deep neural network brings light to the dream. The
 neural network is a biological design, just like our brains. [history
 of neural network]. Data and computational power bring us here.
 
-Lots algorithm focus on extract high-level info from the images. More
+\brief{Lots algorithm focus on extract high-level info from the images. More
 and more deep learning algorithm start identifying lower-level info
 from the image like edge extracting and vanishing point detection.
 (geometric info). Identifying geometric information is useful for many
-applications.
+applications.}
+In computer vision, low-level elements like edges, line segments,
+super-pixels and vanishing points play important roles in many
+applications like image measuration, facade detection, and
+geo-localization.
+Though the CNNs are good at extracting high-level information from
+images, more and more researches start focusing on using CNN to
+extract low-level these elements.
+
+Zhai \etal~\cite{zhai2016horizon} Firstly try to detect horizon
+line and vanishing point using global image context extracted by CNN.
+Workman \etal~\cite{workman2016horizon} take the idea further and
+design an end-to-end network to predict horizon line from images
+in the wild. 
+Hold-Geoffroy \etal~\cite{hold2017perceptual}
+improve~\cite{workman2016horizon}'s results by using deeper networks,
+and introduce a new perceptual measure for horizon line detection.
+Unlike the previous work that mainly focus on horizon line detection,
+Zhang \etal~\cite{zhang2018dominant} propose to detect the dominant
+vanishing point using deep neural networks.
+
 
 Geometric information can help training neural network to extract
 high-level information.
