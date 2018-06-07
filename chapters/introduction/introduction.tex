@@ -25,6 +25,7 @@
   \item growing, densely available in space and time
 \end{itemize}
 
+\brief{
 The topic of understanding images has been around for half a century.
 A well known [annodose] in computer vision community is set in the
 60s. The MIT professor Dr. Marvin Minsky assigned a couple of
@@ -35,22 +36,22 @@ he can prove it in a class]]. Fortunate for the mathematicans, the
 ``Four color theorem'' has been proved by using powerful computational
 resources, while the computer scientists are still trapped in Dr.
 Marvin Minsky's summer program (not fully solved yet).
+}
 
+\brief{
 The ultimate goal of image understanding is to extract high-level
 understanding from digital images or videos. The task seems natural
 and easy for an adult human, but it is difficult for machines. 1) Silver
 bullet does not exist \todo{cite}, no general algorithm, we do things
 in a ad-hoc manner.
+}
 
+\brief{
 The emerge of deep neural network brings light to the dream. The
 neural network is a biological design, just like our brains. [history
 of neural network]. Data and computational power bring us here.
+}
 
-\brief{Lots algorithm focus on extract high-level info from the images. More
-and more deep learning algorithm start identifying lower-level info
-from the image like edge extracting and vanishing point detection.
-(geometric info). Identifying geometric information is useful for many
-applications.}
 In computer vision, low-level elements like edges, line segments,
 super-pixels and vanishing points play important roles in many
 applications like image measuration, facade detection, and
@@ -58,7 +59,13 @@ geo-localization.
 Though the CNNs are good at extracting high-level information from
 images, more and more researches start focusing on using CNN to
 extract low-level these elements.
-
+%
+Lee \etal~\cite{lee2017semantic} propose to detect semantic line
+segments, which are able to segment the scene semantically, using
+neural network. Maninis \etal~\cite{maninis2016convolutional} and Yang
+\etal~\cite{yang2016object} explore to detect object contours with
+CNNs.
+%
 Zhai \etal~\cite{zhai2016horizon} Firstly try to detect horizon
 line and vanishing point using global image context extracted by CNN.
 Workman \etal~\cite{workman2016horizon} take the idea further and
@@ -71,13 +78,12 @@ Unlike the previous work that mainly focus on horizon line detection,
 Zhang \etal~\cite{zhang2018dominant} propose to detect the dominant
 vanishing point using deep neural networks.
 
-
+\brief{
 Geometric information can help training neural network to extract
 high-level information.
+}
 
-\brief{Specifically, Use of overhead image (or map layout) is useful.
-overhead imagery are useful and easy to access, gowing densely
-available in space and time.}
+\todo{re-edit}
 The use of overhead imagery has been proved useful for image
 understanding.
 Several methods have been recently proposed to jointly reason about
@@ -103,8 +109,9 @@ with respect to the aerial image. To our knowledge, our work is the
 first work to explore predicting the semantic layout of a ground
 image from an aerial image.
 
-
+\brief{
 We use geometric information and DL to solve computer vision problems.
+}
 
 
 \section{Our Approach}
