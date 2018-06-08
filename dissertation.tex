@@ -12,15 +12,13 @@
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{lipsum}
-\usepackage{mystyle}
+\usepackage{memhfixc}
+\usepackage{miscstyle}
 
-\usepackage[resetlabels]{multibib}
-\newcites{journal,conference,workshop,abstracts}{Refereed
-  Journal Publications,Refereed Conference Publications,
-  Refereed Workshop Publications,Abstracts}
+\newcommand{\disstitle}{Geometric Information for Image Understanding}
 
-\usepackage[pdfauthor={Scott Workman},
-            pdftitle={Leveraging Overhead Imagery for Localization, Mapping, and Understanding},
+\usepackage[pdfauthor={Menghua Zhai},
+            pdftitle={\disstitle},
             bookmarks=false,
             bookmarksnumbered=true,
             bookmarksopen=true,
@@ -28,19 +26,12 @@
             letterpaper=true,
             linktocpage,
             pagebackref=true]{hyperref}
-\usepackage{memhfixc}
-
-\OnehalfSpacing
-\setsecnumdepth{subsection}
-
-\DeclareGraphicsExtensions{.pdf,.jpg,.png}
-\graphicspath{{images/}}
 
 \begin{document}
 \emergencystretch 3em
 
 \author{Menghua Zhai}
-\title{Geometric Information for Image Understanding}
+\title{\disstitle}
 
 \abstract
 {
