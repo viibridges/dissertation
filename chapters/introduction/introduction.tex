@@ -122,15 +122,60 @@ We use geometric information and DL to solve computer vision problems.
 
 
 \section{Our Approach}
-Our approach conver the following area:
+My thesis focuses on the image understanding with camera geometry.
+There are two directions we will address: 1) How can we obtain camera
+geometry from images; 2) How can we use camera geometry to improve the
+current methods for image semantic extracting. For the first direction,
+we explore both the traditional method and deep learning approaches on
+different geometric calibration parameters. For the second direction,
+we will exploit the image geometric location to help extract
+semantically meaningful informations from images.
 
 \begin{itemize}[noitemsep]
 
-  \item \textbf{Extract Geometric Info from Image using DL}
+  \item \textbf{Complete Camera Geo-Calibration with MCMC Method:} 
+  The complete camera geo-calibration includes the detection of camera
+  location in the world, the pose and the focal length of the camera
+  given the input image. By constructing a objective function that
+  measures the ``matchness'' between the camera calibration and the
+  observation of the image, we are able to optimize the parameters in
+  the calibration space. However, this space multi-dimensional, which
+  makes the naive grid search infeasible. Our insight is to do the
+  optimization using Markov Chain Monte Carlo (MCMC) method. Our
+  algorithm is able to avoid unnecessary sampling in the
+  low-probabilistic region in the parameter space thus reduce the
+  computational time dramatically.
 
-  \item \textbf{Overhead Image for Image Understanding}
+  \item \textbf{Detecting Horizon and VPs using CNN:}
+  Horizon line and vanishing points (VPs) plays important roles in many
+  application such as image mensuration and facade detection. In the
+  previous work, researchers tended to use build bottom-up approaches to
+  solve this problem. Our work is inspired by human's perception of the
+  horizon line and the vanishing point. Our method exploit the image
+  global context to provide a prior distribution of the final solution,
+  thus to reduce the dimensionality of the solution space.
 
-  \item \textbf{Extract High-Level Feature by Learning When and Where.}
+  \item \textbf{Cross-view Domain Adaptation:} 
+  Current machine learning methods address problems that involves mostly
+  the ground imagery. Tons of dataset targeting on ground imagery are
+  annotated while much fewer are done for the overhead imagery.
+  In this work, we try to transfer the semantics from the ground imagery
+  to the overhead imagery by identifying the latent geometry
+  correspondences between these two. Similar to methods that driven by
+  the projection losses \todo{citation}, our network learns 
+  both the geometric projection between the overhead and ground
+  images, and the semantics of the overhead images jointly.
+
+  \item \textbf{Extract High-Level Feature by Learning When and Where:}
+  One of the key to the success of machine learning approaches are the
+  large quantity of annotated data. However, fully annotated imagery
+  only consists of a tiny part of the image resources available online.
+  The idea is to exploit other meta-info that are automatically
+  recorded/captured by devices to train the ML models.  We demonstrate
+  that the camera geometry can be used as weak ground truth for
+  supervision problem. By learning the capture time and the geolocation
+  of the images, our network is able capture the geo-temporal related
+  high-level features.
 
 \end{itemize}
 
