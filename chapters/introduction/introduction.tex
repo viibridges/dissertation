@@ -17,12 +17,12 @@
 %Outline:
 \begin{itemize}
   \item sliver bullet and ``summer project'' story
-  \item ``summer project'' is still going on
-  \item tranditional CV methods and emerge of deep learning (gamer changer)
-  \item geometry information are useful for applications, how to learn them
-  \item geometry information are useful for image understanding (training), how to use them
-  \item overhead image (encoding location) as type of geometry information are useful
-  \item growing, densely available in space and time
+  \item Geometry is important.
+  \item traditional method for geometry detection
+  \item deep learning (gamer changer)
+  \item geometry detection with deep learning
+  \item geometry for deep learning training
+  \item overhead images
 \end{itemize}
 
 \brief{
@@ -38,13 +38,25 @@ resources, while the computer scientists are still trapped in Dr.
 Marvin Minsky's summer program (not fully solved yet).
 }
 
-\brief{
-The ultimate goal of image understanding is to extract high-level
-understanding from digital images or videos. The task seems natural
-and easy for an adult human, but it is difficult for machines. 1) Silver
-bullet does not exist \todo{cite}, no general algorithm, we do things
-in a ad-hoc manner.
-}
+It is not a trivial task for machines to understand images in general.
+To achieve this goal, researchers adopt a divide-and-conquer strategy,
+that is divide image understanding into various sub-problems like
+object recognition, semantic segmentation, and pose estimation \etc.
+During the past decades, a lot of methods are developed to solve there
+sub-problem, many of them adopted a bottom-up (\todo{citations})
+workflow, where basic level cues play important roles
+(\todo{examples}). Among there basic cues, camera geometry are
+particularly useful for some computer vision tasks like facade
+detection, indoor layout estimation~\cite{ren2016coarse}.
+
+In the camera pin-hole model, camera geometry denotes the camera
+both intrinsic and extrinsic parameters. The intrinsic parameters
+encode the information of the camera itself such as focal length,
+principal point \etc; the extrinsic parameters are referred to as the
+external states of the camera, such as the camera poses and
+offset/location under some coordinate system. In this work, our study
+of the camera geometry mainly includes the extrinsic like camera pose
+and the geo-orientation/geo-localization of the camera.
 
 \brief{
 The emerge of deep neural network brings light to the dream. The
@@ -143,6 +155,7 @@ semantically meaningful informations from images.
   research.
 
   \item \textbf{Camera Geometry for Image Understanding:}
+  \todo{more writing}
   We explore the potentials of camera geometry for image understanding.
   Current machine learning methods address problems that involves mostly
   the ground imagery. Tons of dataset targeting on ground imagery are
