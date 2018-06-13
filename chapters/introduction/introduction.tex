@@ -58,12 +58,37 @@ offset/location under some coordinate system. In this work, our study
 of the camera geometry mainly includes the extrinsic like camera pose
 and the geo-orientation/geo-localization of the camera.
 
-\brief{
-The emerge of deep neural network brings light to the dream. The
-neural network is a biological design, just like our brains. [history
-of neural network]. Data and computational power bring us here.
-}
+During past dacades, many research has been done to detect the camera
+geometry from input images. \todo{citation and examples}. Most of the
+previous work optimize for a limited set of camera calibration
+parameters only. However, our research found that there exists an
+effective way of optimizing multiple camera calibration parameters at
+simultaneously (refer to \chapref{mcmc}). Our method use the Monte
+Carlo Markov Chain (MCMC) method to sample the possible solutions that
+minimize the objective function, which measure the ``matchness''
+between the observation (input image) and the camera calibration.
 
+Among the most influential approaches for camera geometry estimation,
+most methods are based on traditional statistics diagram. Not until a
+fewer years ago, machine learning based methods gradually caught
+people's attention in this area, thanks for the popularity of deep
+neural network. Neural networks were first proposed in 80th
+(\todo{citation}), The back-forward method develop by Hinton
+\todo{citation} makes the effective training possible. However neural
+networks are generally thought by researchers merely toy that can only
+solve a very limited set of tasks. It is the develop of computational
+resources and the big collection of annotated data that make the
+neural networks deeper and eventually bring it to the stage of
+industrial applications.
+
+In the area of vanishing point detection, we are among the first
+researches that use deep neural networks to solve the problem. The
+deep neural networks prove to be a good tool to extract high-level
+information that offer great help to conquer the problems in camera
+geometry estimation. \todo{many citations}.
+%
+\newline \newline
+%
 In computer vision, low-level elements like edges, line segments,
 super-pixels and vanishing points play important roles in many
 applications like image measuration, facade detection, and
