@@ -4,3 +4,34 @@ and introduce a new perceptual measure for horizon line detection.
 Unlike the previous work that mainly focus on horizon line detection,
 Zhang \etal~\cite{zhang2018dominant} propose to detect the dominant
 vanishing point using deep neural networks.
+
+\brief{
+Geometric information can help training neural network to extract
+high-level information.
+}
+
+\todo{re-edit}
+The use of overhead imagery has been proved useful for image
+understanding.
+Several methods have been recently proposed to jointly reason about
+co-located aerial and ground image pairs. Luo
+\etal~\cite{luo2008event} demonstrate that aerial imagery can aid
+in recognizing the visual content of a geo-tagged ground image.
+M{\'a}ttyus \etal~\cite{mattyus2016hd} perform joint inference over
+monocular aerial imagery and stereo ground images for fine-grained
+road segmentation. Wegner \etal~\cite{wegner2016cataloging} build a
+map of street trees. Given the horizon line and the camera intrinsics,
+Ghouaiel and Lef{\`e}vre~\cite{ghouaiel2016coupling} transform
+geo-tagged ground-level panoramas to a top-down view to enable
+comparisons with aerial imagery for the task of change detection.
+Recent work on cross-view image
+geolocalization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
+ has shown that convolutional neural
+networks are capable of extracting features from aerial imagery
+that can be matched to features extracted from ground imagery.
+Vo \etal~\cite{vo2016localizing} extend this line of work,
+demonstrating improved geolocalization performance by applying an
+auxiliary loss function to regress the ground-level camera orientation
+with respect to the aerial image. To our knowledge, our work is the
+first work to explore predicting the semantic layout of a ground
+image from an aerial image.

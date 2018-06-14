@@ -14,16 +14,16 @@
   %speak the most universally understood language.''
 %\end{chapquote}
 
-%Outline:
-\begin{itemize}
-  \item sliver bullet and ``summer project'' story
-  \item \st{Geometry is important.}
-  \item \st{traditional method for geometry detection}
-  \item \st{deep learning (gamer changer)}
-  \item \st{geometry detection with deep learning}
-  \item geometry for deep learning training
-  \item overhead images
-\end{itemize}
+%%Outline:
+%\begin{itemize}
+  %\item sliver bullet and ``summer project'' story
+  %\item \st{Geometry is important.}
+  %\item \st{traditional method for geometry detection}
+  %\item \st{deep learning (gamer changer)}
+  %\item \st{geometry detection with deep learning}
+  %\item \st{geometry for deep learning training}
+  %\item \st{overhead images}
+%\end{itemize}
 
 \brief{
 The topic of understanding images has been around for half a century.
@@ -104,47 +104,38 @@ researches that use deep neural networks to solve the problem. The
 deep neural networks prove to be a good tool to extract high-level
 information that offer great help to conquer the problems in camera
 geometry estimation. \todo{many citations}.
-%
 
-\brief{
-Geometric information can help training neural network to extract
-high-level information.
-}
-Camera geometry can provide help learn high-level image semantics.
+In our work, we have shown that deep neural networks are powerful
+tools for camera geometry estimation. In fact, the camera
+geometry can also assist learning high-level image semantics.
 Hoiem \etal~\cite{hoiem2008putting} demonstrate that taking camera
 perspective (horizon line) into consideration improves the performance
-for object detection.
+for object detection. Godard \etal~\cite{godard2017unsupervised}
+learn to predict the scene depth from a single image using left-right
+consistency, which is also an application of camera geometry.
+\todo{more citations about the projective loss}.
 
-\todo{re-edit}
-The use of overhead imagery has been proved useful for image
-understanding.
-Several methods have been recently proposed to jointly reason about
-co-located aerial and ground image pairs. Luo
-\etal~\cite{luo2008event} demonstrate that aerial imagery can aid
-in recognizing the visual content of a geo-tagged ground image.
-M{\'a}ttyus \etal~\cite{mattyus2016hd} perform joint inference over
-monocular aerial imagery and stereo ground images for fine-grained
-road segmentation. Wegner \etal~\cite{wegner2016cataloging} build a
-map of street trees. Given the horizon line and the camera intrinsics,
-Ghouaiel and Lef{\`e}vre~\cite{ghouaiel2016coupling} transform
-geo-tagged ground-level panoramas to a top-down view to enable
-comparisons with aerial imagery for the task of change detection.
-Recent work on cross-view image
-geolocalization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
- has shown that convolutional neural
-networks are capable of extracting features from aerial imagery
-that can be matched to features extracted from ground imagery.
-Vo \etal~\cite{vo2016localizing} extend this line of work,
-demonstrating improved geolocalization performance by applying an
-auxiliary loss function to regress the ground-level camera orientation
-with respect to the aerial image. To our knowledge, our work is the
-first work to explore predicting the semantic layout of a ground
-image from an aerial image.
+Another example of camera geometry boosting the learning project is to
+exploit the overhead imagery. Using the geometric locations of the
+ground-view images we can download the corresponding overhead images
+at the same locations through public online resources like bingmap
+\todo{cite}.
+%
+\todo{copy from scott} More recently, efforts have been made to
+automate overhead image analysis. As early as
+1970~\cite{idelsohn1970learning} methods were introduced for
+classifying terrain types from a single overhead image, with the goal
+of automatically generating terrain maps.  Similarly, in 1976 Bajcsy
+et al.~\cite{bajcsy1976computer} described a system for recognizing
+roads, intersections, and other road-like objects in overhead imagery.
+However, as overhead imaging differs drastically from ground-level
+imaging, the majority of techniques that have been developed have
+occurred independently and in task-specific ways~\cite{Rozen}.
+\brief{overhead image grows fast}.
 
-\brief{
-We use geometric information and DL to solve computer vision problems.
-}
-
+\todo{expand this paragraph}
+Camera geometry can also be used as weak annotations during training
+of the networks for image understanding.
 
 \section{Our Approach}
 My thesis focuses on the image understanding with camera geometry.
