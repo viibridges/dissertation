@@ -39,23 +39,28 @@ Understanding}
 \abstract
 {
   \SingleSpacing
-    Deep neural networks as one of the machine learning categories have been proposed
-    since 1980s and proved successful in recent years. This thesis proposes methods which
-    leverage deep neural networks to solve the camera geo-calibration problem, which is
-    one of the import computer vision tasks. Furthermore, we also use the geo-calibration
-    information (geo-location, orientation, etc.) to boost the training of the deep neural
-    networks for image understanding.
-    Our work focuses on three primary research areas: 1) estimating vanishing points
-    and horizon line using image global context computed with deep neural networks. 2)
-    domain adaptation from the ground image semantics to the satellite image semantics,
-    and 3) learning transient feature representations for webcam images using the time
-    and geo-location information in a semi-supervised manner.
-    The primary contribution of this thesis is to explore the relation between the
-    camera calibration information and image semantics, and bridge the gap between
-    two research domains using deep neural networks, which provides us new ways for
-    camera calibration and network training.
+  Camera geometry is one of the fundamental elements in computer vision.
+  It plays an essential role in many applications like depth estimation
+  and image mensuration. 
+  %
+  In recent years, the rise of deep neural networks (DNNs) had changed
+  the game in many computer vision areas, their ability of abstracting
+  high-level semantic knowledges makes a lot of hard challenges
+  solvable. 
+  %
+  This thesis mainly explores the possibility of combining camera
+  geometry and DNNs. That is 1) Detecting camera geometry using DNNs,
+  and 2) Training DNNs with camera geometric information.  Our work
+  includes two research targets: The first part of this thesis focuses
+  on camera geometry detection with DNNs, and the rest of it
+  demonstrates how camera geometry can boost the learning of DNNs.
+  %
+  The primary contribution of this thesis is to explore the relation
+  between camera geometry and image semantics, and bridge the gap
+  between these two research domains, which provides us new ways for
+  both camera calibration and deep neural network training.
 }
-\keywords{ deep neural networks, computer vision, geo-calibration}
+\keywords{ camera geometry, deep neural networks, computer vision}
 
 \advisor{Nathan Jacobs}
 \dgs{Miroslaw Truszczynski}
