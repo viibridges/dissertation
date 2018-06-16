@@ -43,12 +43,13 @@ program still remains open.
 
 It is not a trivial task for machines to understand images in general.
 To achieve this goal, researchers adopt a divide-and-conquer strategy,
-that is divide image understanding into various sub-problems like
+that is dividing image understanding into various sub-problems like
 object recognition, semantic segmentation, and pose estimation \etc.
-During the past decades, a lot of methods are developed to solve there
-sub-problem, many of them adopted a bottom-up (\todo{citations})
+During past decades, a lot of methods are developed to solve
+these
+sub-problems. Many of them adopted a bottom-up (\todo{citations})
 workflow, where basic level cues play important roles
-(\todo{examples}). Among there basic cues, camera geometry are
+(\todo{examples}). Among these basic cues, camera geometry is
 particularly useful for some computer vision tasks like facade
 detection, indoor layout estimation~\cite{ren2016coarse}.
 
@@ -61,14 +62,14 @@ offset/location under some coordinate system. In this work, our study
 of the camera geometry mainly includes the extrinsic like camera pose
 and the geo-orientation/geo-localization of the camera.
 
-During past dacades, many research has been done to detect the camera
+Many research has been done to detect the camera
 geometry from input images. \todo{citation and examples}. Most of the
 previous work optimize for a limited set of camera calibration
 parameters only. However, our research found that there exists an
 effective way of optimizing multiple camera calibration parameters at
 simultaneously (refer to \chapref{mcmc}). Our method use the Monte
 Carlo Markov Chain (MCMC) method to sample the possible solutions that
-minimize the objective function, which measure the ``matchness''
+minimize the objective function, which measures the ``matchness''
 between the observation (input image) and the camera calibration.
 
 Among the most influential approaches for camera geometry estimation,
@@ -76,12 +77,12 @@ most methods are based on traditional statistics diagram. Not until a
 fewer years ago, machine learning based methods gradually caught
 people's attention in this area, thanks for the popularity of deep
 neural network. Neural networks were first proposed in 80th
-(\todo{citation}), The back-forward method develop by Hinton
-\todo{citation} makes the effective training possible. However neural
+(\todo{citation}), The back-forward method developed by Hinton
+\todo{citation} makes the effective training possible. However, neural
 networks are generally thought by researchers merely toy that can only
 solve a very limited set of tasks. It is the develop of computational
-resources and the big collection of annotated data that make the
-neural networks deeper and eventually bring it to the stage of
+resources and the big collection of annotated data that enables the
+neural networks to grow deeper and eventually brings it to the stage of
 industrial applications.
 
 In computer vision, low-level elements like edges, line segments,
@@ -108,13 +109,13 @@ deep neural networks prove to be a good tool to extract high-level
 information that offer great help to conquer the problems in camera
 geometry estimation. \todo{many citations}.
 
-In our work, we have shown that deep neural networks are powerful
-tools for camera geometry estimation. In fact, the camera
-geometry can also assist learning high-level image semantics.
+In our previous work, we have shown that deep neural networks are
+powerful tools for camera geometry estimation as well. In fact, the
+camera geometry can also assist learning high-level image semantics.
 Hoiem \etal~\cite{hoiem2008putting} demonstrate that taking camera
 perspective (horizon line) into consideration improves the performance
-for object detection. Godard \etal~\cite{godard2017unsupervised}
-learn to predict the scene depth from a single image using left-right
+for object detection. Godard \etal~\cite{godard2017unsupervised} learn
+to predict the scene depth from a single image using left-right
 consistency, which is also an application of camera geometry.
 \todo{more citations about the projective loss}.
 
@@ -122,9 +123,10 @@ Another example of camera geometry boosting the learning project is to
 exploit the overhead imagery. Using the geometric locations of the
 ground-view images we can download the corresponding overhead images
 at the same locations through public online resources like bingmap
-\todo{cite}.
-%
-\todo{copy from scott} More recently, efforts have been made to
+\todo{cite}. We refer to these image pairs as ``cross-view image
+pairs''.
+
+\todo{copy from scott} Efforts have been made to
 automate overhead image analysis. As early as
 1970~\cite{idelsohn1970learning} methods were introduced for
 classifying terrain types from a single overhead image, with the goal
@@ -134,15 +136,32 @@ roads, intersections, and other road-like objects in overhead imagery.
 However, as overhead imaging differs drastically from ground-level
 imaging, the majority of techniques that have been developed have
 occurred independently and in task-specific ways~\cite{Rozen}.
-\brief{overhead image grows fast}.
+%\brief{overhead image grows fast}.
 
-\todo{expand this paragraph}
+Our work demonstrates that we are able to transfer the learned semantic
+knowledge from the ground image domain to the overhead image domain,
+given the camera geometric information of these two kind of images. In
+our algorithm, the camera geometry helps to collect the ``cross-view
+image pairs'' and aligned the orientation directions of images in a
+pair.
+
 Camera geometry can also be used as weak annotations during training
-of the networks for image understanding.
+of the networks for image understanding.  One of the key to the
+success of machine learning approaches are the large quantity of
+annotated data. However, fully annotated imagery consists of only a
+tiny part of the image resources available online. The idea is to
+exploit other meta-info that are automatically recorded/captured by
+devices to train the ML models. One of the meta-info potentially
+helpful for learning is camera geometry.  We demonstrate that the
+camera geometry can be used as weak ground truth for supervision
+problem. By learning the capture time and the geolocation of the
+images simultaneously, our network is able capture the geo-temporal
+related high-level features.
+
 
 \section{Our Approach}
 My thesis focuses on the image understanding with camera geometry.
-There are two directions we will address: 1) How can we obtain camera
+There are two directions we will address: 1) How to estimate camera
 geometry from images; 2) How can we use camera geometry to improve the
 current methods for image semantic extracting. For the first direction,
 we explore both the traditional method and deep learning approaches on
