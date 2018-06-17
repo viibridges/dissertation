@@ -67,7 +67,7 @@ geometry from input images. \todo{citation and examples}. Most of the
 previous work optimize for a limited set of camera calibration
 parameters only. However, our research found that there exists an
 effective way of optimizing multiple camera calibration parameters at
-simultaneously (refer to \chapref{mcmc}). Our method use the Monte
+simultaneously (refer to \chapref{mcmc}). Our algorithm uses the Monte
 Carlo Markov Chain (MCMC) method to sample the possible solutions that
 minimize the objective function, which measures the ``matchness''
 between the observation (input image) and the camera calibration.
@@ -181,11 +181,20 @@ semantically meaningful informations from images.
   research.
 
   \item \textbf{Camera Geometry for Image Understanding:}
-  \todo{more writing}
   We explore the potentials of camera geometry for image understanding.
   Current machine learning methods address problems that involves mostly
-  the ground imagery. Tons of dataset targeting on ground imagery are
-  annotated while much fewer are done for the overhead imagery.
+  the ground imagery. 
+  Studies around overhead images are relatively less thus much fewer
+  annotated data exists in public. With the camera geometric
+  information, we can pair the ground imagery with overhead imagery to
+  form cross-view pairs. Our algorithm explore how to transfer the
+  learned knowledge from a network designed for ground level image
+  semantic segmentation to a new network designed for overhead imagery
+  semantic segmentation use these cross-view pairs.
+  Furthermore, we also explore the potential of the camera geometry as
+  weak annotation in supervised learning. Our algorithm shows that by
+  directly learning to predict camera locations, the network networks
+  are able to extract high-level geo-temporal features.
 
 \end{itemize}
 
@@ -228,7 +237,7 @@ The remainder of this work is organized as follows:
   In this work, we try to transfer the semantics from the ground imagery
   to the overhead imagery by identifying the latent geometry
   correspondences between these two. Similar to methods that driven by
-  the projection losses \todo{citation}, our network learns 
+  the projective losses \todo{citation}, our network learns 
   both the geometric projection between the overhead and ground
   images, and the semantics of the overhead images jointly. \newline
 
