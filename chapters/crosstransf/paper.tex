@@ -71,7 +71,7 @@ the domain of aerial image understanding.
   transformation is applied, $T$, to the aerial semantic features to
 create a ground-level semantic labeling.  }
 
-	\label{fig:architecture}
+	\label{fig:architecture_cross}
 \end{figure*}
 
 \section{Related Work}
@@ -204,7 +204,7 @@ aerial viewpoint to the ground-level using the estimated
 transformation matrix, $M$. 
 There are many choices for these components, and the 
 remainder of this section describes the particular choices we made for this 
-study. See~\figref{architecture} for a visual overview of the architecture.
+study. See~\figref{architecture_cross} for a visual overview of the architecture.
 
 \paragraph{Aerial Image Feature Extraction} For $A(I_a;\Theta_A)$, we
 use the VGG16~\cite{simonyan2014very} base architecture and convert it to a 
@@ -274,7 +274,7 @@ pixels sampled from the aerial image:
 The base network, $\tilde{F}$, is a multi-layer perceptron, with ReLU
 activation functions, that takes as input a 293-element vector.
 The network has three layers, with 128, 64 and 1 output channels
-respectively (refer to the lower part of~\figref{architecture}).  The
+respectively (refer to the lower part of~\figref{architecture_cross}).  The
 na\"{\i}ve approach can be considered a special case of this
 representation where we ignore the aerial image and use a one-hot
 encoding representation of rows and columns.  
@@ -288,7 +288,7 @@ new transformation matrix, $M$, without needing to resort to
 interpolation.
 
 \subsection{Dataset}
-\label{sec:dataset}
+\label{sec:dataset_cross}
 
 \begin{figure}
 	\newlength{\aheight}
@@ -325,7 +325,7 @@ $(i, j)$ (locations in contours) with high $\tilde{F}(i,j,y,x,
 S(I_a; \Theta_S))$ values.  Corresponding fields between the aerial image and
 the ground image are shown in the same color.}
 
-  \label{fig:dataset}
+  \label{fig:dataset_cross}
 \end{figure}
 
 We collect our training and testing dataset from the CVUSA
@@ -341,7 +341,7 @@ aerial images.  We also crop the panoramas vertically
 to reduce the portion of the sky and
 ground pixels.  In total, we collected 35,532 image pairs for
 training and 8,884 image pairs for testing. Some examples aerial/ground 
-image pairs in our dataset are shown \figref{dataset}. 
+image pairs in our dataset are shown \figref{dataset_cross}. 
 
 \subsection{Implementation Details}
 \label{sec:details}
@@ -370,7 +370,6 @@ an aerial image and generate a full-resolution, semantically meaningful
 feature map.
 
 \section{Evaluation and Applications}
-\label{sec:evaluation}
 In this section, we will show that our network architecture can be
 used in four different tasks: 1) weakly supervised semantic learning, 
 2) aerial imagery labeling, 3) orientation regression and geocalibration, 
@@ -383,7 +382,7 @@ can be found in our supplemental materials.
 
 We trained our full network architecture (with randomly initialized
 weights) to predict ground-level semantic labeling using the dataset
-described in \secref{dataset}.  \figref{weakly} shows example output,
+described in \secref{dataset_cross}.  \figref{weakly} shows example output,
 $L_a$, from the aerial image understanding CNN. This demonstrates that
 the resulting network has learned to extract semantic features from an
 aerial image, all without any manual annotated aerial imagery.
@@ -675,7 +674,7 @@ from the aerial point of view.}
 \begin{itemize}
 
 \item{\textbf{CVUSA:}} We use the test set introduced
-in~\secref{dataset} to create this dataset, it has two parts for
+in~\secref{dataset_cross} to create this dataset, it has two parts for
 orientation estimation and geocalibration, respectively.  For the
 orientation regression task, we rotate the aerial image to a random
 angle. For the fine-grained geocalibration experiment, we center-crop
