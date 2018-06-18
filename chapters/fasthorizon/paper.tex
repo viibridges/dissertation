@@ -15,8 +15,9 @@ problem formulations that significantly increase robustness to noise.
 
 \begin{figure}
   \centering
-  \includegraphics[width=.48\linewidth]{fasthorizon/cover_hybrid_sampling}
-  \includegraphics[width=.48\linewidth]{fasthorizon/cover_segment_clusters}
+  \includegraphics[width=.4\linewidth]{fasthorizon/cover_hybrid_sampling}
+  \hfill
+  \includegraphics[width=.4\linewidth]{fasthorizon/cover_segment_clusters}
 
   \caption{An example result of our method. (left) Horizon line
     candidates, colored by their scores (red means high score), and
@@ -241,7 +242,7 @@ the line segment to contain the vanishing point.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\linewidth]{fasthorizon/homoIntersection}
+  \includegraphics[width=0.6\linewidth]{fasthorizon/homoIntersection}
   \caption{In homogeneous coordinates, lines (red lines) are defined
     by the normal (red arrow) of the plane (red triangle) they form
     with the origin (green dot). Two lines form a great circle (blue
@@ -389,8 +390,9 @@ distribution as a distribution over points in the image.
 
 \begin{figure}
  \centering
- \includegraphics[width=.48\linewidth]{fasthorizon/4horpdf}
- \includegraphics[width=.48\linewidth]{fasthorizon/68horpdf}
+ \includegraphics[width=.4\linewidth]{fasthorizon/4horpdf}
+ \hfill
+ \includegraphics[width=.4\linewidth]{fasthorizon/68horpdf}
 
  \caption{Global image context imposes a strong prior on horizon line
    location. The output of our CNN is visualized as an overlaid
@@ -557,7 +559,7 @@ vanishing points are found near the horizon line ground truth.
 
 \begin{figure}
   \centering
-  \includegraphics[width=.92\linewidth]{fasthorizon/independent_subset}
+  \includegraphics[width=.82\linewidth]{fasthorizon/independent_subset}
 
   \caption{A ring-like graph (left) is converted into three nearly
     linear subgraphs (right) by partitioning around a node with
@@ -807,11 +809,11 @@ are implausible, even resulting in an estimate that is off the image.
 
 \begin{figure}
   \centering
-  \includegraphics[width=.48\linewidth]{fasthorizon/cnn_vs_nocnn_ecd_hybrid}
-  \includegraphics[width=.48\linewidth]{fasthorizon/cnn_vs_nocnn_ecd_uniform}
-  %
-  \includegraphics[width=.48\linewidth]{fasthorizon/cnn_vs_nocnn_yud_hybrid}
-  \includegraphics[width=.48\linewidth]{fasthorizon/cnn_vs_nocnn_yud_uniform}
+  \includegraphics[width=.4\linewidth]{fasthorizon/cnn_vs_nocnn_ecd_hybrid}
+  \includegraphics[width=.4\linewidth]{fasthorizon/cnn_vs_nocnn_ecd_uniform}
+  \\
+  \includegraphics[width=.4\linewidth]{fasthorizon/cnn_vs_nocnn_yud_hybrid}
+  \includegraphics[width=.4\linewidth]{fasthorizon/cnn_vs_nocnn_yud_uniform}
   \caption{Two images where horizon line estimates are much better with global context (left) than without (right).}
   \label{fig:iscontext}
 \end{figure}
@@ -819,14 +821,15 @@ are implausible, even resulting in an estimate that is off the image.
 \begin{figure*}
   \centering
   \includegraphics[width=0.1571\linewidth]{fasthorizon/montage_ecd5}
-  \includegraphics[width=0.0884\linewidth]{fasthorizon/montage_ecd1}
+  %\includegraphics[width=0.0884\linewidth]{fasthorizon/montage_ecd1}
   \includegraphics[width=0.1572\linewidth]{fasthorizon/montage_yud2}
   \includegraphics[width=0.1571\linewidth]{fasthorizon/montage_ecd4}
   \includegraphics[width=0.1572\linewidth]{fasthorizon/montage_yud3}
   \includegraphics[width=0.0884\linewidth]{fasthorizon/montage_ecd6}
   \includegraphics[width=0.1571\linewidth]{fasthorizon/montage_ecd8}
+  \\
   \includegraphics[width=0.1375\linewidth]{fasthorizon/montage_ecd5_homo}
-  \includegraphics[width=0.1375\linewidth]{fasthorizon/montage_ecd1_homo}
+  %\includegraphics[width=0.1375\linewidth]{fasthorizon/montage_ecd1_homo}
   \includegraphics[width=0.1375\linewidth]{fasthorizon/montage_yud2_homo}
   \includegraphics[width=0.1375\linewidth]{fasthorizon/montage_ecd4_homo}
   \includegraphics[width=0.1375\linewidth]{fasthorizon/montage_yud3_homo}
@@ -834,14 +837,15 @@ are implausible, even resulting in an estimate that is off the image.
   \includegraphics[width=0.1375\linewidth]{fasthorizon/montage_ecd8_homo}
   
   \includegraphics[width=0.1540\linewidth]{fasthorizon/montage_yud1}
-  \includegraphics[width=0.0867\linewidth]{fasthorizon/montage_ecd3}
+  %\includegraphics[width=0.0867\linewidth]{fasthorizon/montage_ecd3}
   \includegraphics[width=0.1540\linewidth]{fasthorizon/montage_yud5}
   \includegraphics[width=0.1540\linewidth]{fasthorizon/montage_yud4}
   \includegraphics[width=0.1731\linewidth]{fasthorizon/montage_ecd2}
   \includegraphics[width=0.1540\linewidth]{fasthorizon/montage_yud6}
   \includegraphics[width=0.0867\linewidth]{fasthorizon/montage_ecd7}
+  \\
   \includegraphics[width=0.1375\linewidth]{fasthorizon/montage_yud1_homo}
-  \includegraphics[width=0.1375\linewidth]{fasthorizon/montage_ecd3_homo}
+  %\includegraphics[width=0.1375\linewidth]{fasthorizon/montage_ecd3_homo}
   \includegraphics[width=0.1375\linewidth]{fasthorizon/montage_yud5_homo}
   \includegraphics[width=0.1375\linewidth]{fasthorizon/montage_yud4_homo}
   \includegraphics[width=0.1375\linewidth]{fasthorizon/montage_ecd2_homo}
