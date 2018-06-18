@@ -2,7 +2,7 @@
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=\linewidth]{crosstransf/cartoon}
+	\includegraphics[width=.5\linewidth]{crosstransf/cartoon}
   \caption{We learn to predict the ground-image
     segmentation directly from an aerial image of the same location,
   thereby transferring the semantics from the ground to the aerial
@@ -351,8 +351,7 @@ framework~\cite{abadi2016tensorflow}. We train our networks for 10
 epochs with the Adam optimizer~\cite{kingma2014adam}. We enable batch
 normalization~\cite{ioffe2015batch} with decay 0.9 in all convolutional and 
 fully-connected layers (except for the output layers) to accelerate
-the training process. Our implementation is available at \todo{URL withheld 
-pending publication}.
+the training process. 
 
 The training procedure is as follows: for a given cross-view image
 pair, $(I_a, I_g)$, we first compute for the ground semantic pixel
@@ -516,7 +515,7 @@ annotations.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=.8\linewidth]{crosstransf/isprs/precisions}
+	\includegraphics[width=.7\linewidth]{crosstransf/isprs/precisions}
 
   \caption{Performance comparison of different initialization methods
   on the ISPRS segmentation task. The $x$-axis is the number of
@@ -586,8 +585,8 @@ experiments:
 
 
 \begin{figure*}
-  \setlength{\aheight}{63pt}
-  \setlength{\gwidth}{52.44pt}
+  \setlength{\aheight}{53.55pt}
+  \setlength{\gwidth}{44.574pt}
   \centering
 
 % Cityscapes
@@ -621,8 +620,8 @@ experiments:
 
 % BingMap
 \vspace{5pt}
-  \setlength{\aheight}{63pt}
-  \setlength{\gwidth}{53.25pt}
+  \setlength{\aheight}{53.55pt}
+  \setlength{\gwidth}{45.2625pt}
   \begin{minipage}[b]{\gwidth}
   \includegraphics[width=\textwidth]{crosstransf/orient/38_g}
   \includegraphics[width=\textwidth]{crosstransf/orient/38_gt}
@@ -668,7 +667,7 @@ from the aerial point of view.}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=.7\linewidth]{crosstransf/orient/orient_err}
+	\includegraphics[width=.5\linewidth]{crosstransf/orient/orient_err}
   \caption{Histogram of the orientation errors on the CVUSA dataset.}
 	\label{fig:orient:err}
 \end{figure}
@@ -731,8 +730,8 @@ including the most likely direction for each location, as well as the
 most likely location and orientation pair.
 
 \begin{figure*}
-  \setlength{\aheight}{93pt}
-  \setlength{\gwidth}{60.65pt}
+  \setlength{\aheight}{80pt}
+  \setlength{\gwidth}{52pt}
   \centering
   \begin{minipage}[b]{\gwidth}
   \includegraphics[width=\textwidth]{crosstransf/geocali/186_im_g}
