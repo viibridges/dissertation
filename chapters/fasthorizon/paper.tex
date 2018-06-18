@@ -574,7 +574,7 @@ vanishing points are found near the horizon line ground truth.
 Since they were randomly sampled, the set of vanishing points
 selected during initialization, $\{\mathbf{p}_i\}_{opt}$, may not be at the
 optimal locations.  We optimize their locations to further minimize
-the objective function \eqref{obj}. We perform an EM-like algorithm
+the objective function \eqref{eq:obj}. We perform an EM-like algorithm
 to refine the vanishing point locations, subject to the constraint
 that they lie on the horizon line:
 \begin{compactitem}
@@ -664,7 +664,7 @@ datasets.
     \Theta_{\mathbf{p}_i,\mathbf{p}_j} > 33^\circ$\\
     \hline
   \end{tabular}
-  \label{tab:parameters}
+  \label{tbl:parameters}
 \end{table}
 
 \begin{figure*}[]
@@ -768,7 +768,7 @@ from a recent method). Our method is significantly better, achieving
     CNN+FULL (Ours) & \textbf{94.78\%} & \textbf{90.80\%} & \textbf{58.24\%} \\
     \hline
   \end{tabular}
-  \label{tab:contribution}
+  \label{tbl:contribution}
 \end{table}
 
 \subsection{Component Error Analysis}
