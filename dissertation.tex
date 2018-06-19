@@ -19,11 +19,9 @@
 \usepackage{multirow}
 \usepackage{miscstyle}
 
-\newcommand{\disstitle}{Laveging Camera Geometric Information for
-Image Understanding}
 
 \usepackage[pdfauthor={Menghua Zhai},
-            pdftitle={\disstitle},
+            pdftitle={dissertation},
             bookmarks=false,
             bookmarksnumbered=true,
             bookmarksopen=true,
@@ -36,31 +34,33 @@ Image Understanding}
 \emergencystretch 3em
 
 \author{Menghua Zhai}
-\title{\disstitle}
+\title{Lavaging Camera Geometry in Deep Neural Network Learning for Image Understanding}
 
 \abstract
-{
-  \SingleSpacing
-  Camera geometry is one of the fundamental elements in computer vision.
-  It plays essential roles in many applications like depth estimation
-  and image mensuration. 
-  %
-  In recent years, the rise of deep neural networks (DNNs) had changed
-  the game in many computer vision areas, their ability of abstracting
-  high-level semantic knowledges makes a lot of hard challenges
-  solvable. 
-  %
-  This thesis mainly explores the possibility of combining camera
-  geometry and DNNs. That is 1) Detecting camera geometry using DNNs,
-  and 2) Training DNNs with camera geometric information.  Our work
-  includes two research targets: The first part of this thesis focuses
-  on camera geometry detection with DNNs, and the rest of it
-  demonstrates how camera geometry can boost the learning of DNNs.
-  %
-  The primary contribution of this thesis is to explore the relation
-  between camera geometry and image semantics, and bridge the gap
-  between these two research domains, which provides us new ways for
-  both camera calibration and deep neural network training.
+{ \SingleSpacing
+In recent years, Deep Neural Networks (DNNs) have proven to be very
+successful in many computer vision areas. Among the most popular
+training techniques, supervised learning is wildly used for DNN
+training and easy to implement. However, successful supervised
+learning approaches are sensitive to the quality of data
+annotations. In some applications like overhead image segmentation and
+transient attributes estimation, data with noise-free annotation is
+either limited in quantity or technically difficult to acquire.
+In this thesis, we use domain adaptation and weak supervision to
+address this problem. Our methods focus on lavaging the camera
+geometric information to deal with the challenges caused by the lack
+of noise-free annotations during DNN training.
+Since the camera geometry affects the way that images manifest
+objects/scenes, it is possible to exploit the relation between the
+camera geometry and image semantics to understand images better.
+Our approach consists of two parts: 1) we explore new methods
+to estimate the camera geometric information from images, and 2) 
+we propose novel algorithms that lavages the camera geometry to train
+deep neural networks.
+The primary contribution of our thesis is to relate the camera
+geometry and image semantics through deep neural networks. Our
+discoveries can provide researchers new insights for both camera
+calibration and DNN training.
 }
 \keywords{ camera geometry, deep neural networks, computer vision}
 
@@ -87,10 +87,10 @@ Image Understanding}
 \inject{introduction}
 %\inject{background}
 
-\inject{mcmc}
-\inject{fasthorizon}
-\inject{crosstransf}
-\inject{whenwhere}
+%\inject{mcmc}
+%\inject{fasthorizon}
+%\inject{crosstransf}
+%\inject{whenwhere}
 
 %\inject{discussion}
 
