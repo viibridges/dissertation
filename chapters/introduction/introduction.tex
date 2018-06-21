@@ -28,16 +28,38 @@ programs that can recognize objects from a scene in their summer
 project~\cite{boden2006mind}. Half a century has passed, the question
 of this ``summer project'' still remains open.
 
-Understanding images is not trivial for machines.  To achieve this
-goal, researchers adopt a divide-and-conquer strategy, that is
-dividing image understanding into various sub-problems like object
-recognition, semantic segmentation, and pose estimation \etc.  During
-past decades, a lot of methods are developed to solve these
-sub-problems. Many of them adopted a bottom-up (\todo{citations})
-workflow, where basic level cues play important roles
-(\todo{examples}). Among these basic cues, camera geometry is
-particularly useful for some computer vision tasks like facade
-detection, indoor layout estimation~\cite{ren2016coarse}.
+The ultimate goal of image understanding is to transfer the visual
+images into numerical or symbolic descriptions of the world
+that are helpful for other thought processes for decision making.
+In general, understanding images is not trivial for machines.
+For different application scenarios, researchers divide image
+understanding into different computer vision tasks. For example,
+pedestrian detection is essential to autonomous driving, and image
+retrieval to an image searching engine.
+
+Among algorithms that are developed to address these sub-tasks, deep
+neural networks (DNNs) rise as stars in recent years. Methods that
+uses DNNs achieve state-of-the-art performances in many computer
+vision areas (\todo{citations}). As parametric algorithms, deep neural
+networks require training for their parameters. Methods to train DNNs
+include supervised algorithms, unsupervised algorithms, and
+reinforcement learning. Supervised algorithms are the most popular and
+commonly applied in many computer vision areas, thanks to their good
+performances and the fact that they are easy to implement. However,
+supervised learning approaches are sensitive to the quality of data
+annotations. In some applications like overhead image segmentation and
+transient attributes estimation, data with noise-free annotation is
+either limited in quantity or technically difficult to acquire.
+In this thesis, we use domain adaptation and weak supervision to
+counter this drawback. Our methods focus on lavaging the camera
+geometric information to deal with the challenges caused by the lack
+of noise-free annotations during DNN training.
+The insight behind it is that the camera geometry affects the way that
+images manifest objects/scenes, it is possible to exploit the relation
+between the camera geometry and image semantics to understand images
+better.
+
+\sepline
 
 In the camera pin-hole model, camera geometry denotes the camera
 both intrinsic and extrinsic parameters. The intrinsic parameters
