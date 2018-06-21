@@ -50,20 +50,18 @@ supervised learning approaches are sensitive to the quality of data
 annotations. In some applications like overhead image segmentation and
 transient attributes estimation, data with noise-free annotation is
 either limited in quantity or technically difficult to acquire.
-In this thesis, we use domain adaptation and weak supervision to
-counter this drawback. Our methods focus on lavaging the camera
-geometric information to deal with the challenges caused by the lack
-of noise-free annotations during DNN training.
-The insight behind it is that the camera geometry affects the way that
-images manifest objects/scenes, it is possible to exploit the relation
-between the camera geometry and image semantics to understand images
-better.
+In this thesis, Our methods focus on lavaging the camera geometric
+information to deal with the challenges caused by the lack of
+noise-free annotations during DNN training. The insight behind it is
+that the camera geometry affects the way that images manifest
+objects/scenes, so it is possible to exploit the relation between the
+camera geometry and image semantics to understand images better.
 
-\sepline
-
-In the camera pin-hole model, camera geometry denotes the camera
-both intrinsic and extrinsic parameters. The intrinsic parameters
-encode the information of the camera itself such as focal length,
+In computer vision, the geometric model of camera projection 
+ 
+In the camera pin-hole model, camera geometric parameters consists of
+the camera intrinsics and the extrinsics. The intrinsic parameters of
+a camera encode information of the camera itself such as focal length,
 principal point \etc; the extrinsic parameters are referred to as the
 external states of the camera, such as the camera poses and
 offset/location under some coordinate system. In this work, our study
