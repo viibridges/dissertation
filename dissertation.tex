@@ -34,7 +34,7 @@
 \emergencystretch 3em
 
 \author{Menghua Zhai}
-\title{Lavaging Camera Geometry in Deep Neural Network Learning for Image Understanding}
+\title{Lavaging Geographic Information in Deep Neural Networks for Image Understanding}
 
 \abstract
 { \SingleSpacing
@@ -46,13 +46,18 @@ learning approaches are sensitive to the quality of data
 annotations. In some applications like overhead image segmentation and
 transient attributes estimation, data with noise-free annotation is
 either limited in quantity or technically difficult to acquire.
-In this thesis, we use domain adaptation and weak supervision to
-address this problem. Our methods focus on lavaging the camera
-geometric information to deal with the challenges caused by the lack
-of noise-free annotations during DNN training.
-Since the camera geometry affects the way that images manifest
-objects/scenes, it is possible to exploit the relation between the
-camera geometry and image semantics to understand images better.
+Our work focuses on lavaging the camera geographic information in
+DNN training to deal with the challenges caused by the lack of
+noise-free annotations.
+In this thesis, the contributions of the geographic information for
+DNN training lies in two folds: 1) The geo-calibrated imagery makes it
+possible to relate pairs of images from different image sources, and
+2) the geographic locations also indicate the appearances of the
+scene.
+By exploiting the relation between the geographic information and the
+scene appearances we are able to develop better approaches to train
+deep neural networks than full supervision when quality annotated
+data is limited.
 Our approach consists of two parts: 1) we explore new methods
 to estimate the camera geometric information from images, and 2) 
 we propose novel algorithms that lavages the camera geometry to train
@@ -62,7 +67,7 @@ geometry and image semantics through deep neural networks. Our
 discoveries can provide researchers new insights for both camera
 calibration and DNN training.
 }
-\keywords{ camera geometry, deep neural networks, computer vision}
+\keywords{geographic information, deep neural networks, computer vision}
 
 \advisor{Nathan Jacobs}
 \dgs{Miroslaw Truszczynski}
