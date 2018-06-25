@@ -50,23 +50,23 @@ supervised learning approaches are sensitive to the quality of data
 annotations. In some applications like overhead image segmentation and
 transient attributes estimation, data with noise-free annotation is
 either limited in quantity or technically difficult to acquire.
-In this thesis, Our methods focus on lavaging the camera geometric
+In this thesis, Our methods focus on lavaging the camera geographic
 information to deal with the challenges caused by the lack of
-noise-free annotations during DNN training. The insight behind it is
-that the camera geometry affects the way that images manifest
-objects/scenes, so it is possible to exploit the relation between the
-camera geometry and image semantics to understand images better.
+noise-free annotations during DNN training. The insight is
+that the camera geographic information encodes the semantic
+information because it is related to the appearances of
+the scenes.
 
-In computer vision, the geometric model of camera projection 
- 
-In the camera pin-hole model, camera geometric parameters consists of
-the camera intrinsics and the extrinsics. The intrinsic parameters of
-a camera encode information of the camera itself such as focal length,
-principal point \etc; the extrinsic parameters are referred to as the
-external states of the camera, such as the camera poses and
-offset/location under some coordinate system. In this work, our study
-of the camera geometry mainly includes the extrinsic like camera pose
-and the geo-orientation/geo-localization of the camera.
+The process of estimating the camera geographic information is
+referred to as geo-calibration. The goal is to estimate the geographic
+location and the geo-orientation of the given camera. 
+Compared to the common camera calibration, geo-calibration focuses on
+calibrating the camera in the geographic coordinates. 
+
+Geographic
+information reveals the scene appearances 
+
+\sepline
 
 Many research has been done to detect the camera
 geometry from input images. \todo{citation and examples}. Most of the
