@@ -32,10 +32,34 @@ The ultimate goal of image understanding is to transfer the visual
 images into numerical or symbolic descriptions of the world
 that are helpful for other thought processes for decision making.
 In general, understanding images is not trivial for machines.
-For different application scenarios, researchers divide image
+Under different scenarios, researchers divide image
 understanding into different computer vision tasks. For example,
 pedestrian detection is essential to autonomous driving, and image
 retrieval to an image searching engine.
+
+As one of the primary vision tasks, camera calibration plays an
+important role in many applications like indoor layout estimation and
+image mensuration. 
+In the camera pin-hole model, camera calibration parameters consist of
+the camera intrinsics and the extrinsic. The intrinsic parameters of
+a camera encode information of the camera itself such as focal length,
+principal point \etc; the extrinsic parameters are referred to as the
+external states of the camera, such as the camera poses and
+offset/location under some coordinate system. Specifically,
+camera geo-calibration consider the camera locations in the geographic
+coordinates.
+In this work, our study mainly focus on the extrinsic like camera pose
+and the geo-orientation/geo-localization of the camera.
+ 
+In current work of camera calibration, most algorithms are
+deterministic, which means they output fixed solutions. Applications
+that takes probabilistic inputs (especially for those which use
+graphic model) don't like it. To address this, we propose to build a
+probabilistic model for camera geo-calibration.
+
+
+
+\sepline
 
 Among algorithms that are developed to address these sub-tasks, deep
 neural networks (DNNs) rise as stars in recent years. Methods that
