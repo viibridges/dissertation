@@ -54,139 +54,40 @@ and the geo-orientation/geo-localization of the camera.
 In current work of camera calibration, most algorithms are
 deterministic, which means they output fixed solutions. Applications
 that takes probabilistic inputs (especially for those which use
-graphic model) don't like it. To address this, we propose to build a
-probabilistic model for camera geo-calibration.
+graphic model) don't like it. To address this, we propose to build
+probabilistic models for camera geo-calibration using deep neural
+networks.
 
+A complete geo-calibration detect both camera intrinsic (focal length,
+principal points \etc) and extrinsic parameters, which includes camera
+roll, pitch angles, geographic orientation and geographic locations.
+In our work, we first build a probabilistic model to detect multiple
+geo-calibration parameters jointly. Our algorithm construct a set of
+constraint functions to measure the fitness between the
+geo-calibration parameters and the observations. An energy function
+is constructed with these constraint functions. Thus each point in the
+solution space forebear a energy score (proportional to the
+probability at that point). We then use graphic model approach to
+sample these point in the space.
 
+In recent years, deep neural networks (DNNs) rise as stars in recent
+years. Methods that uses DNNs achieve state-of-the-art performances in
+many computer vision areas (\todo{citations}). We demonstrate that
+DNNs are good tools to solve the calibration problems. 
+As a next step of our study, We further
+divide these constraints on subset of the calibration parameters and
+conquer them with DNNs.
 
-\sepline
+We first focus on camera roll and pitch angles. Given the already
+known intrinsic parameters, camera roll and pitch angles can be
+derived from the horizon line position in the image. Detecting horizon
+line is easier because it is tightly related to the content/appearance
+of the scene. In our work, we create a new method to use DNNs to give
+a prior distribution of the horizon line, then assign a probability to
+each by measuring their consistences with vanishing points detected
+with traditional statistic methods.
 
-Among algorithms that are developed to address these sub-tasks, deep
-neural networks (DNNs) rise as stars in recent years. Methods that
-uses DNNs achieve state-of-the-art performances in many computer
-vision areas (\todo{citations}). As parametric algorithms, deep neural
-networks require training for their parameters. Methods to train DNNs
-include supervised algorithms, unsupervised algorithms, and
-reinforcement learning. Supervised algorithms are the most popular and
-commonly applied in many computer vision areas, thanks to their good
-performances and the fact that they are easy to implement. However,
-supervised learning approaches are sensitive to the quality of data
-annotations. In some applications like overhead image segmentation and
-transient attributes estimation, data with noise-free annotation is
-either limited in quantity or technically difficult to acquire.
-In this thesis, Our methods focus on lavaging the camera geographic
-information to deal with the challenges caused by the lack of
-noise-free annotations during DNN training. The insight is
-that the camera geographic information encodes the semantic
-information because it is related to the appearances of
-the scenes.
-
-The process of estimating the camera geographic information is
-referred to as geo-calibration. The goal is to estimate the geographic
-location and the geo-orientation of the given camera. 
-Compared to the common camera calibration, geo-calibration focuses on
-calibrating the camera in the geographic coordinates. 
-
-Geographic
-information reveals the scene appearances 
-
-\sepline
-
-Many research has been done to detect the camera
-geometry from input images. \todo{citation and examples}. Most of the
-previous work optimize for a limited set of camera calibration
-parameters only. However, our research found that there exists an
-effective way of optimizing multiple camera calibration parameters at
-simultaneously (refer to \chapref{mcmc}). Our algorithm uses the Monte
-Carlo Markov Chain (MCMC) method to sample the possible solutions that
-minimize the objective function, which measures the ``matchness''
-between the observation (input image) and the camera calibration.
-
-Among the most influential approaches for camera geometry estimation,
-most methods are based on traditional statistics diagram. Not until a
-fewer years ago, machine learning based methods gradually caught
-people's attention in this area, thanks for the popularity of deep
-neural network. Neural networks were first proposed in 80th
-(\todo{citation}), The back-forward method developed by Hinton
-\todo{citation} makes the effective training possible. However, neural
-networks are generally thought by researchers merely toy that can only
-solve a very limited set of tasks. It is the develop of computational
-resources and the big collection of annotated data that enables the
-neural networks to grow deeper and eventually brings it to the stage of
-industrial applications.
-
-In computer vision, low-level elements like edges, line segments,
-super-pixels and vanishing points play important roles in many
-applications like image measuration, facade detection, and
-geo-localization.
-Though the CNNs are good at extracting high-level information from
-images, more and more researches start focusing on using CNN to
-extract low-level these elements.
-%
-Lee \etal~\cite{lee2017semantic} propose to detect semantic line
-segments, which are able to segment the scene semantically, using
-neural network. Maninis \etal~\cite{maninis2016convolutional} and Yang
-\etal~\cite{yang2016object} explore to detect object contours with
-CNNs.
-%
-Aside from edges and contours, another category of low-level
-information that the CNNs can detect is the camera geometry, like
-camera location, vanishing points, and horizon lines.
-%
-In the area of vanishing point detection, we are among the first
-researches that use deep neural networks to solve the problem. The
-deep neural networks prove to be a good tool to extract high-level
-information that offer great help to conquer the problems in camera
-geometry estimation. \todo{many citations}.
-
-In our previous work, we have shown that deep neural networks are
-powerful tools for camera geometry estimation as well. In fact, the
-camera geometry can also assist learning high-level image semantics.
-Hoiem \etal~\cite{hoiem2008putting} demonstrate that taking camera
-perspective (horizon line) into consideration improves the performance
-for object detection. Godard \etal~\cite{godard2017unsupervised} learn
-to predict the scene depth from a single image using left-right
-consistency, which is also an application of camera geometry.
-\todo{more citations about the projective loss}.
-
-Another example of camera geometry boosting the learning project is to
-exploit the overhead imagery. Using the geometric locations of the
-ground-view images we can download the corresponding overhead images
-at the same locations through public online resources like bingmap
-\todo{cite}. We refer to these image pairs as ``cross-view image
-pairs''.
-
-\todo{copy from scott} Efforts have been made to
-automate overhead image analysis. As early as
-1970~\cite{idelsohn1970learning} methods were introduced for
-classifying terrain types from a single overhead image, with the goal
-of automatically generating terrain maps.  Similarly, in 1976 Bajcsy
-et al.~\cite{bajcsy1976computer} described a system for recognizing
-roads, intersections, and other road-like objects in overhead imagery.
-However, as overhead imaging differs drastically from ground-level
-imaging, the majority of techniques that have been developed have
-occurred independently and in task-specific ways~\cite{Rozen}.
-%\brief{overhead image grows fast}.
-
-Our work demonstrates that we are able to transfer the learned semantic
-knowledge from the ground image domain to the overhead image domain,
-given the camera geometric information of these two kind of images. In
-our algorithm, the camera geometry helps to collect the ``cross-view
-image pairs'' and aligned the orientation directions of images in a
-pair.
-
-Camera geometry can also be used as weak annotations during training
-of the networks for image understanding.  One of the key to the
-success of machine learning approaches are the large quantity of
-annotated data. However, fully annotated imagery consists of only a
-tiny part of the image resources available online. The idea is to
-exploit other meta-info that are automatically recorded/captured by
-devices to train the ML models. One of the meta-info potentially
-helpful for learning is camera geometry.  We demonstrate that the
-camera geometry can be used as weak ground truth for supervision
-problem. By learning the capture time and the geolocation of the
-images simultaneously, our network is able capture the geo-temporal
-related high-level features.
+Study of geo-localization has a long history. 
 
 
 \section{Our Approach}
