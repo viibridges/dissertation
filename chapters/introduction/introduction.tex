@@ -87,45 +87,62 @@ a prior distribution of the horizon line, then assign a probability to
 each by measuring their consistences with vanishing points detected
 with traditional statistic methods.
 
-Study of geo-localization has a long history. 
+Study of geo-localization has a long history. \todo{citations}. We
+seek to geo-localize images with temporal information. The system
+estimate the geographic location of the camera in the form of discrete
+probabilities over bins. This application works in rough scale. We
+also design another algorithm that can do finer scale localization
+based on the rough location input. In that work, we train a network to
+transfer the semantic segmentation masks from the top-view perspective
+to the ground view perspective. In order to train the network, we have
+to construct the image pairs called cross-view image pairs.
+
+Overhead imagery plays an import role in the cross-view learning area.
+To construct a cross view image pair, we need to know the geographic
+location (sometimes also with the geographic orientation).
+\todo{copy from scott} Efforts have been made to
+automate overhead image analysis. As early as
+1970~\cite{idelsohn1970learning} methods were introduced for
+classifying terrain types from a single overhead image, with the goal
+of automatically generating terrain maps.  Similarly, in 1976 Bajcsy
+et al.~\cite{bajcsy1976computer} described a system for recognizing
+roads, intersections, and other road-like objects in overhead imagery.
+However, as overhead imaging differs drastically from ground-level
+imaging, the majority of techniques that have been developed have
+occurred independently and in task-specific ways~\cite{Rozen}.
+
+Benefited from the fast growing monitoring satellite market, overhead
+imagery grows fast nowadays. Microsoft BingMap provides public access
+to their overhead image database with various resolution options. With
+the geographic information of the ground image, we are able to
+download the corresponding overhead images to form the geo-orientation
+aligned cross-view image pairs.
+
+Our algorithm takes advantage of cross-view pairs, to train a deep
+neural network that can semantically segment the overhead image and
+then transfer the segmentation mask to the ground view. To finer
+geo-orient and localize the image, we can match the ground
+segmentation mask with the mask generated from overhead image at
+location $l$.
+
+Another contribution of our work is that along the training for
+networks that do geo-calibration, we are able to learn to extract
+high-level features from the networks along side.
 
 
 \section{Our Approach}
-My thesis focuses on the image understanding with camera geometry.
-There are two directions we will address: 1) How to estimate camera
-geometry from images; 2) How can we use camera geometry to improve the
-current methods for image semantic extracting. For the first direction,
-we explore both the traditional method and deep learning approaches on
-different geometric calibration parameters. For the second direction,
-we will exploit the image geometric location to help extract
-semantically meaningful informations from images.
+Our thesis focus on constructing a probabilistic model for camera
+geo-calibration. To do that, we first develop an general architecture
+for geo-calibration with different constraint functions. We then seek
+to conquer constraints in subset of calibration parameters.
 
 \begin{itemize}[noitemsep]
+  \item \textbf{General Architecture for Geo-Calibration:}
+  We designed a graphic model to estimate the probability over
+  geo-calibration parameter space.
 
-  \item \textbf{Camera Geometry Detection:} 
-  We investigate different methods to detect camera geometry from the
-  input images. We first explore a sampling approach to find the
-  complete camera calibration parameters that fit the observation of
-  objects (input image) best. In our next work, we use a deep neural
-  network to learn to detect horizon line and vanishing points. These
-  two approaches provides information for the next stage of our
-  research.
-
-  \item \textbf{Camera Geometry for Image Understanding:}
-  We explore the potentials of camera geometry for image understanding.
-  Current machine learning methods address problems that involves mostly
-  the ground imagery. 
-  Studies around overhead images are relatively less thus much fewer
-  annotated data exists in public. With the camera geometric
-  information, we can pair the ground imagery with overhead imagery to
-  form cross-view pairs. Our algorithm explore how to transfer the
-  learned knowledge from a network designed for ground level image
-  semantic segmentation to a new network designed for overhead imagery
-  semantic segmentation use these cross-view pairs.
-  Furthermore, we also explore the potential of the camera geometry as
-  weak annotation in supervised learning. Our algorithm shows that by
-  directly learning to predict camera locations, the network networks
-  are able to extract high-level geo-temporal features.
+  \item \textbf{Constraints for Subset Parameters:}
+  Divide and conquer the problems.
 
 \end{itemize}
 
@@ -160,8 +177,20 @@ The remainder of this work is organized as follows:
   global context to provide a prior distribution of the final solution,
   thus to reduce the dimensionality of the solution space. \newline
 
+  \item \textbf{\chapref{whenwhere} -
+  Learn Where with When:} \newline \newline
+  One of the key to the success of machine learning approaches are the
+  large quantity of annotated data. However, fully annotated imagery
+  only consists of a tiny part of the image resources available online.
+  The idea is to exploit other meta-info that are automatically
+  recorded/captured by devices to train the ML models.  We demonstrate
+  that the camera geometry can be used as weak ground truth for
+  supervision problem. By learning the capture time and the geolocation
+  of the images, our network is able capture the geo-temporal related
+  high-level features. \newline
+
   \item \textbf{\chapref{crosstransf} -
-  Cross-view Domain Adaptation:} \newline \newline
+  Finer Localization by Matching the Overhead Images:} \newline \newline
   Current machine learning methods address problems that involves mostly
   the ground imagery. Tons of dataset targeting on ground imagery are
   annotated while much fewer are done for the overhead imagery.
@@ -172,16 +201,5 @@ The remainder of this work is organized as follows:
   both the geometric projection between the overhead and ground
   images, and the semantics of the overhead images jointly. \newline
 
-  \item \textbf{\chapref{whenwhere} -
-  Extract High-Level Feature by Learning When and Where:} \newline \newline
-  One of the key to the success of machine learning approaches are the
-  large quantity of annotated data. However, fully annotated imagery
-  only consists of a tiny part of the image resources available online.
-  The idea is to exploit other meta-info that are automatically
-  recorded/captured by devices to train the ML models.  We demonstrate
-  that the camera geometry can be used as weak ground truth for
-  supervision problem. By learning the capture time and the geolocation
-  of the images, our network is able capture the geo-temporal related
-  high-level features. \newline
 
 \end{itemize}

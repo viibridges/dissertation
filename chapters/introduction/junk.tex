@@ -203,3 +203,40 @@ camera geometry can be used as weak ground truth for supervision
 problem. By learning the capture time and the geolocation of the
 images simultaneously, our network is able capture the geo-temporal
 related high-level features.
+
+My thesis focuses on the image understanding with camera geometry.
+There are two directions we will address: 1) How to estimate camera
+geometry from images; 2) How can we use camera geometry to improve the
+current methods for image semantic extracting. For the first direction,
+we explore both the traditional method and deep learning approaches on
+different geometric calibration parameters. For the second direction,
+we will exploit the image geometric location to help extract
+semantically meaningful informations from images.
+
+\begin{itemize}[noitemsep]
+
+  \item \textbf{Camera Geometry Detection:} 
+  We investigate different methods to detect camera geometry from the
+  input images. We first explore a sampling approach to find the
+  complete camera calibration parameters that fit the observation of
+  objects (input image) best. In our next work, we use a deep neural
+  network to learn to detect horizon line and vanishing points. These
+  two approaches provides information for the next stage of our
+  research.
+
+  \item \textbf{Camera Geometry for Image Understanding:}
+  We explore the potentials of camera geometry for image understanding.
+  Current machine learning methods address problems that involves mostly
+  the ground imagery. 
+  Studies around overhead images are relatively less thus much fewer
+  annotated data exists in public. With the camera geometric
+  information, we can pair the ground imagery with overhead imagery to
+  form cross-view pairs. Our algorithm explore how to transfer the
+  learned knowledge from a network designed for ground level image
+  semantic segmentation to a new network designed for overhead imagery
+  semantic segmentation use these cross-view pairs.
+  Furthermore, we also explore the potential of the camera geometry as
+  weak annotation in supervised learning. Our algorithm shows that by
+  directly learning to predict camera locations, the network networks
+  are able to extract high-level geo-temporal features.
+\end{itemize}
