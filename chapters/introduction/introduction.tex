@@ -38,27 +38,35 @@ pedestrian detection is essential to autonomous driving, and image
 retrieval to an image searching engine.
 
 As one of the primary vision tasks, camera calibration plays an
-important role in many applications like indoor layout estimation and
-image mensuration. 
-In the camera pin-hole model, camera calibration parameters consist of
-the camera intrinsics and the extrinsic. The intrinsic parameters of
-a camera encode information of the camera itself such as focal length,
-principal point \etc; the extrinsic parameters are referred to as the
-external states of the camera, such as the camera poses and
-offset/location under some coordinate system. Specifically,
-camera geo-calibration consider the camera locations in the geographic
-coordinates.
-In this work, our study mainly focus on the extrinsic like camera pose
-and the geo-orientation/geo-localization of the camera.
- 
-In current work of camera calibration, most algorithms are
-deterministic, which means they output fixed solutions. Applications
-that takes probabilistic inputs (especially for those which use
-graphic model) don't like it. To address this, we propose to build
-probabilistic models for camera geo-calibration using deep neural
-networks.
+important role in many applications like autonomous driving, indoor
+layout estimation and image mensuration. 
+In the camera pin-hole model, the projection from scene to the image
+frame are determined by camera intrinsic and extrinsic parameters. 
+The intrinsic parameters describe the information of camera
+itself such as focal length, principal point \etc; 
+The extrinsic parameters describe the external states of the
+camera, such as the camera poses and translation under some
+coordinate system.
+Some applications like GIS and geo-localization are more interested in
+calibrating the camera under geographic coordinates, namely knowing
+the camera pose with respect to the ground reference frame (\ie ENU)
+and camera location in geographic coordinates. We refer to such
+calibration as \textbf{geo-calibration}.
+In this work, our study mainly focuses on estimating geo-calibration
+extrinsic parameters like camera pose and the
+geo-orientation/geo-localization of the camera.
 
-A complete geo-calibration detect both camera intrinsic (focal length,
+In current work of camera calibration, most algorithms are
+deterministic, which means they output fixed solutions. Deterministic
+systems may seem straight-forward but they also forebear the following
+drawbacks: 1) Deterministic systems can not handle uncertainties which
+are commonly encountered in the real world problems.  2) Deterministic
+systems are not friendly to applications developed with graphic models
+that are interfaced with their outputs.
+To address these drawbacks, We propose to build probabilistic
+models for camera geo-calibration.
+
+A complete geo-calibration detects both camera intrinsic (focal length,
 principal points \etc) and extrinsic parameters, which includes camera
 roll, pitch angles, geographic orientation and geographic locations.
 In our work, we first build a probabilistic model to detect multiple
@@ -69,7 +77,7 @@ is constructed with these constraint functions. Thus each point in the
 solution space forebear a energy score (proportional to the
 probability at that point). We then use graphic model approach to
 sample these point in the space.
-
+ 
 In recent years, deep neural networks (DNNs) rise as stars in recent
 years. Methods that uses DNNs achieve state-of-the-art performances in
 many computer vision areas (\todo{citations}). We demonstrate that
