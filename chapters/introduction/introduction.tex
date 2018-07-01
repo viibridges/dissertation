@@ -143,18 +143,29 @@ high-level features from the networks. \todo{expand}
 
 
 \section{Our Approach}
-Our thesis focus on constructing a probabilistic model for camera
-geo-calibration. To do that, we first develop an general architecture
-for geo-calibration with different constraint functions. We then seek
-to conquer constraints in subset of calibration parameters.
+We first propose primary probabilistic model to jointly estimate 
+the full geo-calibration parameters. The key for the success of this
+model is to construct good constraint functions that describe the
+fitness between the calibration parameters and the images. We then
+dismantle the full geo-calibration into several partial
+geo-calibration tasks, each of which provide a constraint function to
+fit in the primary model.
 
 \begin{itemize}[noitemsep]
-  \item \textbf{General Architecture for Geo-Calibration:}
-  We designed a graphic model to estimate the probability over
-  geo-calibration parameter space.
+  \item \textbf{General Probabilistic Architecture for Geo-Calibration:}
+  We design a graphic model to estimate the probability over
+  full geo-calibration parameters. Our model is a general
+  architecture, which can take different constraints to form
+  the energy function.
 
-  \item \textbf{Constraints for Subset Parameters:}
-  Divide and conquer the problems.
+  \item \textbf{Constraint Function for Camera Poses:}
+  We develop a constraint function for two camera pose angles: pitch
+  and roll.
+
+  \item \textbf{Constraint Function for Camera Geographic Locations
+  and Orientations:}
+  We develop a constraint function for camera geographic locations and
+  orientations.
 
 \end{itemize}
 
@@ -170,7 +181,7 @@ The remainder of this work is organized as follows:
   The complete camera geo-calibration includes the detection of camera
   location in the world, the pose and the focal length of the camera
   given the input image. By constructing a objective function that
-  measures the ``matchness'' between the camera calibration and the
+  measures the ``fitness'' between the camera calibration and the
   observation of the image, we are able to optimize the parameters in
   the calibration space. However, this space multi-dimensional, which
   makes the naive grid search infeasible. Our insight is to do the
@@ -180,7 +191,9 @@ The remainder of this work is organized as follows:
   computational time dramatically. \newline
 
   \item \textbf{\chapref{fasthorizon} -
-  Detecting Horizon and VPs using CNN:} \newline \newline
+  Detecting Pitch and Roll using CNN:} \newline \newline
+  Assuming the intrinsic parameters are known, camera roll and pitch
+  angles can be derived from the horizon line position in the image.
   Horizon line and vanishing points (VPs) plays important roles in many
   application such as image mensuration and facade detection. In the
   previous work, researchers tended to use build bottom-up approaches to
@@ -190,12 +203,14 @@ The remainder of this work is organized as follows:
   thus to reduce the dimensionality of the solution space. \newline
 
   \item \textbf{\chapref{whenwhere} -
-  Learn Where with When:} \newline \newline
+  Estimating Geographic Location with Temporal Information:} \newline \newline
+  In this work, we demonstrate that we can estimate the camera geographic
+  location with the input image and its temporal information.
   One of the key to the success of machine learning approaches are the
   large quantity of annotated data. However, fully annotated imagery
   only consists of a tiny part of the image resources available online.
   The idea is to exploit other meta-info that are automatically
-  recorded/captured by devices to train the ML models.  We demonstrate
+  recorded/captured by devices to train the ML models. We demonstrate
   that the camera geometry can be used as weak ground truth for
   supervision problem. By learning the capture time and the geolocation
   of the images, our network is able capture the geo-temporal related
@@ -203,6 +218,8 @@ The remainder of this work is organized as follows:
 
   \item \textbf{\chapref{crosstransf} -
   Finer Localization by Matching the Overhead Images:} \newline \newline
+  With the rough geographic location, we are able to refine the result
+  with overhead images.
   Current machine learning methods address problems that involves mostly
   the ground imagery. Tons of dataset targeting on ground imagery are
   annotated while much fewer are done for the overhead imagery.
