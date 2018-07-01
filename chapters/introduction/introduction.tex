@@ -52,6 +52,8 @@ calibrating the camera under geographic coordinates, namely knowing
 the camera pose with respect to the ground reference frame (\ie ENU)
 and camera location in geographic coordinates. We refer to such
 calibration as \textbf{geo-calibration}.
+The complete geo-calibration includes intrinsic (focal
+length, principal points \etc) and extrinsic parameters.
 In this work, our study mainly focuses on estimating geo-calibration
 extrinsic parameters like camera pose and the
 geo-orientation/geo-localization of the camera.
@@ -65,50 +67,52 @@ systems are not friendly to applications developed with graphic models
 that are interfaced with their outputs.
 To address these drawbacks, We propose to build probabilistic
 models for camera geo-calibration.
-
-A complete geo-calibration detects both camera intrinsic (focal length,
-principal points \etc) and extrinsic parameters, which includes camera
-roll, pitch angles, geographic orientation and geographic locations.
-In our work, we first build a probabilistic model to detect multiple
-geo-calibration parameters jointly. Our algorithm construct a set of
-constraint functions to measure the fitness between the
-geo-calibration parameters and the observations. An energy function
-is constructed with these constraint functions. Thus each point in the
-solution space forebear a energy score (proportional to the
-probability at that point). We then use graphic model approach to
-sample these point in the space.
+We first build a probabilistic model to detect multiple
+geo-calibration parameters jointly.  Our algorithm treats each set of
+geo-calibration parameters as a point in the solution space. It
+constructs an energy function for points in the solution space to
+measure the fitness between the geo-calibration parameters and the
+observations (images), so that each point is associated with an energy
+score.  The probability over the calibration parameters is
+anti-proportional to the energy score, which we then compute with
+graphic model approach. The essential part of our algorithm is the
+construction of the energy function. To better measure the fitness
+between the calibration parameters and the observation, we divide the
+energy function into a combination of partial calibration problems,
+each of which is responsible for a subset of calibration parameters.
+We will discuss these constraint functions in several following work.
  
-In recent years, deep neural networks (DNNs) rise as stars in recent
-years. Methods that uses DNNs achieve state-of-the-art performances in
+In recent years, deep neural networks (DNNs) rise as stars. Methods
+using DNNs achieve state-of-the-art performances in
 many computer vision areas (\todo{citations}). We demonstrate that
-DNNs are good tools to solve the calibration problems. 
-As a next step of our study, We further
-divide these constraints on subset of the calibration parameters and
-conquer them with DNNs.
+DNNs are good tools to solve partial calibration problems. 
+As a next step of our study, We focus on calibrating cameras with deep
+neural networks.
 
-We first focus on camera roll and pitch angles. Given the already
-known intrinsic parameters, camera roll and pitch angles can be
+We first estimate camera roll and pitch angles. Assuming the intrinsic
+parameters are known, camera roll and pitch angles can be
 derived from the horizon line position in the image. Detecting horizon
 line is easier because it is tightly related to the content/appearance
-of the scene. In our work, we create a new method to use DNNs to give
-a prior distribution of the horizon line, then assign a probability to
-each by measuring their consistences with vanishing points detected
-with traditional statistic methods.
+of the scene. In our work, we first create a new method using DNNs to
+give a prior distribution of the horizon line, then assign a
+probability to each by measuring their consistences with vanishing
+points detected using traditional statistic methods.
 
-Study of geo-localization has a long history. \todo{citations}. We
-seek to geo-localize images with temporal information. The system
-estimate the geographic location of the camera in the form of discrete
-probabilities over bins. This application works in rough scale. We
-also design another algorithm that can do finer scale localization
-based on the rough location input. In that work, we train a network to
-transfer the semantic segmentation masks from the top-view perspective
-to the ground view perspective. In order to train the network, we have
-to construct the image pairs called cross-view image pairs.
+Study of geo-localization has a long history. \todo{citations}. In
+another work, We seek to geo-localize images with temporal
+information. The system estimates the discrete probability over the
+camera geographic location. This application works in rough scale. In
+our next work, we design an algorithm that can do fine-scale localization
+based on the rough geographic location inputs. In that work, we
+designed a deep neural network to transfer the semantic segmentation
+masks from the top-view perspective to the ground view perspective. In
+order to train the network, we have to construct a data form called
+cross-view image pairs.
 
 Overhead imagery plays an import role in the cross-view learning area.
 To construct a cross view image pair, we need to know the geographic
 location (sometimes also with the geographic orientation).
-\todo{copy from scott} Efforts have been made to
+\todo{rewrite the following} Efforts have been made to
 automate overhead image analysis. As early as
 1970~\cite{idelsohn1970learning} methods were introduced for
 classifying terrain types from a single overhead image, with the goal
@@ -121,21 +125,21 @@ occurred independently and in task-specific ways~\cite{Rozen}.
 
 Benefited from the fast growing monitoring satellite market, overhead
 imagery grows fast nowadays. Microsoft BingMap provides public access
-to their overhead image database with various resolution options. With
-the geographic information of the ground image, we are able to
+to their overhead image database with various resolution options.
+Given the geographic information of the ground image, we are able to
 download the corresponding overhead images to form the geo-orientation
 aligned cross-view image pairs.
 
-Our algorithm takes advantage of cross-view pairs, to train a deep
-neural network that can semantically segment the overhead image and
-then transfer the segmentation mask to the ground view. To finer
-geo-orient and localize the image, we can match the ground
-segmentation mask with the mask generated from overhead image at
-location $l$.
+%Our algorithm takes advantage of the cross-view pairs, to train a deep
+%neural network that can semantically segment the overhead image and
+%then transfer the segmentation mask to the ground view. To finer
+%geo-orient and localize the image, we can match the ground
+%segmentation mask with the mask generated from overhead image at
+%location $l$.
 
 Another contribution of our work is that along the training for
 networks that do geo-calibration, we are able to learn to extract
-high-level features from the networks along side.
+high-level features from the networks. \todo{expand}
 
 
 \section{Our Approach}
