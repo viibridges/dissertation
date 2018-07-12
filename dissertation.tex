@@ -40,26 +40,29 @@
 
 \abstract
 { \SingleSpacing
-Camera calibration is one of the primary task in computer vision.
-It plays an important role in applications like SLAM, image
-mensuration and indoor layout estimation. Current models for camera
-calibration are mostly deterministic, namely they output fixed
-solutions. 
-However, deterministic calibration models can not handle uncertainties
-in our real life well. Furthermore, they are not very friendly to
-graphic model algorithms with which they interface.
-To address these problems, we propose a probabilistic model with deep
-neural networks (DNNs) for camera geo-calibration, providing more
-flexible inputs. Compared to traditional camera calibration,
-camera geo-calibration measures the camera extrinsic in geographic
-coordinates.  Furthermore, our approaches also demonstrate that the
+The ultimate goal of image understanding is to transfer the visual
+images into numerical or symbolic descriptions of the world
+that are helpful for other thought processes for decision making.
+In general, understanding images is not trivial for machines.
+Under different scenarios, researchers divide image
+understanding into different computer vision tasks. For example,
+pedestrian detection is essential to autonomous driving, and image
+retrieval to an image searching engine. Knowing when, where, and in
+which direction picture was taken, the task of geo-calibration makes
+it possible to use imagery to understand the world and how it changes
+in time. Current models for geo-calibration are mostly deterministic,
+namely they output fixed solutions. However, deterministic 
+models can not handle uncertainties in our real life well.
+Furthermore, their outputs are not very friendly to graphic model
+algorithms. To address these problems, we propose a probabilistic
+model for camera geo-calibration using deep neural networks (DNNs),
+providing more flexible inputs. We also demonstrate that the
 geographic information is helpful for extracting/transferring high
-level features in DNN training.  The primary contributions of our
-thesis include building a probabilistic model for camera
-geo-calibration ,and relating the camera geographic information and
-image semantics through deep neural networks. Our discoveries can
-provide researchers new insights for both camera calibration and DNN
-training.
+level features. The primary contributions of our thesis include
+building a probabilistic model for camera geo-calibration, and
+relating the camera geographic information and image semantics through
+deep neural networks. Our discoveries can provide researchers new
+insights for both camera geo-calibration and DNN training.
 }
 \keywords{geo-calibration, deep neural networks, computer vision}
 
