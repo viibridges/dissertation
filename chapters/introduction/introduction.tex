@@ -15,27 +15,33 @@
 
 Before the father of computer asked this question, creating
 machines that can think as human has been a dream through the human
-history. In the late 18th century, Hungarian inventor, Wolfgan von
-Kempelen, constructed an automatic machine called ``The Turk'' (also
-known as the ``Mechanical Turk'') to play a chess game. Though it
-proved to be an elaborate hoax, people's enthusiasm for machine
-intelligence lasts till today. As one of the core elements of
-intelligence, human vision plays an important role in our daily lives.
-In order to make computer understand images, scholars had put a lot of
-research efforts in the study of computer vision. In 1960s, MIT
-professor Dr. Marvin Minsky asked his undergraduates to develop
-programs that can recognize objects from a scene in their summer
-project~\cite{boden2006mind}. Half a century has passed, the question
-of this ``summer project'' still remains open.
+history. In 1960s, MIT professor Dr. Marvin Minsky asked his
+undergraduates to develop programs that can recognize objects from a
+scene in their summer project~\cite{boden2006mind}. Half a century has
+passed, the question of this ``summer project'' still remains open.
 
 The ultimate goal of image understanding is to transfer the visual
-images into numerical or symbolic descriptions of the world
-that are helpful for other thought processes for decision making.
+signals (images/videos) into abstract symbolic descriptions of the
+world which are helpful for decision making.
 In general, understanding images is not trivial for machines.
 Under different scenarios, researchers divide image
 understanding into different computer vision tasks. For example,
 pedestrian detection is essential to autonomous driving, and image
 retrieval to an image searching engine.
+
+For many applications, knowing when, where, and in which direction a
+picture was taken is important to understand the world. We refer to
+this such a vision task as {\em geo-calibration}.
+In current work of geo-calibration, most algorithms are
+deterministic, which means they output fixed solutions. Deterministic
+systems may seem straight-forward but they also have some 
+drawbacks: 1) Deterministic systems can not handle uncertainties in
+the real world very well. 2) they are not
+friendly to applications developed with graphic models that are
+interfaced with their outputs. To address these problems, We propose
+to build probabilistic models for camera geo-calibration.
+
+\section{Background}
 
 As one of the primary vision tasks, camera calibration plays an
 important role in many applications like autonomous driving, indoor
@@ -47,6 +53,7 @@ itself such as focal length, principal point \etc;
 The extrinsic parameters describe the external states of the
 camera, such as the camera poses and translation under some
 coordinate system.
+
 Some applications like GIS and geo-localization are more interested in
 calibrating the camera under geographic coordinates, namely knowing
 the camera pose with respect to the ground reference frame (\ie ENU)
