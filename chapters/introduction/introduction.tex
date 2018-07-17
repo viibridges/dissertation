@@ -41,11 +41,12 @@ friendly to applications developed with graphic models that are
 interfaced with their outputs. To address these problems, We propose
 to build probabilistic models for camera geo-calibration.
 
+Beside that, we also explored the possibility to learn high-level
+features from the networks that do geo-calibration. \todo{expand}
+
 \section{Background}
 
-As one of the primary vision tasks, camera calibration plays an
-important role in many applications like autonomous driving, indoor
-layout estimation and image mensuration. 
+\subsection{Geo-Calibration}
 In the camera pin-hole model, the projection from scene to the image
 frame are determined by camera intrinsic and extrinsic parameters. 
 The intrinsic parameters describe the information of camera
@@ -53,42 +54,19 @@ itself such as focal length, principal point \etc;
 The extrinsic parameters describe the external states of the
 camera, such as the camera poses and translation under some
 coordinate system.
-
 Some applications like GIS and geo-localization are more interested in
 calibrating the camera under geographic coordinates, namely knowing
 the camera pose with respect to the ground reference frame (\ie ENU)
 and camera location in geographic coordinates. We refer to such
-calibration as \textbf{geo-calibration}.
+calibration task as \textbf{geo-calibration}.
+
 The complete geo-calibration includes intrinsic (focal
 length, principal points \etc) and extrinsic parameters.
 In this work, our study mainly focuses on estimating geo-calibration
 extrinsic parameters like camera pose and the
 geo-orientation/geo-localization of the camera.
 
-In current work of camera calibration, most algorithms are
-deterministic, which means they output fixed solutions. Deterministic
-systems may seem straight-forward but they also forebear the following
-drawbacks: 1) Deterministic systems can not handle uncertainties which
-are commonly encountered in the real world problems.  2) Deterministic
-systems are not friendly to applications developed with graphic models
-that are interfaced with their outputs.
-To address these drawbacks, We propose to build probabilistic
-models for camera geo-calibration.
-We first build a probabilistic model to detect multiple
-geo-calibration parameters jointly.  Our algorithm treats each set of
-geo-calibration parameters as a point in the solution space. It
-constructs an energy function for points in the solution space to
-measure the fitness between the geo-calibration parameters and the
-observations (images), so that each point is associated with an energy
-score.  The probability over the calibration parameters is
-anti-proportional to the energy score, which we then compute with
-graphic model approach. The essential part of our algorithm is the
-construction of the energy function. To better measure the fitness
-between the calibration parameters and the observation, we divide the
-energy function into a combination of partial calibration problems,
-each of which is responsible for a subset of calibration parameters.
-We will discuss these constraint functions in several following work.
- 
+\subsection{Deep Neural Networks}
 In recent years, deep neural networks (DNNs) rise as stars. Methods
 using DNNs achieve state-of-the-art performances in
 many computer vision areas (\todo{citations}). We demonstrate that
@@ -96,26 +74,8 @@ DNNs are good tools to solve partial calibration problems.
 As a next step of our study, We focus on calibrating cameras with deep
 neural networks.
 
-We first estimate camera roll and pitch angles. Assuming the intrinsic
-parameters are known, camera roll and pitch angles can be
-derived from the horizon line position in the image. Detecting horizon
-line is easier because it is tightly related to the content/appearance
-of the scene. In our work, we first create a new method using DNNs to
-give a prior distribution of the horizon line, then assign a
-probability to each by measuring their consistences with vanishing
-points detected using traditional statistic methods.
 
-Study of geo-localization has a long history. \todo{citations}. In
-another work, We seek to geo-localize images with temporal
-information. The system estimates the discrete probability over the
-camera geographic location. This application works in rough scale. In
-our next work, we design an algorithm that can do fine-scale localization
-based on the rough geographic location inputs. In that work, we
-designed a deep neural network to transfer the semantic segmentation
-masks from the top-view perspective to the ground view perspective. In
-order to train the network, we have to construct a data form called
-cross-view image pairs.
-
+\subsection{Overhead Imagery}
 Overhead imagery plays an import role in the cross-view learning area.
 To construct a cross view image pair, we need to know the geographic
 location (sometimes also with the geographic orientation).
@@ -137,80 +97,48 @@ Given the geographic information of the ground image, we are able to
 download the corresponding overhead images to form the geo-orientation
 aligned cross-view image pairs.
 
-%Our algorithm takes advantage of the cross-view pairs, to train a deep
-%neural network that can semantically segment the overhead image and
-%then transfer the segmentation mask to the ground view. To finer
-%geo-orient and localize the image, we can match the ground
-%segmentation mask with the mask generated from overhead image at
-%location $l$.
-
-Another contribution of our work is that along the training for
-networks that do geo-calibration, we are able to learn to extract
-high-level features from the networks. \todo{expand}
-
-
 \section{Our Approach}
-We first propose primary probabilistic model to jointly estimate 
-the full geo-calibration parameters. The key for the success of this
-model is to construct good constraint functions that describe the
-fitness between the calibration parameters and the images. We then
-dismantle the full geo-calibration into several partial
-geo-calibration tasks, each of which provide a constraint function to
-fit in the primary model.
+We divide our approach in two steps. First, we propose a general
+probabilistic model to jointly estimate the geo-calibration
+parameters. The key for the success of this model is to construct good
+constraint functions that describe the fitness between the calibration
+parameters and the images. Then we dismantle the full geo-calibration
+into several partial geo-calibration tasks, each of which provide a
+constraint function that could fit into our general model.
+
+\subsection{General Probabilistic Model for Geo-Calibration}
+The complete camera geo-calibration includes the detection of camera
+geographic location, the pose and the focal length of the camera.  We
+design a graphic model to estimate the probability over these
+geo-calibration parameters. 
+We construct an scoring function to measure the ``fitness'' between
+the calibration parameters and the observation of the image. The
+scoring function is proportional to the probability distribution of
+the camera parameters. We propose a Markov Chain Monte Carlo (MCMC)
+sampling approach to approximate the underlying probability
+distribution over the full geo-calibration of the camera.
+Our model is a general architecture, which can take different
+constraints to form the energy function. The details about this model
+can be found in \chapref{mcmc}.
+
+\subsection{Developing Constraint Functions}
+In our general model, the scoring function is defined as a linear
+combination of multiple constraint functions. We then develop
+these constraint functions to describe different calibration
+parameters.
 
 \begin{itemize}[noitemsep]
-  \item \textbf{General Probabilistic Architecture for Geo-Calibration:}
-  We design a graphic model to estimate the probability over
-  full geo-calibration parameters. Our model is a general
-  architecture, which can take different constraints to form
-  the energy function.
+  \item \textbf{Constraint for Horizon Line and Vanishing Points:}
+  We first estimate camera roll and pitch angles. Assuming the intrinsic
+  parameters are known, camera roll and pitch angles can be
+  derived from the horizon line position in the image. Detecting horizon
+  line is easier because it is tightly related to the content/appearance
+  of the scene. In our work, we first create a new method using DNNs to
+  give a prior distribution of the horizon line, then assign a
+  probability to each by measuring their consistences with vanishing
+  points detected using traditional statistic methods. \newline
 
-  \item \textbf{Constraint Function for Camera Poses:}
-  We develop a constraint function for two camera pose angles: pitch
-  and roll.
-
-  \item \textbf{Constraint Function for Camera Geographic Locations
-  and Orientations:}
-  We develop a constraint function for camera geographic locations and
-  orientations.
-
-\end{itemize}
-
-
-\section{Synopsis}
-
-The remainder of this work is organized as follows:
-  
-\begin{itemize}[noitemsep]
-
-  \item \textbf{\chapref{mcmc} - 
-  Complete Camera Geo-Calibration with MCMC Method:} \newline \newline
-  The complete camera geo-calibration includes the detection of camera
-  location in the world, the pose and the focal length of the camera
-  given the input image. By constructing a objective function that
-  measures the ``fitness'' between the camera calibration and the
-  observation of the image, we are able to optimize the parameters in
-  the calibration space. However, this space multi-dimensional, which
-  makes the naive grid search infeasible. Our insight is to do the
-  optimization using Markov Chain Monte Carlo (MCMC) method. Our
-  algorithm is able to avoid unnecessary sampling in the
-  low-probabilistic region in the parameter space thus reduce the
-  computational time dramatically. \newline
-
-  \item \textbf{\chapref{fasthorizon} -
-  Detecting Pitch and Roll using CNN:} \newline \newline
-  Assuming the intrinsic parameters are known, camera roll and pitch
-  angles can be derived from the horizon line position in the image.
-  Horizon line and vanishing points (VPs) plays important roles in many
-  application such as image mensuration and facade detection. In the
-  previous work, researchers tended to use build bottom-up approaches to
-  solve this problem. Our work is inspired by human's perception of the
-  horizon line and the vanishing point. Our method exploit the image
-  global context to provide a prior distribution of the final solution,
-  thus to reduce the dimensionality of the solution space. \newline
-
-  \item \textbf{\chapref{whenwhere} -
-  Estimating Geographic Location with Temporal Information:} \newline \newline
+  \item \textbf{Constraint for Coarse Geographic Locations:}
   In this work, we demonstrate that we can estimate the camera geographic
   location with the input image and its temporal information.
   One of the key to the success of machine learning approaches are the
@@ -223,8 +151,7 @@ The remainder of this work is organized as follows:
   of the images, our network is able capture the geo-temporal related
   high-level features. \newline
 
-  \item \textbf{\chapref{crosstransf} -
-  Finer Localization by Matching the Overhead Images:} \newline \newline
+  \item \textbf{Constraint for Fine Geographic Locations and Orientations}
   With the rough geographic location, we are able to refine the result
   with overhead images.
   Current machine learning methods address problems that involves mostly
@@ -236,6 +163,5 @@ The remainder of this work is organized as follows:
   the projective losses \todo{citation}, our network learns 
   both the geometric projection between the overhead and ground
   images, and the semantics of the overhead images jointly. \newline
-
 
 \end{itemize}

@@ -250,3 +250,126 @@ intelligence lasts till today. As one of the core elements of
 intelligence, human vision plays an important role in our daily lives.
 In order to make computer understand images, scholars had put a lot of
 research efforts in the study of computer vision. 
+
+
+As one of the primary vision tasks, camera calibration plays an
+important role in many applications like autonomous driving, indoor
+layout estimation and image mensuration. 
+
+
+In current work of camera calibration, most algorithms are
+deterministic, which means they output fixed solutions. Deterministic
+systems may seem straight-forward but they also forebear the following
+drawbacks: 1) Deterministic systems can not handle uncertainties which
+are commonly encountered in the real world problems.  2) Deterministic
+systems are not friendly to applications developed with graphic models
+that are interfaced with their outputs.
+To address these drawbacks, We propose to build probabilistic
+models for camera geo-calibration.
+We first build a probabilistic model to detect multiple
+geo-calibration parameters jointly.  Our algorithm treats each set of
+geo-calibration parameters as a point in the solution space. It
+constructs an energy function for points in the solution space to
+measure the fitness between the geo-calibration parameters and the
+observations (images), so that each point is associated with an energy
+score.  The probability over the calibration parameters is
+anti-proportional to the energy score, which we then compute with
+graphic model approach. The essential part of our algorithm is the
+construction of the energy function. To better measure the fitness
+between the calibration parameters and the observation, we divide the
+energy function into a combination of partial calibration problems,
+each of which is responsible for a subset of calibration parameters.
+We will discuss these constraint functions in several following work.
+
+
+However, this space multi-dimensional, which
+makes the naive grid search infeasible. Our insight is to do the
+optimization using Markov Chain Monte Carlo (MCMC) method. Our
+algorithm is able to avoid unnecessary sampling in the
+low-probabilistic region in the parameter space thus reduce the
+computational time dramatically. 
+
+
+  Study of geo-localization has a long history. \todo{citations}. In
+  another work, We seek to geo-localize images with temporal
+  information. The system estimates the discrete probability over the
+  camera geographic location. This application works in rough scale. In
+  our next work, we design an algorithm that can do fine-scale localization
+  based on the rough geographic location inputs. In that work, we
+  designed a deep neural network to transfer the semantic segmentation
+  masks from the top-view perspective to the ground view perspective. In
+  order to train the network, we have to construct a data form called
+  cross-view image pairs. \newline
+
+
+
+\section{Synopsis}
+
+The remainder of this work is organized as follows:
+  
+\begin{itemize}[noitemsep]
+
+  \item \textbf{\chapref{mcmc} - 
+  Complete Camera Geo-Calibration with MCMC Method:} \newline \newline
+  The complete camera geo-calibration includes the detection of camera
+  location in the world, the pose and the focal length of the camera
+  given the input image. By constructing a objective function that
+  measures the ``fitness'' between the camera calibration and the
+  observation of the image, we are able to optimize the parameters in
+  the calibration space. However, this space multi-dimensional, which
+  makes the naive grid search infeasible. Our insight is to do the
+  optimization using Markov Chain Monte Carlo (MCMC) method. Our
+  algorithm is able to avoid unnecessary sampling in the
+  low-probabilistic region in the parameter space thus reduce the
+  computational time dramatically. \newline
+
+  \item \textbf{\chapref{fasthorizon} -
+  Detecting Pitch and Roll using CNN:} \newline \newline
+  Assuming the intrinsic parameters are known, camera roll and pitch
+  angles can be derived from the horizon line position in the image.
+  Horizon line and vanishing points (VPs) plays important roles in many
+  application such as image mensuration and facade detection. In the
+  previous work, researchers tended to use build bottom-up approaches to
+  solve this problem. Our work is inspired by human's perception of the
+  horizon line and the vanishing point. Our method exploit the image
+  global context to provide a prior distribution of the final solution,
+  thus to reduce the dimensionality of the solution space. \newline
+
+  \item \textbf{\chapref{whenwhere} -
+  Estimating Geographic Location with Temporal Information:} \newline \newline
+  In this work, we demonstrate that we can estimate the camera geographic
+  location with the input image and its temporal information.
+  One of the key to the success of machine learning approaches are the
+  large quantity of annotated data. However, fully annotated imagery
+  only consists of a tiny part of the image resources available online.
+  The idea is to exploit other meta-info that are automatically
+  recorded/captured by devices to train the ML models. We demonstrate
+  that the camera geometry can be used as weak ground truth for
+  supervision problem. By learning the capture time and the geolocation
+  of the images, our network is able capture the geo-temporal related
+  high-level features. \newline
+
+  \item \textbf{\chapref{crosstransf} -
+  Finer Localization by Matching the Overhead Images:} \newline \newline
+  With the rough geographic location, we are able to refine the result
+  with overhead images.
+  Current machine learning methods address problems that involves mostly
+  the ground imagery. Tons of dataset targeting on ground imagery are
+  annotated while much fewer are done for the overhead imagery.
+  In this work, we try to transfer the semantics from the ground imagery
+  to the overhead imagery by identifying the latent geometry
+  correspondences between these two. Similar to methods that driven by
+  the projective losses \todo{citation}, our network learns 
+  both the geometric projection between the overhead and ground
+  images, and the semantics of the overhead images jointly. \newline
+
+
+\end{itemize}
+
+
+%Our algorithm takes advantage of the cross-view pairs, to train a deep
+%neural network that can semantically segment the overhead image and
+%then transfer the segmentation mask to the ground view. To finer
+%geo-orient and localize the image, we can match the ground
+%segmentation mask with the mask generated from overhead image at
+%location $l$.
