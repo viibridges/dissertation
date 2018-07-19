@@ -373,3 +373,24 @@ The remainder of this work is organized as follows:
 %geo-orient and localize the image, we can match the ground
 %segmentation mask with the mask generated from overhead image at
 %location $l$.
+
+
+In the camera pin-hole model, the projection from scene to the image
+frame are determined by the camera intrinsic and extrinsic parameters. 
+The intrinsic parameters describe the information of camera
+itself such as focal length, principal point \etc; 
+The extrinsic parameters describe the external states of the
+camera, such as the camera poses and translation under some
+coordinate system.
+Some applications like GIS and geo-localization are more interested in
+calibrating the camera under geographic coordinates, namely knowing
+the camera pose with respect to the ground reference frame (\ie ENU)
+and camera location in geographic coordinates. We refer to such
+calibration task as \textbf{geo-calibration}.
+
+The complete geo-calibration includes intrinsic (focal
+length, principal points \etc) and extrinsic parameters.
+In this work, our study mainly focuses on estimating geo-calibration
+extrinsic parameters like camera pose and the
+geo-orientation/geo-localization of the camera.
+

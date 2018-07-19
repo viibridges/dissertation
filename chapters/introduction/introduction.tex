@@ -47,24 +47,46 @@ features from the networks that do geo-calibration. \todo{expand}
 \section{Background}
 
 \subsection{Geo-Calibration}
-In the camera pin-hole model, the projection from scene to the image
-frame are determined by camera intrinsic and extrinsic parameters. 
-The intrinsic parameters describe the information of camera
-itself such as focal length, principal point \etc; 
-The extrinsic parameters describe the external states of the
-camera, such as the camera poses and translation under some
-coordinate system.
-Some applications like GIS and geo-localization are more interested in
-calibrating the camera under geographic coordinates, namely knowing
-the camera pose with respect to the ground reference frame (\ie ENU)
-and camera location in geographic coordinates. We refer to such
-calibration task as \textbf{geo-calibration}.
+Automatic image geo-calibration continues to grow in importance as a
+direct result of the increasing amount of imagery available
+via the Internet. Conceptually geo-calibration task is
+straightforward: given an image, identify the location it was captured
+in the world and the direction the camera was facing. Solving this
+problem is of great value for a wide variety of fields, with potential
+applications ranging from the forensic sciences~\cite{stylianou13jane}
+to crowd-sourced environmental monitoring~\cite{zhang2012mining}.
 
-The complete geo-calibration includes intrinsic (focal
-length, principal points \etc) and extrinsic parameters.
-In this work, our study mainly focuses on estimating geo-calibration
-extrinsic parameters like camera pose and the
-geo-orientation/geo-localization of the camera.
+Extracting location-dependent or orientation-dependent features from
+image data has drawn a great detail of attention from the vision
+community~\cite{jacobs07geolocate, jacobs11geolocate,
+jacobs08geoorient}. The common trend amongst these methods is that
+they take advantage of a large dataset of geo-referenced images. Hays
+and Efros~\cite{hays2008im2gps} use a data-driven scene matching
+approach to localize a query image using a large dataset of geo-tagged
+images.  Doersch et al. extract location-dependent features that
+capture the relative appearance differences of large cities.  Lin et
+al.~\cite{lin2013cross} localize a ground-level image by learning the
+relationship between pairs of ground and aerial images of the same
+location. Other techniques focus on urban environments and infer
+location using local image
+descriptors~\cite{schindler2008detecting,snavely2006photo}. Li et
+al.~\cite{li2012worldwide} exploit geo-registered 3D points clouds to
+estimate camera pose. Many other cues exist, such as the
+skyline~\cite{baatz2012large,ramalingam2009geolocalization}, sky
+appearance~\cite{lalonde2010sun,workman2014rainbow}, and
+shadows~\cite{junejo2008estimating,wu2010geo}.
+
+However, recognizing the geo-location and geo-orientation of an
+arbitrary outdoor image is an extremely challenging task.  Many
+methods have been proposed; the most common approach is to build a
+large database of images with known location and localize a query
+image using either local~\cite{li2010location,schindler2008detecting}
+or global~\cite{hays2008im2gps,doersch2012what} image features.  This
+approach is not applicable when no nearby ground-level imagery exists
+in the reference database, such as when the image was not captured
+near a popular tourist destination.  Even when reference imagery is
+available, the appearance of the objects may not be visually
+distinctive, for example a train track or a body of water. 
 
 \subsection{Deep Neural Networks}
 In recent years, deep neural networks (DNNs) rise as stars. Methods
