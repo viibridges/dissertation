@@ -88,13 +88,19 @@ near a popular tourist destination.  Even when reference imagery is
 available, the appearance of the objects may not be visually
 distinctive, for example a train track or a body of water. 
 
-\subsection{Deep Neural Networks}
+\subsection{Deep Neural Networks for Geo-Calibration}
 In recent years, deep neural networks (DNNs) rise as stars. Methods
 using DNNs achieve state-of-the-art performances in
-many computer vision areas (\todo{citations}). We demonstrate that
-DNNs are good tools to solve partial calibration problems. 
-As a next step of our study, We focus on calibrating cameras with deep
-neural networks.
+many computer vision areas (\todo{citations}). 
+Recent work on cross-view image
+geolocalization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
+ has shown that convolutional neural
+networks are capable of extracting features from aerial imagery
+that can be matched to features extracted from ground imagery.
+Vo \etal~\cite{vo2016localizing} extend this line of work,
+demonstrating improved geolocalization performance by applying an
+auxiliary loss function to regress the ground-level camera orientation
+with respect to the aerial image.
 
 
 \subsection{Overhead Imagery}
