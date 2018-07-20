@@ -88,20 +88,29 @@ near a popular tourist destination.  Even when reference imagery is
 available, the appearance of the objects may not be visually
 distinctive, for example a train track or a body of water. 
 
+
 \subsection{Deep Neural Networks for Geo-Calibration}
 In recent years, deep neural networks (DNNs) rise as stars. Methods
-using DNNs achieve state-of-the-art performances in
-many computer vision areas (\todo{citations}). 
+using DNNs have achieved state-of-the-art performances in many computer
+vision areas (\todo{citations}). 
+The deep neural networks prove to be a good tool to extract high-level
+information, this valuable ability offers great help for researchers
+to conquer the problems like geo-localization and camera calibration.
 Recent work on cross-view image
 geolocalization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
- has shown that convolutional neural
-networks are capable of extracting features from aerial imagery
-that can be matched to features extracted from ground imagery.
-Vo \etal~\cite{vo2016localizing} extend this line of work,
-demonstrating improved geolocalization performance by applying an
-auxiliary loss function to regress the ground-level camera orientation
-with respect to the aerial image.
-
+has shown that convolutional neural networks are capable of extracting
+features from aerial imagery that can be matched to features extracted
+from ground imagery.  Vo \etal~\cite{vo2016localizing} extend this
+line of work, demonstrating improved geolocalization performance by
+applying an auxiliary loss function to regress the ground-level camera
+orientation with respect to the aerial image.  Horizon line is
+important indicator for estimating camera poses.
+Work~\cite{workman2016horizon, hold2017perceptual} has been done to to
+identify the horizon line using an end-to-end CNN. Workman
+\etal~\cite{workman2015deepfocal} develop a CNN to estimate the camera
+focal length. Kendall \etal~\cite{kendall2015convolutional} propose a
+neural network that can do 6-DOF camera relocalization, but their
+method only limited to specific scenes.
 
 \subsection{Overhead Imagery}
 Overhead imagery plays an import role in the cross-view learning area.
@@ -125,35 +134,37 @@ Given the geographic information of the ground image, we are able to
 download the corresponding overhead images to form the geo-orientation
 aligned cross-view image pairs.
 
+
 \section{Our Approach}
 We divide our approach in two steps. First, we propose a general
 probabilistic model to jointly estimate the geo-calibration
 parameters. The key for the success of this model is to construct good
 constraint functions that describe the fitness between the calibration
-parameters and the images. Then we dismantle the full geo-calibration
-into several partial geo-calibration tasks, each of which provide a
-constraint function that could fit into our general model.
+parameters and the images. Under this guidance we dismantle the full
+geo-calibration into several partial geo-calibration tasks, each of
+which provides a constraint function that could fit into our general
+model.
 
 \subsection{General Probabilistic Model for Geo-Calibration}
 The complete camera geo-calibration includes the detection of camera
 geographic location, the pose and the focal length of the camera.  We
-design a graphic model to estimate the probability over these
-geo-calibration parameters. 
-We construct an scoring function to measure the ``fitness'' between
-the calibration parameters and the observation of the image. The
-scoring function is proportional to the probability distribution of
-the camera parameters. We propose a Markov Chain Monte Carlo (MCMC)
-sampling approach to approximate the underlying probability
-distribution over the full geo-calibration of the camera.
-Our model is a general architecture, which can take different
-constraints to form the energy function. The details about this model
-can be found in \chapref{mcmc}.
+design a general model to estimate the probability over these
+geo-calibration parameters: First, we construct a scoring function to
+measure the ``fitness'' between the calibration parameters and the
+observation of the image. The scoring function is proportional to the
+probability distribution of the camera parameters. Then we propose a
+Markov Chain Monte Carlo (MCMC) sampling approach to approximate the
+underlying probability distribution over the full geo-calibration of
+the camera. 
+Our model is a general architecture, which can take
+different constraints to form the energy function. The details about
+this model can be found in \chapref{mcmc}.
 
 \subsection{Developing Constraint Functions}
 In our general model, the scoring function is defined as a linear
-combination of multiple constraint functions. We then develop
-these constraint functions to describe different calibration
-parameters.
+combination of multiple constraint functions.
+In the rest of the work, We focus on developing good constraint
+functions for different set of calibration parameters.
 
 \begin{itemize}[noitemsep]
   \item \textbf{Constraint for Horizon Line and Vanishing Points:}
@@ -161,23 +172,24 @@ parameters.
   parameters are known, camera roll and pitch angles can be
   derived from the horizon line position in the image. Detecting horizon
   line is easier because it is tightly related to the content/appearance
-  of the scene. In our work, we first create a new method using DNNs to
-  give a prior distribution of the horizon line, then assign a
-  probability to each by measuring their consistences with vanishing
-  points detected using traditional statistic methods. \newline
+  of the scene. In our work, we create a new method using a CNN to
+  estimate the prior distribution of the horizon line. We then assign
+  a probability to each horizon line by measuring their consistences
+  with vanishing points detected using traditional statistic methods.
+  We present the algorithm details in \chapref{fasthorizon}.
+  \newline
 
   \item \textbf{Constraint for Coarse Geographic Locations:}
-  In this work, we demonstrate that we can estimate the camera geographic
-  location with the input image and its temporal information.
-  One of the key to the success of machine learning approaches are the
-  large quantity of annotated data. However, fully annotated imagery
-  only consists of a tiny part of the image resources available online.
-  The idea is to exploit other meta-info that are automatically
-  recorded/captured by devices to train the ML models. We demonstrate
-  that the camera geometry can be used as weak ground truth for
-  supervision problem. By learning the capture time and the geolocation
-  of the images, our network is able capture the geo-temporal related
-  high-level features. \newline
+  In this work, we demonstrate to estimate the camera geographic
+  location with the input image.
+  We provide two approaches to obtain the probability distribution over the camera
+  geographic location. Most straightforwardly, our network output
+  categorical distribution over world into a $N \times M$ bins. Better
+  results can be obtained with temporal inputs (image timestamps). Other
+  than that, our algorithm can also compute the probability for any
+  geographic location.
+  We present the algorithm details in \chapref{whenwhere}.
+  \newline
 
   \item \textbf{Constraint for Fine Geographic Locations and Orientations}
   With the rough geographic location, we are able to refine the result
@@ -190,6 +202,8 @@ parameters.
   correspondences between these two. Similar to methods that driven by
   the projective losses \todo{citation}, our network learns 
   both the geometric projection between the overhead and ground
-  images, and the semantics of the overhead images jointly. \newline
+  images, and the semantics of the overhead images jointly. 
+  We present the algorithm details in \chapref{crosstransf}
+  \newline
 
 \end{itemize}
