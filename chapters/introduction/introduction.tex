@@ -112,13 +112,15 @@ focal length. Kendall \etal~\cite{kendall2015convolutional} propose a
 neural network that can do 6-DOF camera relocalization, but their
 method only limited to specific scenes.
 
-\subsection{Overhead Imagery}
-Overhead imagery plays an import role in the cross-view learning area.
-To construct a cross view image pair, we need to know the geographic
-location (sometimes also with the geographic orientation).
-\todo{rewrite the following} Efforts have been made to
-automate overhead image analysis. As early as
-1970~\cite{idelsohn1970learning} methods were introduced for
+\subsection{Cross-view Imagery}
+Since the cross-view imagery plays an important role in geolocalization,
+we spare an seperate section to introduce it. The cross-view image
+pair consists of a ground-view image and an overhead imager at the
+same location. In some cases, the ground/overhead images are also
+aligned in orientation.
+Specifically, Study of the overhead imagery has been long started.
+Efforts have been made to automate overhead image analysis. As early
+as 1970~\cite{idelsohn1970learning} methods were introduced for
 classifying terrain types from a single overhead image, with the goal
 of automatically generating terrain maps.  Similarly, in 1976 Bajcsy
 et al.~\cite{bajcsy1976computer} described a system for recognizing
@@ -126,13 +128,19 @@ roads, intersections, and other road-like objects in overhead imagery.
 However, as overhead imaging differs drastically from ground-level
 imaging, the majority of techniques that have been developed have
 occurred independently and in task-specific ways~\cite{Rozen}.
-
 Benefited from the fast growing monitoring satellite market, overhead
 imagery grows fast nowadays. Microsoft BingMap provides public access
 to their overhead image database with various resolution options.
 Given the geographic information of the ground image, we are able to
-download the corresponding overhead images to form the geo-orientation
+obtain the corresponding overhead images to form the geo-orientation
 aligned cross-view image pairs.
+Given the fact that overhead imagery has much larger earth coverage
+and better registered in geographic locations, many geo-localization
+approaches extract the features of it as reference
+database~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
+
+Furthermore, there are many other properties of the cross-view pairs
+to explore for high-level feature extraction \todo{expand}.
 
 
 \section{Our Approach}
