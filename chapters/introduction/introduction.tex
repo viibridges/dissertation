@@ -200,8 +200,10 @@ functions for different set of calibration parameters.
   \newline
 
   \item \textbf{Constraint for Fine Geographic Locations and Orientations}
-  With the rough geographic location, we are able to refine the result
-  with overhead images.
+  In our previous method, we present that our algorithm can estimate
+  the camera location distribution in low-res world division. In this
+  work we focus on refining the geo-localization results with the help
+  of overhead imagery and estimating the camera geo-orientation.
   Current machine learning methods address problems that involves mostly
   the ground imagery. Tons of dataset targeting on ground imagery are
   annotated while much fewer are done for the overhead imagery.
@@ -211,6 +213,13 @@ functions for different set of calibration parameters.
   the projective losses \todo{citation}, our network learns 
   both the geometric projection between the overhead and ground
   images, and the semantics of the overhead images jointly. 
+  When refining the camera geographic location, we compare the
+  semantic layout of the ground image with those transferred from
+  overhead images sampled from different locations and orientations. The
+  optimal prediction is found when the semantic layouts from these
+  two sources fit best. For probabilistic outputs, we can also assign
+  an energy score to each location and orientation combination
+  according to how well the semantic layouts match to each other.
   We present the algorithm details in \chapref{crosstransf}
   \newline
 
