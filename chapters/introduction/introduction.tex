@@ -30,8 +30,8 @@ pedestrian detection is essential to autonomous driving, and image
 retrieval to an image searching engine.
 
 For many applications, knowing when, where, and in which direction a
-picture was taken is important to understand the world. We refer to
-this such a vision task as {\em geo-calibration}.
+picture was taken is important to understand the world. We refer to 
+such a vision task as {\em geo-calibration}.
 In current work of geo-calibration, most algorithms are
 deterministic, which means they output fixed solutions. Deterministic
 systems may seem straight-forward but they also have some 
@@ -41,8 +41,20 @@ friendly to applications developed with graphic models that are
 interfaced with their outputs. To address these problems, We propose
 to build probabilistic models for camera geo-calibration.
 
-Beside that, we also explored the possibility to learn high-level
-features from the networks that do geo-calibration. \todo{expand}
+Beside geo-calibration, this thesis also studies the possibility to
+learn high-level image representations with help of geographic
+information. In one of our work, we demonstrate that we are able to
+learn geo-temporal feature representations of image with geographic
+locations and capture time. In another work, knowing the geographic
+location, we transfer the learned knowledge of a CNN for ground image
+segmentation to another CNN designed for overhead image segmentation.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.8\linewidth]{introduction/architecture}
+  \caption{Architecture of our approach.}
+  \label{fig:intro:architecture}
+\end{figure}
 
 \section{Background}
 
@@ -94,28 +106,28 @@ In recent years, deep neural networks (DNNs) rise as stars. Methods
 using DNNs have achieved state-of-the-art performances in many computer
 vision areas (\todo{citations}). 
 The deep neural networks prove to be a good tool to extract high-level
-information, this valuable ability offers great help for researchers
+image representations, this valuable ability offers great help for researchers
 to conquer the problems like geo-localization and camera calibration.
 Recent work on cross-view image
 geolocalization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
 has shown that convolutional neural networks are capable of extracting
-features from aerial imagery that can be matched to features extracted
-from ground imagery.  Vo \etal~\cite{vo2016localizing} extend this
+features from geo-tagged aerial imagery that can be matched to features extracted
+from the inquiry ground imagery.  Vo \etal~\cite{vo2016localizing} extend this
 line of work, demonstrating improved geolocalization performance by
 applying an auxiliary loss function to regress the ground-level camera
-orientation with respect to the aerial image.  Horizon line is
+orientation with respect to the aerial image.  Horizon line is an
 important indicator for estimating camera poses.
-Work~\cite{workman2016horizon, hold2017perceptual} has been done to to
-identify the horizon line using an end-to-end CNN. Workman
-\etal~\cite{workman2015deepfocal} develop a CNN to estimate the camera
-focal length. Kendall \etal~\cite{kendall2015convolutional} propose a
-neural network that can do 6-DOF camera relocalization, but their
-method only limited to specific scenes.
+Work~\cite{zhai2016horizon, workman2016horizon, hold2017perceptual}
+has been done to to identify the horizon line with CNNs.
+Workman \etal~\cite{workman2015deepfocal} develop a CNN to estimate
+the camera focal length. Kendall \etal~\cite{kendall2015convolutional}
+propose a neural network that can identify 6-DOF camera parameters,
+but their method only limited to specific scenes.
 
 \subsection{Cross-view Imagery}
 Since the cross-view imagery plays an important role in geolocalization,
-we spare an seperate section to introduce it. The cross-view image
-pair consists of a ground-view image and an overhead imager at the
+we spare an separate section to introduce it. A cross-view image
+pair consists of a ground-view image and an overhead image at the
 same location. In some cases, the ground/overhead images are also
 aligned in orientation.
 Specifically, Study of the overhead imagery has been long started.
@@ -136,11 +148,12 @@ obtain the corresponding overhead images to form the geo-orientation
 aligned cross-view image pairs.
 Given the fact that overhead imagery has much larger earth coverage
 and better registered in geographic locations, many geo-localization
-approaches extract the features of it as reference
-database~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
+approaches~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
+extract the overhead features as reference database for
+geo-localization.
 
-Furthermore, there are many other properties of the cross-view pairs
-to explore for high-level feature extraction \todo{expand}.
+%Furthermore, there are many other properties of the cross-view pairs
+%to explore for high-level feature extraction \todo{expand}.
 
 
 \section{Our Approach}
@@ -151,7 +164,8 @@ constraint functions that describe the fitness between the calibration
 parameters and the images. Under this guidance we dismantle the full
 geo-calibration into several partial geo-calibration tasks, each of
 which provides a constraint function that could fit into our general
-model.
+model. The architecture of our approaches refers to
+\figref{intro:architecture}.
 
 \subsection{General Probabilistic Model for Geo-Calibration}
 The complete camera geo-calibration includes the detection of camera
