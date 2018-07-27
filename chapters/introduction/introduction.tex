@@ -205,11 +205,15 @@ functions for different set of calibration parameters.
   In this work, we demonstrate to estimate the camera geographic
   location with the input image.
   We provide two approaches to obtain the probability distribution over the camera
-  geographic location. Most straightforwardly, our network output
+  geographic location. Most straightforwardly, our network outputs
   categorical distribution over world into a $N \times M$ bins. Better
-  results can be obtained with temporal inputs (image timestamps). Other
-  than that, our algorithm can also compute the probability for any
-  geographic location.
+  results can be obtained with temporal inputs (image timestamps).
+  Our algorithm can also compute the probability at arbitrary
+  geographic location, with lower accuracy than the straightforward
+  method.
+  We also demonstrate that our algorithm can learn a  geo-temporal
+  feature representation of image with geographic locations and capture
+  time.
   We present the algorithm details in \chapref{whenwhere}.
   \newline
 
@@ -217,21 +221,25 @@ functions for different set of calibration parameters.
   In our previous method, we present that our algorithm can estimate
   the camera location distribution in low-res world division. In this
   work we focus on refining the geo-localization results with the help
-  of overhead imagery and estimating the camera geo-orientation.
+  of overhead imagery and on estimating the camera geo-orientation.
   Current machine learning methods address problems that involves mostly
   the ground imagery. Tons of dataset targeting on ground imagery are
   annotated while much fewer are done for the overhead imagery.
   In this work, we try to transfer the semantics from the ground imagery
   to the overhead imagery by identifying the latent geometry
-  correspondences between these two. Similar to methods that driven by
-  the projective losses \todo{citation}, our network learns 
-  both the geometric projection between the overhead and ground
-  images, and the semantics of the overhead images jointly. 
+  correspondences between these two. Similar to the monocular depth
+  estimation methods that driven by
+  the technique called {\em Reprojection
+  Losses}~\cite{garg2016unsupervised,
+  godard2017unsupervised,zhou2017unsupervised, yan2016perspective}, our
+  network learns to geometrically project pixels from the overhead
+  images to the ground images,
+  and learns to segment the overhead images jointly. 
   When refining the camera geographic location, we compare the
   semantic layout of the ground image with those transferred from
   overhead images sampled from different locations and orientations. The
   optimal prediction is found when the semantic layouts from these
-  two sources fit best. For probabilistic outputs, we can also assign
+  two sources match best. For probabilistic outputs, we can also assign
   an energy score to each location and orientation combination
   according to how well the semantic layouts match to each other.
   We present the algorithm details in \chapref{crosstransf}
