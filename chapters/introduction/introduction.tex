@@ -36,18 +36,19 @@ In current work of geo-calibration, most algorithms are
 deterministic, which means they output fixed solutions. Deterministic
 systems may seem straight-forward but they also have some 
 drawbacks: 1) Deterministic systems can not handle uncertainties in
-the real world very well. 2) they are not
-friendly to applications developed with graphic models that are
-interfaced with their outputs. To address these problems, We propose
-to build probabilistic models for camera geo-calibration.
+the real world very well. 2) They are not
+friendly to graphic model applications.
+To address these problems, We propose to build probabilistic models
+for camera geo-calibration.
 
-Beside geo-calibration, this thesis also studies the possibility to
-learn high-level image representations with help of geographic
+Beside geo-calibration, this thesis also studies the possibilities of
+learning high-level image representations with the help of geographic
 information. In one of our work, we demonstrate that we are able to
 learn geo-temporal feature representations of image with geographic
-locations and capture time. In another work, knowing the geographic
-location, we transfer the learned knowledge of a CNN for ground image
-segmentation to another CNN designed for overhead image segmentation.
+locations and image timestamps. In another work, we exploit image geographic
+locations to transfer the learned knowledge of a CNN for ground image
+semantic segmentation to another CNN designed for overhead image
+semantic segmentation.
 
 \begin{figure}
   \centering
@@ -126,10 +127,10 @@ but their method only limited to specific scenes.
 
 \subsection{Cross-view Imagery}
 Since the cross-view imagery plays an important role in geolocalization,
-we spare an separate section to introduce it. A cross-view image
+we spare an separate section to discuss it. A cross-view image
 pair consists of a ground-view image and an overhead image at the
-same location. In some cases, the ground/overhead images are also
-aligned in orientation.
+same location. In some cases, two images are also aligned in
+orientation.
 Specifically, Study of the overhead imagery has been long started.
 Efforts have been made to automate overhead image analysis. As early
 as 1970~\cite{idelsohn1970learning} methods were introduced for
@@ -157,14 +158,15 @@ geo-localization.
 
 
 \section{Our Approach}
-We divide our approach in two steps. First, we propose a general
+Our approach consists of two big steps. First, we propose a general
 probabilistic model to jointly estimate the geo-calibration
 parameters. The key for the success of this model is to construct good
-constraint functions that describe the fitness between the calibration
-parameters and the images. Under this guidance we dismantle the full
-geo-calibration into several partial geo-calibration tasks, each of
-which provides a constraint function that could fit into our general
-model. The architecture of our approaches refers to
+constraint functions which describe the fitness between the calibration
+parameters and the images. As the second step of our approach, we
+dismantle the full geo-calibration into several partial
+geo-calibration tasks, each of which could provides a strong constraint
+function that fit in the general model. The architecture of
+our approaches refers to
 \figref{intro:architecture}.
 
 \subsection{General Probabilistic Model for Geo-Calibration}
