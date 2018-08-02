@@ -170,34 +170,40 @@ our approaches refers to
 \figref{intro:architecture}.
 
 \subsection{General Probabilistic Model for Geo-Calibration}
-The complete camera geo-calibration includes the detection of camera
-geographic location, the pose and the focal length of the camera.  We
+The complete camera geo-calibration detects the camera
+geographic location, pose, and focal length of the camera.  We
 design a general model to estimate the probability over these
-geo-calibration parameters: First, we construct a scoring function to
-measure the ``fitness'' between the calibration parameters and the
-observation of the image. The scoring function is proportional to the
-probability distribution of the camera parameters. Then we propose a
-Markov Chain Monte Carlo (MCMC) sampling approach to approximate the
-underlying probability distribution over the full geo-calibration of
-the camera. 
-Our model is a general architecture, which can take
-different constraints to form the energy function. The details about
-this model can be found in \chapref{mcmc}.
+geo-calibration parameters: First, we model the relation between the
+image projection of the scene and the geo-calibration parameters. This
+relation is ruled by both the pin-hole model principle and the
+geographic location of the camera.
+We then construct a scoring function to measure the ``fitness'' between the
+calibration parameters and the observation of the image. 
+The scoring function is proportional to the probability distribution
+of the camera parameters. We propose a Markov Chain Monte
+Carlo (MCMC) sampling approach to approximate the underlying
+probability distribution over the full geo-calibration of the camera.
+Our model is a general architecture, which can take different
+constraints to form the scoring function. The details about this model
+can be found in \chapref{mcmc}.
 
 \subsection{Developing Constraint Functions}
 In our general model, the scoring function is defined as a linear
 combination of multiple constraint functions.
 In the rest of the work, We focus on developing good constraint
-functions for different set of calibration parameters.
+functions for different set of calibration parameters. Besides, we
+also show our methods are able to extract high-level image features
+with the help of geographic information.
 
 \begin{itemize}[noitemsep]
   \item \textbf{Constraint for Horizon Line and Vanishing Points:}
   We first estimate camera roll and pitch angles. Assuming the intrinsic
   parameters are known, camera roll and pitch angles can be
-  derived from the horizon line position in the image. Detecting horizon
-  line is easier because it is tightly related to the content/appearance
-  of the scene. In our work, we create a new method using a CNN to
-  estimate the prior distribution of the horizon line. We then assign
+  derived from the horizon line position in the image. Compared to
+  directly detecting the camera pose, identifying horizon line is easier
+  because it is tightly related to the appearance
+  of the scene. In our work, we create a new method using CNN to
+  estimate the prior distribution of the horizon line. We assign
   a probability to each horizon line by measuring their consistences
   with vanishing points detected using traditional statistic methods.
   We present the algorithm details in \chapref{fasthorizon}.
@@ -207,14 +213,14 @@ functions for different set of calibration parameters.
   In this work, we demonstrate to estimate the camera geographic
   location with the input image.
   We provide two approaches to obtain the probability distribution over the camera
-  geographic location. Most straightforwardly, our network outputs
+  geographic location. Most straightforwardly, our network estimate the
   categorical distribution over world into a $N \times M$ bins. Better
-  results can be obtained with temporal inputs (image timestamps).
+  results can be procured with temporal inputs (image timestamps).
   Our algorithm can also compute the probability at arbitrary
   geographic location, with lower accuracy than the straightforward
   method.
-  We also demonstrate that our algorithm can learn a  geo-temporal
-  feature representation of image with geographic locations and capture
+  We demonstrate that our algorithm is able to learn geo-temporal
+  image representations with geographic locations and capture
   time.
   We present the algorithm details in \chapref{whenwhere}.
   \newline
@@ -241,9 +247,9 @@ functions for different set of calibration parameters.
   semantic layout of the ground image with those transferred from
   overhead images sampled from different locations and orientations. The
   optimal prediction is found when the semantic layouts from these
-  two sources match best. For probabilistic outputs, we can also assign
-  an energy score to each location and orientation combination
-  according to how well the semantic layouts match to each other.
+  two sources match best. For probabilistic outputs, we assign
+  a score to each location and orientation setting,
+  based on how well the semantic layouts match to each other.
   We present the algorithm details in \chapref{crosstransf}
   \newline
 
