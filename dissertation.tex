@@ -42,29 +42,33 @@
 { \SingleSpacing
 The ultimate goal of image understanding is to transfer the visual
 images into numerical or symbolic descriptions of the world
-that are helpful for other thought processes for decision making.
-In general, understanding images is not trivial for machines.
-Under different scenarios, researchers divide image
-understanding into different computer vision tasks. For example,
-pedestrian detection is essential to autonomous driving, and image
-retrieval to an image searching engine. Knowing when, where, and in
-which direction picture was taken, the task of geo-calibration makes
-it possible to use imagery to understand the world and how it changes
-in time. Current models for geo-calibration are mostly deterministic,
-namely they output fixed solutions. However, deterministic 
-models can not handle uncertainties in our real life well.
-Furthermore, their outputs are not very friendly to graphic model
-algorithms. To address these limitations, we propose a probabilistic
-model for camera geo-calibration using deep neural networks (DNNs),
-providing more flexible inputs. We also demonstrate that the
-geographic information is helpful for high-level feature extraction.
-The primary contributions of our thesis include building a
-probabilistic model for camera geo-calibration, and learning
-high-level image representations with help of geographic information.
-Our discoveries can provide researchers new insights for both camera
-geo-calibration and DNN training.
+that are helpful for decision making.
+%
+%In general, understanding images is not trivial for machines.
+%Under different scenarios, researchers divide image
+%understanding into different computer vision tasks. For example,
+%pedestrian detection is essential to autonomous driving, and image
+%retrieval to an image searching engine.
+%
+Knowing when, where, and in which direction picture was taken, the
+task of geo-calibration makes it possible to use imagery to understand
+the world and how it changes in time. Current models for
+geo-calibration are mostly deterministic, namely they output fixed
+solutions. However, deterministic models can not model the
+uncertainties that are inherent when the scene of the image is ambiguous.
+Furthermore, their outputs are not very friendly to algorithms that
+take probabilistic inputs. To address these limitations, we
+propose a probabilistic model for camera geo-calibration using deep
+neural networks.
+%
+While our primary contribution is geo-calibration, We also show that
+learning to geo-calibrate a camera is helpful for high-level feature
+extraction.
+%
+%Our discoveries can provide researchers new insights for both camera
+%geo-calibration and DNN training.
 }
-\keywords{geo-calibration, deep neural networks, computer vision}
+\keywords{computer vision, geo-calibration, deep neural networks}
 
 \advisor{Nathan Jacobs}
 \dgs{Miroslaw Truszczynski}
