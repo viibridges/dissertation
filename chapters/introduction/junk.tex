@@ -435,3 +435,26 @@ passed, the question of this ``summer project'' still remains open.
 %locations to transfer the learned knowledge of a CNN for ground image
 %semantic segmentation to another CNN designed for overhead image
 %semantic segmentation.
+
+Study of the overhead imagery has been long started.
+Efforts have been made to automate overhead image analysis. As early
+as 1970~\cite{idelsohn1970learning} methods were introduced for
+classifying terrain types from a single overhead image, with the goal
+of automatically generating terrain maps.  Similarly, in 1976 Bajcsy
+et al.~\cite{bajcsy1976computer} described a system for recognizing
+roads, intersections, and other road-like objects in overhead imagery.
+However, as overhead imaging differs drastically from ground-level
+imaging, the majority of techniques that have been developed have
+occurred independently and in task-specific ways~\cite{Rozen}.
+Benefited from the fast growing monitoring satellite market, overhead
+imagery grows fast nowadays. Microsoft BingMap provides public access
+to their overhead image database with various resolution options.
+Given the geographic information of the ground image, we are able to
+obtain the corresponding overhead images to form the geo-orientation
+aligned cross-view image pairs.
+%
+Given the fact that overhead imagery has much larger earth coverage
+and better registered in geographic locations, many geo-localization
+approaches~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
+extract the overhead features as reference database for
+geo-localization.

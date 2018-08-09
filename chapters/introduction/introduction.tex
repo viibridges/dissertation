@@ -52,14 +52,17 @@ for high-level feature extracting.
 \section{Background}
 
 \subsection{Geo-Calibration}
+\todo{add deterministic methods, add literature for time estimation}
+
 Automatic image geo-calibration continues to grow in importance as a
 direct result of the increasing amount of imagery available
 via the Internet. Conceptually geo-calibration task is
-straightforward: given an image, identify the location it was captured
-in the world and the direction the camera was facing. Solving this
-problem is of great value for a wide variety of fields, with potential
-applications ranging from the forensic sciences~\cite{stylianou13jane}
-to crowd-sourced environmental monitoring~\cite{zhang2012mining}.
+straightforward: given an image, identify the time and the location it
+was captured in the world and the direction the camera was facing.
+Solving this problem is of great value for a wide variety of fields,
+with potential applications ranging from the forensic
+sciences~\cite{stylianou13jane} to crowd-sourced environmental
+monitoring~\cite{zhang2012mining}.
 
 Extracting location-dependent or orientation-dependent features from
 image data has drawn a great detail of attention from the vision
@@ -95,58 +98,48 @@ distinctive, for example a train track or a body of water.
 
 
 \subsection{Deep Neural Networks for Geo-Calibration}
-In recent years, deep neural networks (DNNs) rise as stars. Methods
-using DNNs have achieved state-of-the-art performances in many computer
-vision areas (\todo{citations}). 
+In recent years, deep neural networks (DNNs) were proven to be
+extremely successful in many computer vision areas (\todo{citations}). 
 The deep neural networks prove to be a good tool to extract high-level
 image representations, this valuable ability offers great help for researchers
 to conquer the problems like geo-localization and camera calibration.
 Recent work on cross-view image
-geolocalization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
+geo-localization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
 has shown that convolutional neural networks are capable of extracting
 features from geo-tagged aerial imagery that can be matched to features extracted
 from the inquiry ground imagery.  Vo \etal~\cite{vo2016localizing} extend this
-line of work, demonstrating improved geolocalization performance by
+line of work, demonstrating improved geo-localization performance by
 applying an auxiliary loss function to regress the ground-level camera
-orientation with respect to the aerial image.  Horizon line is an
-important indicator for estimating camera poses.
+orientation with respect to the aerial image. 
+
+Closely related to camera geo-calibration, studies also have been done
+to identify the camera poses and focal length using deep neural
+networks.
+Horizon line is an important indicator for estimating camera poses,
+which is, giving the focal length, one can derive the camera roll and
+pitch angles from the horizon line position in the image.
 Work~\cite{zhai2016horizon, workman2016horizon, hold2017perceptual}
-has been done to to identify the horizon line with CNNs.
-Workman \etal~\cite{workman2015deepfocal} develop a CNN to estimate
-the camera focal length. Kendall \etal~\cite{kendall2015convolutional}
-propose a neural network that can identify 6-DOF camera parameters,
-but their method only limited to specific scenes.
+has been done to to identify the horizon line with CNNs.  Workman
+\etal~\cite{workman2015deepfocal} develop a CNN to estimate the camera
+focal length. Kendall \etal~\cite{kendall2015convolutional} propose a
+neural network that can identify 6-DOF camera parameters, but their
+method only limited to specific scenes.
 
-\subsection{Cross-view Imagery}
-Since the cross-view imagery plays an important role in geolocalization,
-we spare an separate section to discuss it. A cross-view image
-pair consists of a ground-view image and an overhead image at the
-same location. In some cases, two images are also aligned in
-orientation.
-Specifically, Study of the overhead imagery has been long started.
-Efforts have been made to automate overhead image analysis. As early
-as 1970~\cite{idelsohn1970learning} methods were introduced for
-classifying terrain types from a single overhead image, with the goal
-of automatically generating terrain maps.  Similarly, in 1976 Bajcsy
-et al.~\cite{bajcsy1976computer} described a system for recognizing
-roads, intersections, and other road-like objects in overhead imagery.
-However, as overhead imaging differs drastically from ground-level
-imaging, the majority of techniques that have been developed have
-occurred independently and in task-specific ways~\cite{Rozen}.
+\subsection{Ground-to-Aerial Geo-Calibration}
+Data-driven scene matching approaches are widely used to localize a
+query image by registering in a large dataset of geo-tagged images. 
 Benefited from the fast growing monitoring satellite market, overhead
-imagery grows fast nowadays. Microsoft BingMap provides public access
-to their overhead image database with various resolution options.
-Given the geographic information of the ground image, we are able to
-obtain the corresponding overhead images to form the geo-orientation
-aligned cross-view image pairs.
-Given the fact that overhead imagery has much larger earth coverage
-and better registered in geographic locations, many geo-localization
-approaches~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
-extract the overhead features as reference database for
-geo-localization.
+imagery grows fast nowadays, which also makes it a perfect source for
+database of geo-tagged. We refer to the geo-calibration process of
+matching the ground-level imagery to the aerial imagery as {\em
+Ground-to-Aerial Geo-Calibration}.
+%
+Cross-view image pair is the basic element for ground-to-aerial
+geo-calibration. It consists of a ground-level image and an overhead
+image at the same location. In some cases, two images are also aligned
+in orientation. 
 
-%Furthermore, there are many other properties of the cross-view pairs
-%to explore for high-level feature extraction \todo{expand}.
+\todo{cite ground-to-aerial geo-calibration papers}
 
 
 \section{Our Approach}
