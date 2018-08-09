@@ -141,6 +141,8 @@ in orientation.
 
 \todo{cite ground-to-aerial geo-calibration papers}
 
+\section{\todo{Dataset}}
+Introduce the dataset we use.
 
 \section{Our Approach}
 Our approach consists of two big steps. First, we propose a general
@@ -151,17 +153,20 @@ parameters and the images. As the second step of our approach, we
 dismantle the full geo-calibration into several partial
 geo-calibration tasks, each of which could provides a strong constraint
 function that fit in the general model. The architecture of
-our approaches refers to
-\figref{intro:architecture}.
+our approaches refers to \figref{intro:architecture}.
+%
+In the end, we show that learning to geo-calibrate a camera is helpful
+for high-level image feature extracting.
+
 
 \subsection{General Probabilistic Model for Geo-Calibration}
 The complete camera geo-calibration detects the camera
 geographic location, pose, and focal length of the camera.  We
 design a general model to estimate the probability over these
-geo-calibration parameters: First, we model the relation between the
+geo-calibration parameters: First, we model the relationship between the
 image projection of the scene and the geo-calibration parameters. This
-relation is ruled by both the pin-hole model principle and the
-geographic location of the camera.
+relationship can be described by the pin-hole model, and
+the geographic location of the camera.
 We then construct a scoring function to measure the ``fitness'' between the
 calibration parameters and the observation of the image. 
 The scoring function is proportional to the probability distribution
@@ -175,10 +180,8 @@ can be found in \chapref{mcmc}.
 \subsection{Developing Constraint Functions}
 In our general model, the scoring function is defined as a linear
 combination of multiple constraint functions.
-In the rest of the work, We focus on developing good constraint
-functions for different set of calibration parameters. Besides, we
-also show our methods are able to extract high-level image features
-with the help of geographic information.
+In the rest of the work, we focus on developing good constraint
+functions for different set of calibration parameters. 
 
 \begin{itemize}[noitemsep]
   \item \textbf{Constraint for Horizon Line and Vanishing Points:}
@@ -239,3 +242,6 @@ with the help of geographic information.
   \newline
 
 \end{itemize}
+
+
+\section{Geo-Calibration for Feature Learning}
