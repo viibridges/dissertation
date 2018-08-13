@@ -52,7 +52,7 @@ for high-level feature extracting.
 \section{Background}
 
 \subsection{Geo-Calibration}
-\todo{add deterministic methods, add literature for time estimation}
+\todo{add deterministic methods}
 
 Automatic image geo-calibration continues to grow in importance as a
 direct result of the increasing amount of imagery available
@@ -108,14 +108,6 @@ extremely successful in many computer vision areas (\todo{citations}).
 The deep neural networks prove to be a good tool to extract high-level
 image representations, this valuable ability offers great help for researchers
 to conquer the problems like geo-localization and camera calibration.
-Recent work on cross-view image
-geo-localization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
-has shown that convolutional neural networks are capable of extracting
-features from geo-tagged aerial imagery that can be matched to features extracted
-from the inquiry ground imagery.  Vo \etal~\cite{vo2016localizing} extend this
-line of work, demonstrating improved geo-localization performance by
-applying an auxiliary loss function to regress the ground-level camera
-orientation with respect to the aerial image. 
 
 Closely related to camera geo-calibration, studies also have been done
 to identify the camera poses and focal length using deep neural
@@ -133,19 +125,31 @@ method only limited to specific scenes.
 
 \subsection{Ground-to-Aerial Geo-Calibration}
 Data-driven scene matching approaches are widely used to localize a
-query image by registering in a large dataset of geo-tagged images. 
-Benefited from the fast growing monitoring satellite market, overhead
-imagery grows fast nowadays, which also makes it a perfect source for
-database of geo-tagged. We refer to the geo-calibration process of
-matching the ground-level imagery to the aerial imagery as {\em
-Ground-to-Aerial Geo-Calibration}.
+query image by registering in a large dataset of geo-tagged
+images~\cite{im2gps, li2010location,zamir2010accurate}.
+Benefited from the fast growing monitoring satellite and drone markets,
+satellite/aerial imagery becomes more and more available than ever
+before, which makes it a rich source for
+reference database of geo-tagged images. We refer to the
+geo-calibration methods which uses the aerial imagery as geographic
+reference as {\em Ground-to-Aerial Geo-Calibration}.
 %
 Cross-view image pair is the basic element for ground-to-aerial
 geo-calibration. It consists of a ground-level image and an overhead
 image at the same location. In some cases, two images are also aligned
 in orientation. 
-
-\todo{cite ground-to-aerial geo-calibration papers}
+%
+Recent work on cross-view image
+geo-localization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
+has shown that convolutional neural networks are capable of extracting
+features from geo-tagged aerial imagery that can be matched to features extracted
+from the inquiry ground imagery.  Vo \etal~\cite{vo2016localizing} extend this
+line of work, demonstrating improved geo-localization performance by
+applying an auxiliary loss function to regress the ground-level camera
+orientation with respect to the aerial image. Hu and Feng
+\etal~\cite{mh2018cvm} achieve the state-of-the-art performance in
+geo-localization by extracting cross-domain global features using
+NetVLAD~\cite{arandjelovic2016netvlad} technique.
 
 
 \subsection{Geo-Calibration for Feature Learning}
