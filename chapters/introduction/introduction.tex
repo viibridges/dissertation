@@ -184,8 +184,8 @@ subspace. Sohn \etal~\cite{sohn2017unsupervised} improved the
 performance of video face recognition using an adversarial-based
 approach to adapt the network to unlabled video imagery.
 
-\section{\todo{Dataset}}
-Introduce the dataset we use.
+%\section{\todo{Dataset}}
+%Introduce the dataset we use.
 
 \section{Our Approach}
 Our approach consists of two big steps. First, we propose a general
@@ -240,19 +240,21 @@ functions for different set of calibration parameters.
   We present the algorithm details in \chapref{fasthorizon}.
   \newline
 
-  \item \textbf{Constraint for Coarse Geographic Locations:}
-  In this work, we demonstrate to estimate the camera geographic
-  location with the input image.
-  We provide two approaches to obtain the probability distribution over the camera
-  geographic location. Most straightforwardly, our network estimate the
-  categorical distribution over world into a $N \times M$ bins. Better
-  results can be procured with temporal inputs (image timestamps).
-  Our algorithm can also compute the probability at arbitrary
-  geographic location, with lower accuracy than the straightforward
-  method.
-  We demonstrate that our algorithm is able to learn geo-temporal
-  image representations with geographic locations and capture
-  time.
+  \item \textbf{Constraint for Time and Coarse Geographic Locations:}
+  In this work, we demonstrate to estimate the capture time and the
+  camera geographic location with the input image.
+  Our network has two branches to predict the image capture time and
+  the geographic location jointly.
+  For time estimation, our network is able to predict the
+  distribution over the month of the year and the global hour of the
+  day when the input image has been captured.
+  For camera geo-localization, We provide two approaches to obtain the
+  probability distribution over the camera geographic location. Most
+  straightforwardly, our network estimate the categorical distribution
+  over world into a $N \times M$ bins. Better results can be procured
+  with temporal inputs (image timestamps).  Our algorithm can also
+  compute the probability at arbitrary geographic location, with lower
+  accuracy than the straightforward method.
   We present the algorithm details in \chapref{whenwhere}.
   \newline
 
@@ -283,7 +285,7 @@ encodes semantic information because it is related to the
 appearances of the scenes.
 
 \begin{itemize}[noitemsep]
-  \item \textbf{Ground-to-Aerial Feature Learning}
+  \item \textbf{Ground-to-Aerial Feature Learning:}
   Current machine learning methods address problems that involves mostly
   the ground-level imagery. Tons of dataset targeting on ground imagery are
   annotated while much fewer are done for the overhead imagery. In
@@ -300,12 +302,19 @@ appearances of the scenes.
   network learns to geometrically project pixels from the overhead
   images to the ground images, and to segment the overhead images
   jointly.
+  \newline
 
-  \item \textbf{Geo-Temporal Feature Learning}
-  In our work, we consider two novel pretext
-  tasks, time and location estimation. Our work is most similar to Li
-  and Snavely~\cite{li2018learning}, who propose an approach for
-  learning intrinsic images by observing image sequences with varying
-  illumination over time. While their targets are reflectance and
-  shading images of the scene, we focus on location and time.
+  \item \textbf{Geo-Temporal Feature Learning:}
+  In \chapref{whenwhere}, we demonstrate that our algorithm is able to
+  learn geo-temporal image representations with geographic locations and
+  capture time.
+  Our work is most similar to Li and Snavely~\cite{li2018learning},
+  who propose an approach for learning intrinsic images by observing
+  image sequences with varying illumination over time. While their
+  targets are reflectance and shading images of the scene, we consider
+  two novel pretext tasks, time and location estimation.
+  By learning to predict its geographic location and capture time from the
+  query image, our network learns to extract geo-temporal features
+  from the image.
+
 \end{itemize}
