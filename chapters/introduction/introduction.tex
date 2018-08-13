@@ -24,7 +24,7 @@ searching engines \etc.
 For many applications, knowing when, where, and in which direction a
 picture was taken is important to understand the world. We refer to 
 estimating these properties as the task of  {\em geo-calibration}.
-In current work of geo-calibration, most algorithms are
+In current work of geo-calibration, a lot of them are
 deterministic, which means they output fixed solutions. Deterministic
 systems may seem straight-forward but they also have some obvious
 drawbacks: 1) Deterministic systems can not model the inherent
@@ -83,6 +83,11 @@ estimate camera pose. Many other cues exist, such as the
 skyline~\cite{baatz2012large,ramalingam2009geolocalization}, sky
 appearance~\cite{lalonde2010sun,workman2014rainbow}, and
 shadows~\cite{junejo2008estimating,wu2010geo}.
+For time estimation, Matzen and Snavely~\cite{matzen2014scene} predict
+timestamps for photos by matching against a time-varying
+reconstruction of a scene.  Hill~\cite{hill1994elephant} estimate the
+time of the day by analyze the light intensity profiles captured by
+cameras.
 
 However, recognizing the geo-location and geo-orientation of an
 arbitrary outdoor image is an extremely challenging task.  Many
@@ -97,7 +102,7 @@ available, the appearance of the objects may not be visually
 distinctive, for example a train track or a body of water. 
 
 
-\subsection{Deep Neural Networks for Geo-Calibration}
+\subsection{Deep Learning in Geo-Calibration}
 In recent years, deep neural networks (DNNs) were proven to be
 extremely successful in many computer vision areas (\todo{citations}). 
 The deep neural networks prove to be a good tool to extract high-level
