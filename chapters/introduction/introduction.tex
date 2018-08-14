@@ -52,8 +52,8 @@ for high-level feature extracting.
 \section{Background}
 
 \subsection{Geo-Calibration}
-\todo{add deterministic methods}
-
+%\todo{add deterministic methods}
+%
 Automatic image geo-calibration continues to grow in importance as a
 direct result of the increasing amount of imagery available
 via the Internet. Conceptually geo-calibration task is
@@ -94,12 +94,12 @@ arbitrary outdoor image is an extremely challenging task.  Many
 methods have been proposed; the most common approach is to build a
 large database of images with known location and localize a query
 image using either local~\cite{li2010location,schindler2008detecting}
-or global~\cite{hays2008im2gps,doersch2012what} image features.  This
-approach is not applicable when no nearby ground-level imagery exists
-in the reference database, such as when the image was not captured
-near a popular tourist destination.  Even when reference imagery is
-available, the appearance of the objects may not be visually
-distinctive, for example a train track or a body of water. 
+or global~\cite{hays2008im2gps,doersch2012what} image features. 
+%This approach is not applicable when no nearby ground-level imagery
+%exists in the reference database, such as when the image was not
+%captured near a popular tourist destination.  Even when reference
+%imagery is available, the appearance of the objects may not be
+%visually distinctive, for example a train track or a body of water. 
 
 
 \subsection{Deep Learning in Geo-Calibration}
@@ -110,7 +110,7 @@ image representations, this valuable ability offers great a help for
 researchers to conquer the problems like geo-localization and camera
 calibration.
 Weyand and Kostrikov \etal~\cite{planet} propose a convolutional
-network to predict the geographic location given an input
+network to predict the geographic location of the input
 image.~\cite{walch2017image} applies LSTM on CNN features learned for
 camera localization.
 
@@ -133,18 +133,18 @@ Data-driven scene matching approaches are widely used to localize a
 query image by registering in a large dataset of geo-tagged
 images~\cite{im2gps, li2010location,zamir2010accurate}.
 Benefited from the fast growing monitoring satellite and drone markets,
-satellite/aerial imagery becomes more and more available than ever
-before, which makes it a rich source for
-reference database of geo-tagged images. We refer to the
-geo-calibration methods which uses the aerial imagery as geographic
-reference as {\em Ground-to-Aerial Geo-Calibration}.
-%
+geo-tagged satellite/aerial imagery becomes more and more available
+than ever before, which makes it a rich source for building
+reference database. We refer to the geo-calibration methods which use
+the aerial imagery as geographic reference as {\em Ground-to-Aerial
+Geo-Calibration}.
+
 Cross-view image pair is the basic element for ground-to-aerial
 geo-calibration. It consists of a ground-level image and an overhead
-image at the same location. In some cases, two images are also aligned
+image at the same location. In some cases, two images may also be aligned
 in orientation. 
-%
-Recent work on cross-view image
+
+Recent work on ground-to-aerial
 geo-localization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
 has shown that convolutional neural networks are capable of extracting
 features from geo-tagged aerial imagery that can be matched to features extracted
@@ -154,7 +154,7 @@ applying an auxiliary loss function to regress the ground-level camera
 orientation with respect to the aerial image. Hu and Feng
 \etal~\cite{mh2018cvm} achieve the state-of-the-art performance in
 geo-localization by extracting cross-domain global features using
-NetVLAD~\cite{arandjelovic2016netvlad} technique.
+the NetVLAD~\cite{arandjelovic2016netvlad} technique.
 
 
 \subsection{Geo-Calibration for Feature Learning}
@@ -164,19 +164,18 @@ past years in the computer vision community due to its efficiency and
 not requiring expert knowledge about the data. Deep neural networks
 are wildly accepted by researchers as good tools to learn high-level
 image representations.
-The most commonly used approach for deep image feature learning is
+The most commonly used approach for deep feature learning is
 full supervision, which usually requires manually annotated
 data~\cite{yosinski2014transferable,zhou2016learning,wen2016discriminative}.
 Though full supervision work well in many applications, there are
-exponentially more image resources without manual annotations (cell
+exponentially more image resources without manual annotation (cell
 phone imagery, YouTube videos\etc), which show a huge potential for
-visual feature learning.  In recent years, people start studying
-various approaches to exploit those unlabeled data. 
-%
-Recent work has explored the use of self-supervision (sometimes
-referred to as unsupervised learning or pretext tasks) for training
-deep neural networks that capture useful visual
-representations~\cite{doersch2015unsupervised,pathak2016context}. 
+visual feature learning.   
+
+To exploit these unlabeled data, recent work has explored the use of
+self-supervision (sometimes referred to as unsupervised learning or
+pretext tasks) for training deep neural networks that capture useful
+visual representations~\cite{doersch2015unsupervised,pathak2016context}. 
 These methods typically
 exploit some known quantity of the data (e.g., pixel color values) to
 avoid expensive manual annotation. As a byproduct, a useful visual
@@ -209,7 +208,7 @@ constraint functions which describe the fitness between the calibration
 parameters and the images. As the second step of our approach, we
 dismantle the full geo-calibration into several partial
 geo-calibration tasks, each of which could provides a strong constraint
-function that fit in the general model. The architecture of
+function that fits in the general model. The architecture of
 our approaches refers to \figref{intro:architecture}.
 %
 In the end, we show that learning to geo-calibrate a camera is helpful
@@ -256,43 +255,45 @@ functions for different set of calibration parameters.
 
   \item \textbf{Constraint for Time and Coarse Geographic Locations:}
   In this work, we demonstrate to estimate the capture time and the
-  camera geographic location with the input image.
-  Our network has two branches to predict the image capture time and
-  the geographic location jointly.
+  camera geographic location given the input image.
+  Our network has two heads to predict the image
+  capture time and the geographic location jointly.
   For time estimation, our network is able to predict the
-  distribution over the month of the year and the global hour of the
+  joint distribution over the month of the year and the global hour of the
   day when the input image has been captured.
   For camera geo-localization, We provide two approaches to obtain the
   probability distribution over the camera geographic location. Most
   straightforwardly, our network estimate the categorical distribution
-  over world into a $N \times M$ bins. Better results can be procured
-  with temporal inputs (image timestamps).  Our algorithm can also
-  compute the probability at arbitrary geographic location, with lower
-  accuracy than the straightforward method.
-  We present the algorithm details in \chapref{whenwhere}.
+  over location of the world, which is represented as a $N \times M$
+  meshgrid. Better results can be procured with image capture time as
+  auxiliary input (if it is known). 
+  %Our algorithm can also compute the probability at arbitrary
+  %geographic location, with lower accuracy than the straightforward
+  %method.
+  We will present the algorithm details in \chapref{whenwhere}.
   \newline
 
   \item \textbf{Constraint for Fine Geographic Locations and Orientations:}
   In our previous method, we present that our algorithm can estimate
   the camera location distribution in low-res world division. In this
   work we focus on refining the geo-localization results with the help
-  of overhead imagery and on estimating the camera geo-orientation. 
+  of overhead imagery and on estimating geo-orientation of the camera. 
   We first learn to segment the ground scene from its paired aerial image.
   When refining the camera geographic location, we compare the
-  semantic layout of the ground image with those transferred from
-  overhead images sampled from different locations and orientations. The
-  optimal prediction is found when the semantic layouts from these
-  two sources match best. For probabilistic outputs, we assign
-  a score to each location and orientation setting,
-  based on how well the semantic layouts match to each other.
-  We present the algorithm details in \chapref{crosstransf}.
+  semantic layout of the ground image with the semantic layout
+  transferred from overhead images, which are sampled in different
+  locations and orientation angles. The optimal prediction is found when the
+  semantic layouts from these two sources match best. For probabilistic
+  outputs, we assign a score to each location and orientation setting,
+  based on how well the semantic layouts match to each other. We will
+  present the algorithm details in \chapref{crosstransf}.
   \newline
 
 \end{itemize}
 
 
 \subsection{Geo-Calibration for Feature Learning}
-Our methods focus on lavaging the camera geographic information to
+Our methods also focus on lavaging the camera geographic information to
 deal with the challenges of lacking manually annotated data during DNN
 training. The insight is that the camera geographic information
 encodes semantic information because it is related to the
@@ -302,19 +303,19 @@ appearances of the scenes.
   \item \textbf{Ground-to-Aerial Feature Learning:}
   Current machine learning methods address problems that involves mostly
   the ground-level imagery. Tons of dataset targeting on ground imagery are
-  annotated while much fewer are done for the overhead imagery. In
-  \chapref{crosstransf}, we proposed a method to learn aerial image
-  semantic segmentation with ground-level ground truth. Our method
+  annotated while much fewer are done for the satellite/aerial imagery. In
+  \chapref{crosstransf}, we proposed a method to learn the aerial image
+  semantic segmentation with only ground-level ground truth. Our method
   exploits the spatial correspondences between images in cross-view
   pairs. 
   In this work, we try to transfer the semantics from the ground
-  imagery to the overhead imagery by identifying the latent geometry
-  correspondences between these two.  Similar to the monocular depth
+  imagery to the aerial imagery by identifying the latent geometry
+  correspondences between these two. Similar to the monocular depth
   estimation methods that driven by the technique called {\em
   Reprojection Losses}~\cite{garg2016unsupervised,
   godard2017unsupervised,zhou2017unsupervised, yan2016perspective}, our
-  network learns to geometrically project pixels from the overhead
-  images to the ground images, and to segment the overhead images
+  network learns to geometrically project pixels from the aerial
+  images to the ground images, and to segment the aerial images
   jointly.
   \newline
 
@@ -327,8 +328,8 @@ appearances of the scenes.
   image sequences with varying illumination over time. While their
   targets are reflectance and shading images of the scene, we consider
   two novel pretext tasks, time and location estimation.
-  By learning to predict its geographic location and capture time from the
-  query image, our network learns to extract geo-temporal features
+  By learning to predict the geographic location and capture time of
+  the query image, our network learns to extract geo-temporal features
   from the image.
 
 \end{itemize}
