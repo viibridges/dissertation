@@ -106,8 +106,13 @@ distinctive, for example a train track or a body of water.
 In recent years, deep neural networks (DNNs) were proven to be
 extremely successful in many computer vision areas (\todo{citations}). 
 The deep neural networks prove to be a good tool to extract high-level
-image representations, this valuable ability offers great help for researchers
-to conquer the problems like geo-localization and camera calibration.
+image representations, this valuable ability offers great a help for
+researchers to conquer the problems like geo-localization and camera
+calibration.
+Weyand and Kostrikov \etal~\cite{planet} propose a convolutional
+network to predict the geographic location given an input
+image.~\cite{walch2017image} applies LSTM on CNN features learned for
+camera localization.
 
 Closely related to camera geo-calibration, studies also have been done
 to identify the camera poses and focal length using deep neural
@@ -160,8 +165,8 @@ not requiring expert knowledge about the data. Deep neural networks
 are wildly accepted by researchers as good tools to learn high-level
 image representations.
 The most commonly used approach for deep image feature learning is
-full supervision, which usually requires manually annotated data
-\todo{citations}.
+full supervision, which usually requires manually annotated
+data~\cite{yosinski2014transferable,zhou2016learning,wen2016discriminative}.
 Though full supervision work well in many applications, there are
 exponentially more image resources without manual annotations (cell
 phone imagery, YouTube videos\etc), which show a huge potential for
