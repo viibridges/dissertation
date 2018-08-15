@@ -65,6 +65,7 @@ Solving this problem is of great value for a wide variety of fields,
 with potential applications ranging from the forensic
 sciences~\cite{stylianou13jane} to environmental
 monitoring~\cite{zhang2012mining}.
+\todo{make it smoother}
 
 \begin{itemize}[noitemsep]
 \item \textbf{Geo-Localization:}
@@ -94,34 +95,37 @@ Matzen and Snavely~\cite{matzen2014scene} predict
 timestamps for photos by matching against a time-varying
 reconstruction of a scene.  Hill~\cite{hill1994elephant} estimate the
 time of the day by measuring the light intensity profiles captured by
-cameras.~\cite{salem2016face2year,ginosar2015century} propose to date the
-year book photos by analyzing human appearance. Lee
+cameras. Methods are proposed to date the
+year book photos by analyzing human
+appearance~\cite{salem2016face2year,ginosar2015century}. Lee
 \etal~\cite{linking2015iccp} find visual paterns in the buildings,
 relate them to certain time periods.
+\newline
+
+\item \textbf{Camera Pose Estimation:}
+\todo{}
 
 \end{itemize}
 
 \subsection{Deep Learning in Geo-Calibration}
 In recent years, deep neural networks (DNNs) were proven to be
-extremely successful in many computer vision areas (\todo{citations}). 
-The deep neural networks prove to be a good tool to extract high-level
-image representations, this valuable ability offers great a help for
-researchers to conquer the problems like geo-localization and camera
-calibration.
+extremely successful in many computer vision areas. 
+It is widely accepted that DNNs have excellent performance in
+high-level visual feature learning.
+This valuable ability provides researchers powerful tools to
+solve the challenging geo-calibration tasks.
 Weyand and Kostrikov \etal~\cite{planet} propose a convolutional
 network to predict the geographic location of the input
-image.~\cite{walch2017image} applies LSTM on CNN features learned for
-camera localization.
+image. Walch \etal~\cite{walch2017image} aggregate learned CNN
+features with LSTM to generate global image representation for camera
+localization.  In pose estimation aera, Work~\cite{zhai2016horizon,
+workman2016horizon, hold2017perceptual} has been done to to identify
+the horizon line with CNNs (one can derive the camera roll and pitch
+angles from the horizon line position giving the camera focal length).
 
 Closely related to camera geo-calibration, studies also have been done
-to identify the camera poses and focal length using deep neural
-networks.
-Horizon line is an important indicator for estimating camera poses,
-which is, giving the focal length, one can derive the camera roll and
-pitch angles from the horizon line position in the image.
-Work~\cite{zhai2016horizon, workman2016horizon, hold2017perceptual}
-has been done to to identify the horizon line with CNNs.  Workman
-\etal~\cite{workman2015deepfocal} develop a CNN to estimate the camera
+to identify the camera intrinsics using deep neural networks.
+Workman \etal~\cite{workman2015deepfocal} develop a CNN to estimate the camera
 focal length. Kendall \etal~\cite{kendall2015convolutional} propose a
 neural network that can identify 6-DOF camera parameters, but their
 method only limited to specific scenes.
