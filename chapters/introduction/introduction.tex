@@ -10,37 +10,39 @@
 \makeatother
 
 \begin{chapquote}{Alan Turing}
-  ``I propose to consider the question: Can machine think?''
+  ``I propose to consider the question: Can machines think?''
 \end{chapquote}
-The ultimate goal of image understanding is to transfer the visual
+The ultimate goal of image understanding is to transfer visual
 signals (images/videos) into abstract symbolic descriptions of the
 world which are helpful for decision making.
 However, understanding images is a not trivial task for machines.
 In order to handle various complicated scenarios, researchers divide
-image understanding into different computer vision tasks: Pedestrian
-detection for autonomous driving, and image retrieval for image
-searching engines \etc.
+image understanding into different computer vision tasks: pedestrian
+detection for autonomous driving, face recognition for security
+system, and image retrieval for image searching engines.
 
 For many applications, knowing when, where, and in which direction a
-picture was taken is important to understand the world. We refer to 
-estimating these properties as the task of  {\em geo-calibration}.
-In current work of geo-calibration, a lot of them are
-deterministic, which means they output fixed solutions. Deterministic
-systems may seem straight-forward but they also have some obvious
-drawbacks: 1) Deterministic systems can not model the inherent
-uncertainties from images of ambiguous scenes. 2) They are not
-friendly to applications that take probabilistic inputs. To address
-these problems, We propose to build probabilistic models for camera
+picture was taken is important to understand the world. However, most
+images does not carry such information, thus we need to develop
+algorithms to dig them up.  We refer to the task of estimating these
+properties as {\em geo-calibration}.
+Most recent work of geo-calibration focus on deterministic systems, 
+which have some drawbacks: 1) they can not model the inherent
+uncertainties from images of ambiguous scenes, and 2) they can not be
+used by applications that take probabilistic inputs. To address
+these problems, we propose to build probabilistic models for camera
 geo-calibration.
 
-Feature engineering is essential for image understanding. In recent
-years, learning based approaches for high-level feature construction
-like deep neural nets get popular. However, most of these feature
+We also show that learning to geo-calibrate a camera is helpful for
+high-level feature extracting. Feature engineering is essential for
+image understanding. In recent years, learning based approaches for
+high-level feature extracting like deep neural nets have drawn a lot
+of attention due to the fact that they do not need any expert
+knowledge about the target data. However, most of these feature
 learning methods heavily relies on manually labeled data. In our
 thesis, we presented alternative ways to learn high-level image
 representations when the manually labeled data is either insufficient
-or absent. We show that learning to geo-calibrate a camera is helpful
-for high-level feature extracting.
+or absent.
 
 \begin{figure}
   \centering
