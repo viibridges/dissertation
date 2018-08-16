@@ -80,7 +80,9 @@ images.  Doersch \etal~\cite{doersch2012what} extract
 location-dependent features that capture the relative appearance
 differences of large cities.  Lin et al.~\cite{lin2013cross} localize
 a ground-level image by learning the relationship between pairs of
-ground and aerial images of the same location. Other techniques focus
+ground and aerial images \footnote{In the context of our thesis, we
+do not distinguish between the satellite imagery and the aerial
+imagery} of the same location. Other techniques focus
 on urban environments and infer location using local image
 descriptors~\cite{schindler2008detecting,snavely2006photo}. Li et
 al.~\cite{li2012worldwide} exploit geo-registered 3D points clouds to
@@ -132,32 +134,41 @@ method only limited to specific scenes.
 
 
 \subsection{Ground-to-Aerial Geo-Calibration}
-Data-driven scene matching approaches are widely used to localize a
-query image by registering in a large dataset of geo-tagged
-images~\cite{im2gps, li2010location,zamir2010accurate}.
-Benefited from the fast growing monitoring satellite and drone markets,
-geo-tagged satellite/aerial imagery becomes more and more available
-than ever before, which makes it a rich source for building
-reference database. We refer to the geo-calibration methods which use
-the aerial imagery as geographic reference as {\em Ground-to-Aerial
-Geo-Calibration}.
+Data-driven scene matching approaches are widely used to for
+geo-calibration.
+When localizing a camera, data-driven algorithms search for k-nearest
+neighbors of the query image in the database of the geo-tagged imagery.
+To reduce the work of querying, the searching process is usually
+carried out in some feature space with applicable number of  
+dimensions~\cite{im2gps, li2010location,zamir2010accurate}.
+However, as items found in most reference dataset, geo-tagged
+ground-level images collected from the internet are usually noisy and
+sparse in geographic space. To achieve more accurate geo-calibration
+results, we need alternative image resources with more accurate
+geographic tags and denser spatial coverage.
 
-Cross-view image pair is the basic element for ground-to-aerial
-geo-calibration. It consists of a ground-level image and an overhead
-image at the same location. In some cases, two images may also be aligned
-in orientation. 
+Benefited from the fast growing monitoring satellite and drone markets,
+the geo-tagged aerial imagery becomes more publicly accessible
+than ever before. Aerial imagery downloading services like
+Microsoft Bing Map provide aerial images of various
+resolutions, which can cover most areas of the world with accurate
+geographic tags, making aerial imagery a rich source for
+reference database. We refer to the geo-calibration methods
+which use the aerial imagery as geographic reference as
+ground-to-aerial geo-calibration.
 
 Recent work on ground-to-aerial
-geo-localization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
+geo-calibration~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
 has shown that convolutional neural networks are capable of extracting
-features from geo-tagged aerial imagery that can be matched to features extracted
-from the inquiry ground imagery.  Vo \etal~\cite{vo2016localizing} extend this
-line of work, demonstrating improved geo-localization performance by
-applying an auxiliary loss function to regress the ground-level camera
-orientation with respect to the aerial image. Hu and Feng
-\etal~\cite{mh2018cvm} achieve the state-of-the-art performance in
-geo-localization by extracting cross-domain global features using
-the NetVLAD~\cite{arandjelovic2016netvlad} technique.
+features from geo-tagged aerial imagery that can be matched to
+features extracted from the ground imagery.  Vo
+\etal~\cite{vo2016localizing} extend this line of work, demonstrating
+improved geo-localization performance by applying an auxiliary loss
+function to regress the ground-level camera orientation with respect
+to the aerial image. Hu and Feng \etal~\cite{mh2018cvm} achieve the
+state-of-the-art performance in geo-localization by extracting
+cross-domain global features using the
+NetVLAD~\cite{arandjelovic2016netvlad} technique.
 
 
 \subsection{Geo-Calibration for Feature Learning}
