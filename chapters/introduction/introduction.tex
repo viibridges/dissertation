@@ -174,20 +174,19 @@ NetVLAD~\cite{arandjelovic2016netvlad} technique.
 \subsection{Geo-Calibration for Feature Learning}
 
 Automatic feature engineering has drawn a lot of attention over the
-past years in the computer vision community due to its efficiency and
-not requiring expert knowledge about the data. Deep neural networks
-are wildly accepted by researchers as good tools to learn high-level
-image representations.
+past years due to its ability to learn useful features without strong
+expert knowledge about the data. Among many automatic feature
+engineering approaches, deep neural networks are wildly accepted by
+researchers as good tools to learn high-level image representations.
 The most commonly used approach for deep feature learning is
 full supervision, which usually requires manually annotated
 data~\cite{yosinski2014transferable,zhou2016learning,wen2016discriminative}.
-Though full supervision work well in many applications, there are
-exponentially more image resources without manual annotation (cell
-phone imagery, YouTube videos\etc), which show a huge potential for
-visual feature learning.   
+Unfortunately, such data is not always available for certain tasks. 
+In contrast, unlabeled data is offen plentiful (\ie cellphone photos
+in Instagram or Youtube videos).
 
-To exploit these unlabeled data, recent work has explored the use of
-self-supervision (sometimes referred to as unsupervised learning or
+To exploit these unlabeled data, recent work has explored
+self-supervision methods (sometimes referred to as unsupervised learning or
 pretext tasks) for training deep neural networks that capture useful
 visual representations~\cite{doersch2015unsupervised,pathak2016context}. 
 These methods typically
@@ -210,9 +209,6 @@ projection to transfer from the source feature subspace to the target
 subspace. Sohn \etal~\cite{sohn2017unsupervised} improved the
 performance of video face recognition using an adversarial-based
 approach to adapt the network to unlabled video imagery.
-
-%\section{\todo{Dataset}}
-%Introduce the dataset we use.
 
 \section{Our Approach}
 Our approach consists of two big steps. First, we propose a general
