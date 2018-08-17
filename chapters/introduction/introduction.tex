@@ -46,26 +46,44 @@ or absent.
 
 \section{Background}
 
-\subsection{Geo-Calibration}
-Automatic image geo-calibration continues to grow in importance as a
-direct result of the increasing amount of imagery available
-via the Internet. 
-Solving this problem is of great value for a wide variety of fields,
-with potential applications ranging from the forensic
-sciences~\cite{stylianou13jane} to environmental
-monitoring~\cite{zhang2012mining}.
-Conceptually the geo-calibration task includes:
-identifying the camera pose ({\em pose estimation}), the camera
-geographic location ({\em geo-localization}), and the time the query
-image was captured ({\em time estimation}).
+\subsection{Geo-Calibration of Outdoor Images}
+Automatic image geo-calibration of outdoor images continues to grow in
+importance as a direct result of the increasing amount of imagery
+available via the Internet.  Solving this problem is of great value
+for a wide variety of fields, with potential applications ranging from
+the forensic sciences~\cite{stylianou13jane} to environmental
+monitoring~\cite{zhang2012mining}.  Conceptually the geo-calibration
+task includes: identifying the camera pose ({\em pose estimation}),
+the camera geographic location ({\em geo-localization}), and the time
+the query image was captured ({\em time estimation}).
 
 \begin{itemize}[noitemsep]
 
 \item \textbf{Pose Estimation:}
+Li et al.~\cite{li2012worldwide} exploit geo-registered 3D points
+clouds to estimate camera pose.
+Vo \etal~\cite{vo2016localizing} propose a geo-localization network
+that can regress the geo-orientation angle of the camera.
+Agarwal \etal~\cite{agarwal2015metric} keep track of the camera pose
+changes by matching SIFT~\cite{lowe1999object} feature points detected
+between the input image and Google Street View panoramas.
+%
+The estimating of horizon line is an essential step for some pose
+estimation algorithm, because horizon lines are closely related to
+camera pitch and roll angles. If the camera focal length is known, one
+can compute the camera pitch and roll angle from the horizon line.
+Collins and Weiss~\cite{unitsphere1990} formulate horizon line
+detection as a statistical estimation problem on the Gaussian Sphere,
+which is similar to the geometry we use.  More recent work has
+explored the use of dual space~\cite{alignment2014,dualspace2013}
+representations. Among the clustering-based approaches, Xu et
+al.~\cite{kitware2013} improve this pipeline by introducing a new
+point-line consistency function that models errors in the line segment
+extraction step.
 \newline
 
 \item \textbf{Geo-Localization:}
-Extracting location-dependent or orientation-dependent features from
+Extracting location-dependent features from
 image data has drawn a great detail of attention from the vision
 community~\cite{jacobs07geolocate, jacobs11geolocate,
 jacobs08geoorient}. The common trend amongst these methods is that
@@ -80,9 +98,8 @@ ground and aerial images \footnote{In the context of our thesis, we
 do not distinguish between the satellite imagery and the aerial
 imagery} of the same location. Other techniques focus
 on urban environments and infer location using local image
-descriptors~\cite{schindler2008detecting,snavely2006photo}. Li et
-al.~\cite{li2012worldwide} exploit geo-registered 3D points clouds to
-estimate camera pose. Many other cues exist, such as the
+descriptors~\cite{schindler2008detecting,snavely2006photo}.
+Many other cues exist, such as the
 skyline~\cite{baatz2012large,ramalingam2009geolocalization}, sky
 appearance~\cite{lalonde2010sun,workman2014rainbow}, and
 shadows~\cite{junejo2008estimating,wu2010geo}.
