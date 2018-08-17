@@ -44,30 +44,26 @@ thesis, we presented alternative ways to learn high-level image
 representations when the manually labeled data is either insufficient
 or absent.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=.8\linewidth]{introduction/architecture}
-  \caption{Architecture of our approach.}
-  \label{fig:intro:architecture}
-\end{figure}
-
 \section{Background}
 
 \subsection{Geo-Calibration}
-%\todo{add deterministic methods}
-%
 Automatic image geo-calibration continues to grow in importance as a
 direct result of the increasing amount of imagery available
-via the Internet. Conceptually the geo-calibration task is
-straightforward: given an image, identify the time and the location it
-was captured in the world and the direction the camera was facing.
+via the Internet. 
 Solving this problem is of great value for a wide variety of fields,
 with potential applications ranging from the forensic
 sciences~\cite{stylianou13jane} to environmental
 monitoring~\cite{zhang2012mining}.
-\todo{make it smoother}
+Conceptually the geo-calibration task includes:
+identifying the camera pose ({\em pose estimation}), the camera
+geographic location ({\em geo-localization}), and the time the query
+image was captured ({\em time estimation}).
 
 \begin{itemize}[noitemsep]
+
+\item \textbf{Pose Estimation:}
+\newline
+
 \item \textbf{Geo-Localization:}
 Extracting location-dependent or orientation-dependent features from
 image data has drawn a great detail of attention from the vision
@@ -103,9 +99,6 @@ appearance~\cite{salem2016face2year,ginosar2015century}. Lee
 \etal~\cite{linking2015iccp} find visual paterns in the buildings,
 relate them to certain time periods.
 \newline
-
-\item \textbf{Camera Pose Estimation:}
-\todo{}
 
 \end{itemize}
 
@@ -174,14 +167,15 @@ NetVLAD~\cite{arandjelovic2016netvlad} technique.
 \subsection{Geo-Calibration for Feature Learning}
 
 Automatic feature engineering has drawn a lot of attention over the
-past years due to its ability to learn useful features without strong
-expert knowledge about the data. Among many automatic feature
-engineering approaches, deep neural networks are wildly accepted by
-researchers as good tools to learn high-level image representations.
-The most commonly used approach for deep feature learning is
-full supervision, which usually requires manually annotated
+past years. Compared to the manual feature engineering,
+automatic feature engineering approaches are able to to learn useful
+features without strong expert knowledge about the data. Among these
+approaches, deep neural networks are wildly accepted by researchers as
+good tools to learn high-level image representations.  The most
+commonly used approach for deep feature learning is full supervision,
+which usually requires manually annotated
 data~\cite{yosinski2014transferable,zhou2016learning,wen2016discriminative}.
-Unfortunately, such data is not always available for certain tasks. 
+Unfortunately, such data is not always available for certain tasks.
 In contrast, unlabeled data is offen plentiful (\ie cellphone photos
 in Instagram or Youtube videos).
 
@@ -211,6 +205,14 @@ performance of video face recognition using an adversarial-based
 approach to adapt the network to unlabled video imagery.
 
 \section{Our Approach}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.8\linewidth]{introduction/architecture}
+  \caption{Architecture of our approach.}
+  \label{fig:intro:architecture}
+\end{figure}
+
 Our approach consists of two big steps. First, we propose a general
 probabilistic model to jointly estimate the geo-calibration
 parameters. The key for the success of this model is to construct good
