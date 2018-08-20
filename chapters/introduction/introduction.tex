@@ -222,27 +222,47 @@ subspace. Sohn \etal~\cite{sohn2017unsupervised} improved the
 performance of video face recognition using an adversarial-based
 approach to adapt the network to unlabled video imagery.
 
-\section{Our Approach}
+\section{Main Contributions}
 
 \begin{figure}
   \centering
-  \includegraphics[width=.8\linewidth]{introduction/architecture}
-  \caption{Architecture of our approach.}
+  \includegraphics[width=\linewidth]{introduction/architecture}
+  \caption{A simplified flowchart of our approach. The algorithm
+inputs (images, time and manual annotations) are fed to different
+constraint models which work as constraint functions. 
+The probabilistic distribution over complete geo-calibration
+parameters are then simulated jointly by fusing these constraint
+functions in a general model for geo-calibration.}
   \label{fig:intro:architecture}
 \end{figure}
 
-Our approach consists of two big steps. First, we propose a general
+We make contributions in three main areas: 1) We proposed a general
 probabilistic model to jointly estimate the geo-calibration
-parameters. The key for the success of this model is to construct good
-constraint functions which describe the fitness between the calibration
-parameters and the images. As the second step of our approach, we
-dismantle the full geo-calibration into several partial
-geo-calibration tasks, each of which could provides a strong constraint
-function that fits in the general model. The architecture of
+parameters, 2) we decompose the full geo-calibration into several
+partial geo-calibration tasks, each of which provides a strong
+constraint function that fits in the general model, and 3) we show
+that learning to geo-calibrate a camera is helpful for high-level
+image feature extraction.
+
+The first two contributions consist of our main approach. Our
+algorithm feeds inputs (images, time and manual annotations) to
+different constraint models, which work as constraint functions. Then
+we fuse these constraint functions to simulate the joint distribution
+over the complete geo-calibration parameters. The flowchart of
 our approaches refers to \figref{intro:architecture}.
-%
-In the end, we show that learning to geo-calibrate a camera is helpful
-for high-level image feature extracting.
+
+Furthermore, we also explore to learning high-level
+visual features and geo-calibrating cameras simultaneously.
+We believe that the geo-calibration parameters are closely related to
+the image representation. 
+Imagine the process of a human doing geo-localization, one could
+roughly guess where a photo was taken when she sees an polar bear on
+an iceberg on it. In this process, learning high-level features
+becomes a necessary step of abstracting visual hints to localize
+the camera.
+Based on this belief, we designed network to learn useful visual
+features by exploiting geographic information, which provides new ways
+for automatic feature learning.
 
 
 \subsection{General Probabilistic Model for Geo-Calibration}
