@@ -170,7 +170,10 @@ resolutions, which cover most areas of the world with accurate
 geographic registration, making aerial imagery a rich source for
 reference databases. We refer to geo-calibration
 methods which use the aerial imagery for geographic reference as
-ground-to-aerial geo-calibration.
+ground-to-aerial geo-calibration. Data used for ground-to-aerial
+geo-calibration is referred to as cross-view pairs.
+A cross-view pair consists of a ground image and an aerial image at
+the same location, and but not necessarily aligned in orientation.
 
 Recent work on ground-to-aerial
 geo-calibration~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
@@ -344,36 +347,41 @@ geo-calibration parameters conditional on the input image.
 
 
 \subsection{Geo-Calibration for Feature Learning}
-Our methods also focus on lavaging the camera geographic information to
-deal with the challenges of lacking manually annotated data during DNN
-training. The insight is that the camera geographic information
-encodes semantic information because it is related to the
-appearances of the scenes.
+Our methods also provide another way to dealing with the challenges of
+lacking manual annotations during DNN training. By learning to
+geo-calibrate a camera, we believe the networks are able to learn
+high-level image representations. This belief comes from the fact that
+the geo-calibration information of a camera encodes semantic
+information because it is closely related to the appearances of the
+scene.
+We explore two types of learning techniques for high-level feature
+extraction: 1) semantic segmentation of the aerial imagery with
+ground-level annotations which is plentiful, and 2) geo-temporal
+features with automatically annotated geographic locations and time.
 
 \begin{itemize}[noitemsep]
   \item \textbf{Ground-to-Aerial Feature Learning:}
-  Current machine learning methods address problems that involves mostly
-  the ground-level imagery. Tons of dataset targeting on ground imagery are
-  annotated while much fewer are done for the satellite/aerial imagery. In
-  \chapref{crosstransf}, we proposed a method to learn the aerial image
-  semantic segmentation with only ground-level ground truth. Our method
-  exploits the spatial correspondences between images in cross-view
-  pairs. 
-  In this work, we try to transfer the semantics from the ground
-  imagery to the aerial imagery by identifying the latent geometry
-  correspondences between these two. Similar to the monocular depth
-  estimation methods that driven by the technique called {\em
+  Most current machine learning methods study problems involving the
+  ground imagery. There exist many annotated dataset of the ground
+  imagery while much fewer of the aerial imagery. 
+  In \chapref{crosstransf}, we proposed a
+  method to learn to semantically segment aerial images with only
+  ground-level annotations. Our method exploits the spatial
+  correspondences between images in cross-view pairs. 
+  In this work, we try to transfer the semantic knowledge from the
+  ground domain to the aerial domain by identifying their latent
+  geometric correspondences. Similar to {\em
   Reprojection Losses}~\cite{garg2016unsupervised,
-  godard2017unsupervised,zhou2017unsupervised, yan2016perspective}, our
-  network learns to geometrically project pixels from the aerial
-  images to the ground images, and to segment the aerial images
-  jointly.
+  godard2017unsupervised,zhou2017unsupervised, yan2016perspective}
+  which have been successfully applied in monocular depth estimation,
+  our network learns geometric projection from aerial to ground, and
+  to semantically segment the aerial images jointly.
   \newline
 
   \item \textbf{Geo-Temporal Feature Learning:}
   In \chapref{whenwhere}, we demonstrate that our algorithm is able to
   learn geo-temporal image representations with geographic locations and
-  capture time.
+  capture time which are automatically captured by smart devices.
   Our work is most similar to Li and Snavely~\cite{li2018learning},
   who propose an approach for learning intrinsic images by observing
   image sequences with varying illumination over time. While their
