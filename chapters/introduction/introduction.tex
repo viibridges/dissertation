@@ -270,77 +270,74 @@ ways for automatic feature learning.
 
 
 \subsection{General Probabilistic Model for Geo-Calibration}
-The complete camera geo-calibration detects the camera
-geographic location, pose, and focal length of the camera.  We
-design a general model to estimate the probability over these
-geo-calibration parameters: First, we model the relationship between the
-image projection of the scene and the geo-calibration parameters. This
-relationship can be described by the pin-hole model, and
-the geographic location of the camera.
-We then construct a scoring function to measure the ``fitness'' between the
-calibration parameters and the observation of the image. 
+We design a general model to estimate the probability over all
+geo-calibration parameters. First, we model the process of projecting
+from the scene at given location, time, and in given camera pose.
+%This the appearance of the image frame are determined by the pin-hole
+%model and the geographic location of the camera.
+We use a scoring function to measure the ``fitness'' between these
+geo-calibration parameters and the appearance of the image. 
 The scoring function is proportional to the probability distribution
-of the camera parameters. We propose a Markov Chain Monte
-Carlo (MCMC) sampling approach to approximate the underlying
-probability distribution over the full geo-calibration of the camera.
+over the geo-calibration parameters, but the denominator is unknown. We
+then propose a Markov Chain Monte Carlo (MCMC) sampling approach to
+approximate the underlying probability distribution.
 Our model is a general architecture, which can take different
-constraints to form the scoring function. The details about this model
+constraints to form the scoring function. The details of this model
 can be found in \chapref{mcmc}.
 
 \subsection{Developing Constraint Functions}
-In our general model, the scoring function is defined as a linear
-combination of multiple constraint functions.
+In the general model, we define the scoring function is as a weighted
+summation of a series of constraint functions.
 In the rest of the work, we focus on developing good constraint
-functions for different set of calibration parameters. 
+functions for different set of geo-calibration parameters. 
+A constraint function outputs a score or probability for some given
+geo-calibration parameters conditional on the input image.
 
 \begin{itemize}[noitemsep]
-  \item \textbf{Constraint for Horizon Line and Vanishing Points:}
-  We first estimate camera roll and pitch angles. Assuming the intrinsic
-  parameters are known, camera roll and pitch angles can be
-  derived from the horizon line position in the image. Compared to
-  directly detecting the camera pose, identifying horizon line is easier
-  because it is tightly related to the appearance
-  of the scene. In our work, we create a new method using CNN to
-  estimate the prior distribution of the horizon line. We assign
-  a probability to each horizon line by measuring their consistences
-  with vanishing points detected using traditional statistic methods.
-  We present the algorithm details in \chapref{fasthorizon}.
-  \newline
+  \item \textbf{Constraint for Camera Pose:}
+  In this constraint we model the camera roll and pitch angles.
+  Assuming the intrinsic parameters are known, camera roll and pitch
+  angles can be derived from the horizon line position on the image.
+  Compared to directly detecting the camera pose, identifying horizon
+  line is easier because it is tightly related to the scene layout.
+  In our work, we create a new method using CNN to estimate the
+  prior distribution over the horizon line. We assign a probability to
+  each horizon candidate sampled from the prior distribution by
+  measuring their consistences with vanishing points detected using
+  traditional statistic methods. We present the algorithm details in
+  \chapref{fasthorizon}.  \newline
 
-  \item \textbf{Constraint for Time and Coarse Geographic Locations:}
-  In this work, we demonstrate to estimate the capture time and the
-  camera geographic location given the input image.
-  Our network has two heads to predict the image
-  capture time and the geographic location jointly.
+  \item \textbf{Constraint for Time and Coarse Location:}
+  In this work, we demonstrate to estimate probability over the
+  capture time and the camera geographic location given the input image.
+  Our network has two branches which predict the image
+  capture time and the geographic location simultaneously.
   For time estimation, our network is able to predict the
-  joint distribution over the month of the year and the global hour of the
+  joint distribution over the month of the year and the UTC hour of the
   day when the input image has been captured.
-  For camera geo-localization, We provide two approaches to obtain the
-  probability distribution over the camera geographic location. Most
-  straightforwardly, our network estimate the categorical distribution
-  over location of the world, which is represented as a $N \times M$
-  meshgrid. Better results can be procured with image capture time as
-  auxiliary input (if it is known). 
-  %Our algorithm can also compute the probability at arbitrary
-  %geographic location, with lower accuracy than the straightforward
-  %method.
-  We will present the algorithm details in \chapref{whenwhere}.
+  For coarse camera geo-localization, We provide two approaches to
+  obtain the probability distribution over the camera geographic
+  location. Most straightforwardly, our network outputs the discrete
+  distribution over the location in the world, which is uniformly
+  divided as a 2D meshgrid. Better results can be procured with the
+  image capture time as auxiliary input (if it is known). 
+  We present the algorithm details in \chapref{whenwhere}.
   \newline
 
-  \item \textbf{Constraint for Fine Geographic Locations and Orientations:}
+  \item \textbf{Constraint for Fine Location and Orientation:}
   In our previous method, we present that our algorithm can estimate
   the camera location distribution in low-res world division. In this
   work we focus on refining the geo-localization results with the help
-  of overhead imagery and on estimating geo-orientation of the camera. 
-  We first learn to segment the ground scene from its paired aerial image.
-  When refining the camera geographic location, we compare the
-  semantic layout of the ground image with the semantic layout
-  transferred from overhead images, which are sampled in different
-  locations and orientation angles. The optimal prediction is found when the
-  semantic layouts from these two sources match best. For probabilistic
-  outputs, we assign a score to each location and orientation setting,
-  based on how well the semantic layouts match to each other. We will
-  present the algorithm details in \chapref{crosstransf}.
+  of overhead imagery and on estimating the geo-orientation of the camera. 
+  We trained our network with cross-view pairs.
+  We first learn to deduce the semantic layout of the ground
+  scene from the associated aerial image.
+  Given a geographic location and orientation, we sample the aerial
+  image, then compare its semantic layout of the ground scene
+  with the semantic layout of the query image (ground image).
+  We assign a score to that location and orientation by matching these
+  two semantic layouts.
+  We present the algorithm details in \chapref{crosstransf}.
   \newline
 
 \end{itemize}
