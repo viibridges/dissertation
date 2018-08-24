@@ -9,8 +9,7 @@
 \chapquote@author\hspace*{\@tempdima}\par\bigskip}
 \makeatother
 
-\begin{chapquote}{Morgan Freeman in {\em Transcendence (2014 film)}
-\\ \todo{don't laugh.}}
+\begin{chapquote}{Morgan Freeman in {\em Transcendence (2014 film)}}
   ``Geo-locating suspects in real time? I've never seen anything like
 it.''
 \end{chapquote}
@@ -26,36 +25,42 @@ system, and image retrieval for image searching engines.
 
 For many applications, knowing when, where, and in which direction a
 picture was taken is important to understand the world. However, most
-images does not carry such information, thus we need to develop
-algorithms to dig them up.  We refer to the task of estimating these
-properties as {\em geo-calibration}.
-Most recent work of geo-calibration focus on deterministic systems, 
+images does not carry such information. Our thesis focuses on
+developing algorithms to estimate this information.
+We refer to the task of estimating these properties as {\em
+geo-calibration}.
+Most recent work of geo-calibration focus on deterministic systems
+\todo{citations}, 
 which have some drawbacks: 1) they can not model the inherent
-uncertainties from images of ambiguous scenes, and 2) they can not be
-used by applications that take probabilistic inputs. To address
-these problems, we propose to build probabilistic models for camera
-geo-calibration.
+uncertainties from images of ambiguous scenes, and 2) without a proper
+modeling of the uncertainty, subsequent processing can yield overly
+confident predictions. To address these problems, we propose to build
+probabilistic models for camera geo-calibration.
 
-We also show that learning to geo-calibrate a camera is helpful for
-high-level feature extracting. Feature engineering is essential for
-image understanding. In recent years, learning based approaches for
-high-level feature extracting like deep neural nets have drawn a lot
-of attention due to the fact that they do not need any expert
-knowledge about the target data. However, most of these feature
-learning methods heavily relies on manually labeled data. In our
-thesis, we presented alternative ways to learn high-level image
-representations when the manually labeled data is either insufficient
-or absent.
+We also show that learning to geo-calibrate a camera allows us to
+implicitly learn to understand the content of the scene.
+As an essential part of scene understanding, how to extract image
+features is an important problem being studied for decades.  In
+recent years, learning based approaches for image feature extraction
+like convolutional neural networks have drawn a lot of attention due
+to the fact that they do not need expert knowledge about the target
+data. However, most of these feature learning methods require large
+quantity of manually labeled data sets.  In this thesis, we presented
+alternative ways to learn high-level image features when the
+manually labeled data is either insufficient or absent.
 
 \section{Background}
+For a better understanding of our work, before the discussion of the
+main topics, we would like to introduce some related computer vision
+concepts in this section.
 
 \subsection{Geo-Calibration of Outdoor Images}
-Automatic image geo-calibration of outdoor images continues to grow in
+Automatic geo-calibration of outdoor images continues to grow in
 importance as a direct result of the increasing amount of imagery
-available via the Internet.  Solving this problem is of great value
+available via the Internet. Solving this problem is of great value
 for a wide variety of fields, with potential applications ranging from
 the forensic sciences~\cite{stylianou13jane} to environmental
-monitoring~\cite{zhang2012mining}.  Conceptually the geo-calibration
+monitoring~\cite{zhang2012mining}. Conceptually the geo-calibration
 task includes: identifying the camera pose ({\em pose estimation}),
 the camera geographic location ({\em geo-localization}), and the time
 when the query image was captured ({\em time estimation}).
@@ -63,6 +68,12 @@ when the query image was captured ({\em time estimation}).
 \begin{itemize}[noitemsep]
 
 \item \textbf{Pose Estimation:}
+Pose estimation includes estimating the camera yaw, pitch, and roll
+angles, $(\theta_{yaw}, \theta_{pitch}, \theta_{roll})$ from a
+image. In the context of geo-calibration, the yaw angle
+$\theta_{yaw}$ is referred to as the geographic orientation angle of
+the camera.
+%
 Li et al.~\cite{li2012worldwide} exploit geo-registered 3D points
 clouds to estimate camera pose.
 Vo \etal~\cite{vo2016localizing} propose a geo-localization network
@@ -87,29 +98,36 @@ extraction step.
 \newline
 
 \item \textbf{Geo-Localization:}
-Extracting location-dependent features from
-image data has drawn a great detail of attention from the vision
-community~\cite{jacobs07geolocate, jacobs11geolocate,
-jacobs08geoorient}. The common trend amongst these methods is that
-they take advantage of a large dataset of geo-referenced images. Hays
-and Efros~\cite{hays2008im2gps} use a data-driven scene matching
-approach to localize a query image using a large dataset of geo-tagged
-images.  Doersch \etal~\cite{doersch2012what} extract
-location-dependent features that capture the relative appearance
-differences of large cities.  Lin et al.~\cite{lin2013cross} localize
-a ground-level image by learning the relationship between pairs of
-ground and aerial images \footnote{In the context of our thesis, we
-do not distinguish between the satellite imagery and the aerial
-imagery} of the same location. Other techniques focus
-on urban environments and infer location using local image
-descriptors~\cite{schindler2008detecting,snavely2006photo}.
-Many other cues exist, such as the
+The task of geo-localization estimates the geographic location, $(lat,
+lon)$, of the camera from the input image or video frames.
+%
+As an important step of geo-localization, extracting
+location-dependent features from image data has drawn a great detail
+of attention from the vision community~\cite{jacobs07geolocate,
+jacobs11geolocate, jacobs08geoorient}. The common trend amongst these
+methods is that they take advantage of a large dataset of
+geo-referenced images. Hays and Efros~\cite{hays2008im2gps} use a
+data-driven scene matching approach to localize a query image using a
+large dataset of geo-tagged images.  Doersch
+\etal~\cite{doersch2012what} extract location-dependent features that
+capture the relative appearance differences of large cities.  Lin et
+al.~\cite{lin2013cross} localize a ground-level image by learning the
+relationship between pairs of ground and aerial images \footnote{In
+the context of our thesis, we do not distinguish between satellite
+imagery and aerial imagery} of the same location. Other techniques
+focus on urban environments and infer location using local image
+descriptors~\cite{schindler2008detecting,snavely2006photo}.  Many
+other cues exist, such as the
 skyline~\cite{baatz2012large,ramalingam2009geolocalization}, sky
 appearance~\cite{lalonde2010sun,workman2014rainbow}, and
 shadows~\cite{junejo2008estimating,wu2010geo}.
 \newline
 
 \item \textbf{Time Estimation:}
+The goal of time estimation is to estimate the time when the input
+image was captured. Depending on the application, the scale of a
+time estimator outputs may range from year to hour.
+%
 Matzen and Snavely~\cite{matzen2014scene} predict
 timestamps for photos by matching against a time-varying
 reconstruction of a scene.  Hill~\cite{hill1994elephant} estimate the
