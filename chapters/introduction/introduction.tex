@@ -218,19 +218,27 @@ state-of-the-art performance in geo-localization by extracting
 cross-domain global features using the
 NetVLAD~\cite{arandjelovic2016netvlad} technique.
 
+The key for the success of these ground-to-aerial geo-calibration
+methods is to learn descriptive features good for ground-to-aerial
+imagery matching. In the following section, we will show how to use
+geo-calibration information to learn useful features.
 
 \subsection{Geo-Calibration for Feature Learning}
 
-Automatic feature engineering has drawn a lot of attention over the
-past years. Compared to the manual feature engineering,
-automatic feature engineering approaches allow to learn useful
-features without strong expert knowledge about the data. Among these
-approaches, deep neural networks are wildly accepted as
-good tools to learn high-level image representations.  The most
-commonly used approach for deep feature learning is full supervision,
-which usually requires manual
+Manually engineering visual features is a common practice for many
+computer vision tasks. One of the successful example of manually
+engineered feature is the SIFT feature~\cite{lowe1999object}.
+In recent years, automatic feature engineering has drawn a lot
+of attention. Compared to the manual feature
+engineering, automatic feature engineering approaches allow to learn
+useful features without strong expert knowledge about the data. Among
+these approaches, deep neural networks are wildly accepted as good
+tools to learn high-level image representations.  The most commonly
+used approach for deep feature learning is full supervision, which
+usually requires large number of manual
 annotations~\cite{yosinski2014transferable,zhou2016learning,wen2016discriminative}.
-Unfortunately, such data is not always available for certain tasks.
+Unfortunately, such data is not always available for certain tasks or
+needs to invest a huge amount of human labors to create.
 In contrast, unlabeled data is often plentiful (\ie cellphone photos
 in Instagram or Youtube videos).
 
@@ -239,9 +247,10 @@ self-supervision methods (sometimes referred to as unsupervised learning or
 pretext tasks) for training deep neural networks that capture useful
 visual representations~\cite{doersch2015unsupervised,pathak2016context}. 
 These methods typically
-exploit some known quantity of the data (e.g., pixel color values) to
-avoid expensive manual annotation. As a byproduct, a useful visual
-representation is learned.
+exploit some known quantity of the data, like pixel color values, to
+avoid expensive manual annotation.
+By learning these quantities associated with the data, one
+can obtain useful features of the image.
 For example, Zhang et al.~\cite{zhang2016colorful} show how image
 colorization (synthesizing colors for a grayscale image) is a powerful
 pretext task for learning visual representations. Pathak et
@@ -258,6 +267,10 @@ projection to transfer from the source feature subspace to the target
 subspace. Sohn \etal~\cite{sohn2017unsupervised} improve the
 performance of video face recognition using an adversarial-based
 approach to adapt the network to unlabeled video imagery.
+
+So far, we have explained four important related computer vision
+concepts. In the following section, we are going to discuss our main
+contributions in this thesis.
 
 \section{Main Contributions}
 
