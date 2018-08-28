@@ -349,7 +349,7 @@ geo-calibration parameters conditional on the input image.
   measuring their consistences with detected vanishing points. We
   present the algorithm details in \chapref{fasthorizon}.  \newline
 
-  \item \textbf{Constraint for Time and Coarse Location:}
+  \item \textbf{Constraint for Time and Location:}
   In this work, we estimate the probability over the
   capture time and the camera geographic location given the input image.
   Our network has two branches which predict the image
@@ -366,12 +366,14 @@ geo-calibration parameters conditional on the input image.
   \chapref{whenwhere}.
   \newline
 
-  \item \textbf{Constraint for Fine Location and Orientation:}
+  \item \textbf{Constraint for Location and Orientation:}
   In our previous method, we present that our algorithm can estimate
-  the camera location distribution in low-res world division. In this
-  work we focus on refining the geo-localization results with the help
-  of overhead imagery and on estimating the geo-orientation of the camera. 
-  We trained our network with cross-view pairs.
+  the discrete camera location. The predictions are only approximate
+  due to the limitation of the algorithm. In this
+  work, we propose a ground-to-aerial geo-calibration method that can
+  further refine the prediction results and estimate the
+  camera geo-orientation with overhead imagery.
+%
   We first learn to deduce the semantic layout of the ground
   scene from the associated aerial image.
   Given a geographic location and orientation, we sample the aerial
