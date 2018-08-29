@@ -300,7 +300,7 @@ different constraint functions. Then
 we fuse these constraint functions to simulate the joint distribution
 over the complete geo-calibration parameters. We present the flowchart of
 our approach in \figref{intro:architecture}.
-
+%
 Furthermore, we also explore to learning image features
 and geo-calibrating cameras simultaneously.  We believe that camera
 poses, geographic locations and image capture times are closely
@@ -373,14 +373,14 @@ geo-calibration parameters conditional on the input image.
   work, we propose a ground-to-aerial geo-calibration method that can
   further refine the prediction results and estimate the
   camera geo-orientation with overhead imagery.
-%
-  We first learn to deduce the semantic layout of the ground
-  scene from the associated aerial image.
-  Given a geographic location and orientation, we sample the aerial
-  image, then compare its semantic layout of the ground scene
-  with the semantic layout of the query image (ground image).
-  We assign a score to that location and orientation by matching these
-  two semantic layouts.
+  %
+  We designed a network that can jointly learn the semantic layout of
+  the aerial image and its projection to the ground-level perspective.
+  When computing the value of constraint function, feed the aerial
+  image of a given location and orientation set to the network. 
+  By comparing the aerial-to-ground layout with the real layout of the
+  ground image, we are able to measure the consistency of these two as
+  the value of our constraint function.
   We present the algorithm details in \chapref{crosstransf}.
   \newline
 
