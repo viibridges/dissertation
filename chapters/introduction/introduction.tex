@@ -342,7 +342,8 @@ geo-calibration parameters conditional on the input image.
   Assuming the intrinsic parameters are known, camera roll and pitch
   angles can be derived from the horizon line position on the image.
   Compared to directly detecting the camera pose, identifying horizon
-  line is easier because it is reflected by the scene layout.
+  line is easier because it can be explicitly estimated from the scene
+  layout.
   In our work, we create a new method using CNN to estimate the
   prior distribution over the horizon line. We assign a probability to
   each horizon candidate sampled from the prior distribution by
@@ -376,7 +377,7 @@ geo-calibration parameters conditional on the input image.
   %
   We designed a network that can jointly learn the semantic layout of
   the aerial image and its projection to the ground-level perspective.
-  When computing the value of constraint function, feed the aerial
+  When computing the value of the constraint function, feed the aerial
   image of a given location and orientation set to the network. 
   By comparing the aerial-to-ground layout with the real layout of the
   ground image, we are able to measure the consistency of these two as
@@ -387,21 +388,19 @@ geo-calibration parameters conditional on the input image.
 \end{itemize}
 
 
-\subsection{Geo-Calibration for Feature Learning}
-Our methods also provide another way to dealing with the challenges of
-lacking manual annotations during DNN training. By learning to
-geo-calibrate a camera, we believe the networks are able to learn
-high-level image representations. This belief comes from the fact that
-the geo-calibration information of a camera encodes semantic
-information because it is closely related to the appearances of the
-scene.
-We explore two types of learning techniques for high-level feature
-extraction: 1) semantic segmentation of the aerial imagery with
-ground-level annotations which is plentiful, and 2) geo-temporal
-features with automatically annotated geographic locations and time.
-
+\subsection{Geo-Calibration for Image Feature Learning}
+Full supervision algorithms are powerful tools to learn useful image
+features. However, full supervision algorithms requires large number
+of annotated data, which in many cases are either not available or
+financially infeasible to obtain. On the other hand, images with free
+annotations like time and locations are plentiful on the Internet.
+To use these image resources for image feature learning, 
+we explore two types of learning techniques that uses time and
+locations as annotations: 1) {\em ground-to-aerial segmentation}, and 2)
+{\em geo-temporal feature learning} with time/location tagged images.
+ 
 \begin{itemize}[noitemsep]
-  \item \textbf{Ground-to-Aerial Feature Learning:}
+  \item \textbf{Ground-to-Aerial Segmentation:}
   Most current machine learning methods study problems involving the
   ground imagery. There exist many annotated dataset of the ground
   imagery while much fewer of the aerial imagery. 
