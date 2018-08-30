@@ -388,7 +388,8 @@ geo-calibration parameters conditional on the input image.
 \end{itemize}
 
 
-\subsection{Geo-Calibration for Image Feature Learning}
+\subsection{Geo-Calibration for Feature Learning and Image
+Understanding}
 Full supervision algorithms are powerful tools to learn useful image
 features. However, full supervision algorithms requires large number
 of annotated data, which in many cases are either not available or
@@ -401,11 +402,15 @@ locations as annotations: 1) {\em ground-to-aerial segmentation}, and 2)
  
 \begin{itemize}[noitemsep]
   \item \textbf{Ground-to-Aerial Segmentation:}
-  Most current machine learning methods study problems involving the
-  ground imagery. There exist many annotated dataset of the ground
-  imagery while much fewer of the aerial imagery. 
-  In \chapref{crosstransf}, we proposed a
-  method to learn to semantically segment aerial images with only
+  Semantic segmentation plays an important role in image understanding.
+  The training for semantic segmentation task requires a large number
+  of annotated data.
+  However, most large scale annotated datasets like ImageNet~\cite{ILSVRC15}
+  and COCO~\cite{lin2014microsoft} are made of ground level images. By
+  comparison, annotated datasets for aerial imagery are rare.
+  %
+  To deal with this problem, we proposed a
+  DNN to learn to semantically segment aerial images with only
   ground-level annotations. Our method exploits the spatial
   correspondences between images in cross-view pairs. 
   In this work, we try to transfer the semantic knowledge from the
@@ -414,21 +419,28 @@ locations as annotations: 1) {\em ground-to-aerial segmentation}, and 2)
   Reprojection Losses}~\cite{garg2016unsupervised,
   godard2017unsupervised,zhou2017unsupervised, yan2016perspective}
   which have been successfully applied in monocular depth estimation,
-  our network learns geometric projection from aerial to ground, and
+  our network learns the geometric projection from aerial to ground, and
   to semantically segment the aerial images jointly.
+  We present the learning details in \chapref{crosstransf}
   \newline
 
-  \item \textbf{Geo-Temporal Feature Learning:}
-  In \chapref{whenwhere}, we demonstrate that our algorithm is able to
-  learn geo-temporal image representations with geographic locations and
-  capture time which are automatically captured by smart devices.
-  Our work is most similar to Li and Snavely~\cite{li2018learning},
-  who propose an approach for learning intrinsic images by observing
-  image sequences with varying illumination over time. While their
-  targets are reflectance and shading images of the scene, we consider
-  two novel pretext tasks, time and location estimation.
+  \item \textbf{Location and Time as Pretext Task:}
+  Smart devices like cellphones and webcams becomes popular and most
+  of them are equipped with clocks and GPS modules nowadays. Thanks to
+  the development of social networks, researchers now can find
+  a lot images online that are tagged with time and locations. In
+  \chapref{whenwhere}, we propose an algorithm that treats the location and
+  time as pretext task to learn useful image features.
   By learning to predict the geographic location and capture time of
   the query image, our network learns to extract geo-temporal features
   from the image.
 
 \end{itemize}
+
+\todo{describe problems to be solve}
+
+In summary, the main contributions of our work include developing a
+probabilistic framework to solve geo-calibration problems, and
+proposing new methods to learn image features with geo-calibration
+information. We are going to present our approaches in detail in the
+following chapter.
