@@ -17,28 +17,28 @@ it.''
 The ultimate goal of image understanding is to transfer visual
 signals (images/videos) into abstract symbolic descriptions of the
 world which are helpful for decision making.
-However, understanding images is a not trivial task for machines.
+However, understanding images is not a trivial task for machines.
 In order to handle various complicated scenarios, researchers divide
 image understanding into different computer vision tasks: pedestrian
 detection for autonomous driving, face recognition for security
-system, and image retrieval for image searching engines.
+system, and image retrieval for searching engines.
 
 For many applications, knowing when, where, and in which direction a
 picture was taken is important to understand the world. However, most
 images does not carry such information. Our thesis focuses on
-developing algorithms to estimate this information.
-We refer to the task of estimating these properties as {\em
-geo-calibration}.
-Most recent work of geo-calibration focus on deterministic systems
+developing algorithms to estimating these properties. We
+refer to the task as {\em geo-calibration}.
+
+Most recent geo-calibration algorithms are deterministic systems
 \todo{citations}, 
-which have some drawbacks: 1) they can not model the inherent
+which have some obvious drawbacks: 1) they can not model the inherent
 uncertainties from images of ambiguous scenes, and 2) without a proper
-modeling of the uncertainty, subsequent processing can yield overly
+modeling of the uncertainty, the subsequent process can yield overly
 confident predictions. To address these problems, we propose to build
 probabilistic models for camera geo-calibration.
 
 We also show that learning to geo-calibrate a camera allows us to
-implicitly learn to understand the content of the scene.
+learn to understand the scene.
 As an essential part of scene understanding, how to extract image
 features is an important problem being studied for decades.  In
 recent years, learning based approaches for image feature extraction
