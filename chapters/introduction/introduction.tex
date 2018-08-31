@@ -30,29 +30,34 @@ developing algorithms to estimating these properties. We
 refer to the task as {\em geo-calibration}.
 
 Most recent geo-calibration algorithms are deterministic systems
-\todo{citations}, 
-which have some obvious drawbacks: 1) they can not model the inherent
-uncertainties from images of ambiguous scenes, and 2) without a proper
-modeling of the uncertainty, the subsequent process can yield overly
-confident predictions. To address these problems, we propose to build
-probabilistic models for camera geo-calibration.
+\todo{citations}. 
+Deterministic systems have some obvious drawbacks: 1) they can not
+model the inherent uncertainties from images of ambiguous scenes, and
+2) without a proper modeling of the uncertainty, the subsequent
+process can yield overly confident predictions. To address these
+problems, we propose to build probabilistic systems for camera
+geo-calibration.
 
 We also show that learning to geo-calibrate a camera allows us to
-learn to understand the scene.
+learn about the scene of the image.
 As an essential part of scene understanding, how to extract image
 features is an important problem being studied for decades.  In
 recent years, learning based approaches for image feature extraction
 like convolutional neural networks have drawn a lot of attention due
 to the fact that they do not need expert knowledge about the target
 data. However, most of these feature learning methods require large
-quantity of manually labeled data sets.  In this thesis, we presented
-alternative ways to learn high-level image features when the
+quantity of manually labeled datasets.  In this thesis, we presented
+alternative ways to learn image features when the
 manually labeled data is either insufficient or absent.
 
 \section{Background}
-For a better understanding of our work, we would like to introduce
-some related computer vision concepts in this section before the
-discussion of the main topics.
+To give a better understanding of our work, we would like to introduce
+some related computer vision concepts before we discuss the main topics.
+We start with the definition of geo-calibration,
+along with its literature. Next, we introduce the history of deep
+learning methods for geo-calibration, and a big category of approaches
+that use aerial imagery. In the end, we cover some related work
+of weakly supervised learning techniques.
 
 \subsection{Geo-Calibration of Outdoor Images}
 Automatic geo-calibration of outdoor images continues to grow in
@@ -61,14 +66,14 @@ available via the Internet. Solving this problem is of great value
 for a wide variety of fields, with potential applications ranging from
 the forensic sciences~\cite{stylianou13jane} to environmental
 monitoring~\cite{zhang2012mining}. Conceptually the geo-calibration
-task includes: identifying the camera pose ({\em pose estimation}),
+task includes identifying: the camera pose ({\em pose estimation}),
 the camera geographic location ({\em geo-localization}), and the time
-when the query image was captured ({\em time estimation}).
+when the image was captured ({\em time estimation}).
 
 \begin{itemize}[noitemsep]
 
 \item \textbf{Pose Estimation:}
-Pose estimation includes estimating the camera yaw, pitch, and roll
+Pose estimation is to estimate the camera yaw, pitch, and roll
 angles, $(\theta_{yaw}, \theta_{pitch}, \theta_{roll})$ from a
 image. In the context of geo-calibration, the yaw angle
 $\theta_{yaw}$ is referred to as the geographic orientation angle of
@@ -85,8 +90,6 @@ between the input image and Google Street View panoramas.
 Horizon line detection is an essential step for some pose
 estimation algorithms, because horizon lines are closely related to
 camera pitch and roll angles.
-%If the camera focal length is known, one can compute the camera pitch
-%and roll angle from the horizon line.
 Collins and Weiss~\cite{unitsphere1990} formulate horizon line
 detection as a statistical estimation problem on the Gaussian Sphere,
 which is similar to the geometry we use.  More recent work has
@@ -99,7 +102,7 @@ extraction step.
 
 \item \textbf{Geo-Localization:}
 The task of geo-localization estimates the geographic location, $(lat,
-lon)$, of the camera from the input image or video frames.
+lon)$, of the camera given image/video inputs.
 %
 As an important step of geo-localization, extracting
 location-dependent features from image data has drawn a great detail
@@ -124,9 +127,9 @@ shadows~\cite{junejo2008estimating,wu2010geo}.
 \newline
 
 \item \textbf{Time Estimation:}
-The goal of time estimation is to estimate the time when the input
-image was captured. Depending on the application, the scale of a
-time estimator outputs may range from year to hour.
+The goal of time estimation is to estimate the time when the 
+image was captured. Depending on the application, the accuracy of
+predictions range from hour to year.
 %
 Matzen and Snavely~\cite{matzen2014scene} predict
 timestamps for photos by matching against a time-varying
@@ -142,11 +145,11 @@ relate them to certain time periods.
 \end{itemize}
 
 In conclusion, most of the geo-calibration algorithms we mention above
-relies on finding visual cues from the input images. The development
-of these algorithms require strong human expertise about the data,
-thus can only be applied in limited scenarios. Therefore, researchers
-need new methodologies in order to make the development of
-geo-calibration algorithms more efficient.
+relies on finding visual cues from input images. To extract useful
+visual features majority of these algorithms require strong human
+expertise about the data, thus can only be applied in limited
+scenarios. Therefore, we contribute to developing geo-calibration
+algorithms without need of strong human expertise about the data.
 
 \subsection{Deep Learning in Geo-Calibration}
 In recent years, deep neural networks (DNNs) were proven to be
@@ -172,10 +175,11 @@ the camera focal length. Kendall \etal~\cite{kendall2015convolutional}
 propose a neural network that can identify 6-DOF camera parameters for
 specific scenes.
 
-These geo-calibration methods make the predictions directly out of
-DNNs.  There is another big category of geo-calibration methods that
-use aerial imagery as geo-registered database, which we will introduce
-in the following section.
+All these geo-calibration methods share the common property that they
+make the predictions directly out of DNNs. Besides these methods,
+there exists another big category of methods that geo-calibrate
+cameras using aerial imagery as geo-registered database. We will
+discuss them in the following section.
 
 \subsection{Ground-to-Aerial Geo-Calibration}
 Data-driven scene matching approaches are commonly used in
@@ -218,29 +222,28 @@ state-of-the-art performance in geo-localization by extracting
 cross-domain global features using the
 NetVLAD~\cite{arandjelovic2016netvlad} technique.
 
-The key for the success of these ground-to-aerial geo-calibration
-methods is to learn descriptive features good for ground-to-aerial
-imagery matching. In the following section, we will show how to use
-geo-calibration information to learn useful features.
+The key for the success of these methods is to learn good descriptive
+features for ground-to-aerial imagery matching. In the following
+section, we will introduce literature about feature learning techniques.
 
-\subsection{Geo-Calibration for Feature Learning}
+\subsection{Feature Learning with Weak Annotations}
 
-Manually engineering visual features is a common practice for many
-computer vision tasks. One of the successful example of manually
-engineered feature is the SIFT feature~\cite{lowe1999object}.
-In recent years, automatic feature engineering has drawn a lot
-of attention. Compared to the manual feature
+Manually engineering visual features is a common practice for
+computer vision tasks. One of the successful example of manual
+feature is SIFT~\cite{lowe1999object}, which is widely used by many
+computer vision algorithms.
+In recent years, automatic feature engineering has drawn more
+attentions. Compared to the manual feature
 engineering, automatic feature engineering approaches allow to learn
 useful features without strong expert knowledge about the data. Among
-these approaches, deep neural networks are wildly accepted as good
-tools to learn high-level image representations.  The most commonly
-used approach for deep feature learning is full supervision, which
-usually requires large number of manual
+these learning approaches, deep neural networks are intensively studied.
+The most common approach for deep feature learning is full
+supervision, which usually requires large number of manual
 annotations~\cite{yosinski2014transferable,zhou2016learning,wen2016discriminative}.
 Unfortunately, such data is not always available for certain tasks or
-needs to invest a huge amount of human labors to create.
-In contrast, unlabeled data is often plentiful (\ie cellphone photos
-in Instagram or Youtube videos).
+needs to invest a huge amount of human labors to create.  In contrast,
+unlabeled data is often plentiful (\ie cellphone photos in Instagram
+or Youtube videos).
 
 To exploit these unlabeled data, recent work has explored
 self-supervision methods (sometimes referred to as unsupervised learning or
@@ -270,7 +273,7 @@ approach to adapt the network to unlabeled video imagery.
 
 So far, we have explained four important related computer vision
 concepts. In the following section, we are going to discuss our main
-contributions in this thesis.
+contributions.
 
 \section{Main Contributions}
 
