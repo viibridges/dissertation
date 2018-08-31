@@ -271,9 +271,8 @@ subspace. Sohn \etal~\cite{sohn2017unsupervised} improve the
 performance of video face recognition using an adversarial-based
 approach to adapt the network to unlabeled video imagery.
 
-So far, we have explained four important related computer vision
-concepts. In the following section, we are going to discuss our main
-contributions.
+We have explained four related computer vision concepts so far. In the
+following section, we are going to discuss our main contributions.
 
 \section{Main Contributions}
 
@@ -289,55 +288,55 @@ functions in a general model for geo-calibration.}
   \label{fig:intro:architecture}
 \end{figure}
 
-We make contributions in three main areas: 1) we proposed a general
-probabilistic model to jointly estimate the geo-calibration
-parameters, 2) we decomposed the full geo-calibration into several
-partial geo-calibration tasks, each of which provides a strong
-constraint function that fits into the general model, and 3) we show
-that learning to geo-calibrate a camera is a useful pretext for image
-feature learning.
+In this thesis, we make contributions in three main areas: 1) we
+proposed a reflexible probabilistic model to jointly estimate the
+geo-calibration parameters, 2) we decomposed the full geo-calibration
+into several partial geo-calibration tasks, each of which provides a
+strong constraint function that fits into the probabilistic model,
+and 3) we show that learning to geo-calibrate a camera is a useful
+pretext for image feature learning.
  
 The first two contributions make our main approach. Our
-algorithm feeds inputs (images, time and manual annotations) to
-different constraint functions. Then
-we fuse these constraint functions to simulate the joint distribution
-over the complete geo-calibration parameters. We present the flowchart of
-our approach in \figref{intro:architecture}.
+algorithm feeds inputs (images, time, and manual annotations) to
+different constraint functions, which we can fuse together to simulate
+the joint distribution over the complete geo-calibration parameters.
+We present the flowchart of our approach in
+\figref{intro:architecture}.
 %
-Furthermore, we also explore to learning image features
-and geo-calibrating cameras simultaneously.  We believe that camera
-poses, geographic locations and image capture times are closely
-related to image representations. 
-Based on the belief that visual features which abstract the image
-contents are the necessary for solving the geo-calibration tasks, we
-designed neural networks to learn useful visual features by
-geo-calibrating cameras. Our work provide new ways for automatic
-feature learning.
+Furthermore, based on the belief that the content of the image is usually dictated
+by the camera pose, geographic location and image capture time. We
+treat geo-calibration information as pretext task and show that they
+are useful for image feature learning.
 
 
-\subsection{General Probabilistic Model for Geo-Calibration}
-We design a general model to estimate the probability over all
-geo-calibration parameters. First, we model the process of projecting
-from the scene at given location, time, and in given camera pose.
-%This the appearance of the image frame are determined by the pin-hole
-%model and the geographic location of the camera.
-We use a scoring function to measure the ``fitness'' between these
-geo-calibration parameters and the appearance of the image. 
+\subsection{Flexible Probabilistic Model for Geo-Calibration}
+We design a flexible probabilistic model to estimate the probability
+over all geo-calibration parameters.
+First, we construct a scoring function to model the process of camera
+projecting the scene to image frame at given pose, location, and time.
+%
+The scoring function consists of a series of constraint functions,
+which measures the ``fitness'' between these geo-calibration
+parameters and the appearance of the image. 
+%
 The scoring function is proportional to the probability distribution
-over the geo-calibration parameters, but the denominator is unknown. We
-then propose a Markov Chain Monte Carlo (MCMC) sampling approach to
-approximate the underlying probability distribution.
-Our model is flexible that it is able to contribute different
-constraint functions to the scoring function. The details of this model
-can be found in \chapref{mcmc}.
+over the geo-calibration parameters. Since the integral over all
+possible parameters is intractable, We propose a Markov Chain Monte
+Carlo (MCMC) sampling approach to approximate the underlying
+probability distribution. 
+%
+Our model is flexible that it allows different constraint functions
+contribute to the scoring function. The details of this model can be
+found in \chapref{mcmc}.
 
 \subsection{Developing Constraint Functions}
-In the general model, we define the scoring function as a weighted
-summation of a series of constraint functions.
-In the rest of the work, we focus on developing good constraint
-functions for different sets of geo-calibration parameters. 
-A constraint function outputs a score or probability for some given
-geo-calibration parameters conditional on the input image.
+The scoring function of the probabilistic
+model is defined as a weighted summation of a series of constraint
+functions.
+A constraint function outputs a score (or probability) of the input
+geo-calibration parameters given the input image. In the rest of the
+work, we focus on developing good constraint functions for different
+sets of geo-calibration parameters. 
 
 \begin{itemize}[noitemsep]
   \item \textbf{Constraint for Camera Pose:}
