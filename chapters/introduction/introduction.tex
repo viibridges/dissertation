@@ -340,50 +340,53 @@ sets of geo-calibration parameters.
 
 \begin{itemize}[noitemsep]
   \item \textbf{Constraint for Camera Pose:}
-  In this constraint, we model the camera roll and pitch angles.
+  We build the constraint function for camera roll and pitch angles.
   Assuming the intrinsic parameters are known, camera roll and pitch
   angles can be derived from the horizon line position on the image.
   Compared to directly detecting the camera pose, identifying horizon
   line is easier because it can be explicitly estimated from the scene
   layout.
-  In our work, we create a new method using CNN to estimate the
-  prior distribution over the horizon line. We assign a probability to
-  each horizon candidate sampled from the prior distribution by
-  measuring their consistences with detected vanishing points. We
-  present the algorithm details in \chapref{fasthorizon}.  \newline
+  In our work, we create a convolutional neural network to estimate the
+  prior distribution over the horizon line.
+  For each horizon line candidate sampled from the prior distribution,
+  we assign a consistency score to it by measuring the consistencies of
+  vanishing points detected on it.
+  The constraint function output is defined as the multiplication of
+  the prior probability of the associated horizon line and its
+  consistency score.
+  We present the algorithm details in \chapref{fasthorizon}.
+  \newline
 
   \item \textbf{Constraint for Time and Location:}
-  In this work, we estimate the probability over the
-  capture time and the camera geographic location given the input image.
-  Our network has two branches which predict the image
+  In this work, we estimate the probability over 
+  the camera geographic location and the capture time of the input
+  image.
+  Our network has two branches that predict the image
   capture time and the geographic location simultaneously.
   For time estimation, our network is able to predict the
   joint distribution over the month of the year and the UTC hour of the
-  day when the input image has been captured.
-  For coarse camera geo-localization, We provide two approaches to
-  obtain the probability distribution over the camera geographic
-  location. Most straightforwardly, our network outputs the discrete
+  day when the input image was captured.
+  For camera geo-localization, our network outputs the discrete
   distribution over the geographic location of the camera. Better
   results can be procured with the image capture time as auxiliary input
-  (if it is known).  We present the algorithm details in
-  \chapref{whenwhere}.
+  (if it is known).  
+  We present the algorithm details in \chapref{whenwhere}.
   \newline
 
   \item \textbf{Constraint for Location and Orientation:}
-  In our previous method, we present that our algorithm can estimate
-  the discrete camera location. The predictions are only approximate
-  due to the limitation of the algorithm. In this
+  The previous algorithm only estimates locations approximately
+  due to the limited capacity of the deep neural network. In this
   work, we propose a ground-to-aerial geo-calibration method that can
   further refine the prediction results and estimate the
-  camera geo-orientation with overhead imagery.
+  camera geo-orientation.
   %
   We designed a network that can jointly learn the semantic layout of
   the aerial image and its projection to the ground-level perspective.
   When computing the value of the constraint function, feed the aerial
-  image of a given location and orientation set to the network. 
+  image of a given location and orientation to the network. 
   By comparing the aerial-to-ground layout with the real layout of the
-  ground image, we are able to measure the consistency of these two as
-  the value of our constraint function.
+  ground image, we are able to measure the consistency between the two
+  and use it as the value of our constraint function.
   We present the algorithm details in \chapref{crosstransf}.
   \newline
 
