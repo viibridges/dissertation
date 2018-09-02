@@ -396,13 +396,15 @@ sets of geo-calibration parameters.
 \subsection{Geo-Calibration for Feature Learning and Image
 Understanding}
 Full supervision algorithms are powerful tools to learn useful image
-features. However, full supervision algorithms requires large number
-of annotated data, which in many cases are either not available or
-financially infeasible to obtain. On the other hand, images with free
-annotations like time and locations are plentiful on the Internet.
-To use these image resources for image feature learning, 
-we explore two types of learning techniques that uses time and
-locations as annotations: 1) {\em ground-to-aerial segmentation}, and 2)
+features. However, full supervision algorithms require large number
+of annotated data, which takes a lot of human labors and is usually
+unavailable.
+On the other hand, images with annotations like tags and GPS locations
+uploaded by individual users or captured automatically by smart
+devices are plentiful on the Internet.
+To use these image resources to understand the world,
+we explore two approaches that use time and
+locations as weak annotations: 1) {\em ground-to-aerial segmentation}, and 2)
 {\em geo-temporal feature learning} with time/location tagged images.
  
 \begin{itemize}[noitemsep]
@@ -411,34 +413,36 @@ locations as annotations: 1) {\em ground-to-aerial segmentation}, and 2)
   The training for semantic segmentation task requires a large number
   of annotated data.
   However, most large scale annotated datasets like ImageNet~\cite{ILSVRC15}
-  and COCO~\cite{lin2014microsoft} are made of ground level images. By
-  comparison, annotated datasets for aerial imagery are rare.
+  and COCO~\cite{lin2014microsoft} are mostly made of ground-level
+  images. By comparison, annotated datasets for aerial imagery are rare.
   %
   To deal with this problem, we proposed a
-  DNN to learn to semantically segment aerial images with only
+  DNN to learn semantic segmentation for aerial images with only
   ground-level annotations. Our method exploits the spatial
-  correspondences between images in cross-view pairs. 
-  In this work, we try to transfer the semantic knowledge from the
+  correspondences between images in the cross-view pair, where the
+  aerial imagery and ground imagery are associated by location and
+  geo-orientation.
+  In this work, we transfer the semantic knowledge from the
   ground domain to the aerial domain by identifying their latent
   geometric correspondences. Similar to {\em
   Reprojection Losses}~\cite{garg2016unsupervised,
-  godard2017unsupervised,zhou2017unsupervised, yan2016perspective}
-  which have been successfully applied in monocular depth estimation,
+  godard2017unsupervised,zhou2017unsupervised, yan2016perspective},
+  which are proven to be successful in monocular depth estimation,
   our network learns the geometric projection from aerial to ground, and
   to semantically segment the aerial images jointly.
   We present the learning details in \chapref{crosstransf}
   \newline
 
   \item \textbf{Location and Time as Pretext Task:}
-  Smart devices like cellphones and webcams becomes popular and most
-  of them are equipped with clocks and GPS modules nowadays. Thanks to
+  Smart devices like cellphones and webcams get more sophisticated
+  nowadays. Most of them are equipped with clocks and GPS modules. Thanks to
   the development of social networks, researchers now can find
-  a lot images online that are tagged with time and locations. In
-  \chapref{whenwhere}, we propose an algorithm that treats the location and
-  time as pretext task to learn useful image features.
-  By learning to predict the geographic location and capture time of
-  the query image, our network learns to extract geo-temporal features
-  from the image.
+  large amount of images online that are tagged with time and
+  geographic locations. In \chapref{whenwhere}, we propose an
+  algorithm that treats the location and time as pretext tasks to learn
+  useful image features.  By learning to predict the geographic location
+  and the capture time of the query image, our network learns to extract
+  geo-temporal features from the image.
 
 \end{itemize}
 
