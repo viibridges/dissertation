@@ -21,17 +21,18 @@ However, understanding images is not a trivial task for machines.
 In order to handle various complicated scenarios, researchers divide
 image understanding into different computer vision tasks: pedestrian
 detection for autonomous driving, face recognition for security
-system, and image retrieval for searching engines.
+systems, and image retrieval for search engines.
 
 For many applications, knowing when, where, and in which direction a
-picture was taken is important to understand the world. However, most
-images does not carry such information. Our thesis focuses on
-developing algorithms to estimating these properties. We
-refer to the task as {\em geo-calibration}.
+picture was taken is important scene understanding. However, most
+images do not carry such information. 
+We refer to the task of estimating this information as {\em
+geo-calibration}. Our thesis focuses on developing geo-calibration
+algorithms.
 
 Most recent geo-calibration algorithms are deterministic systems
 \todo{citations}. 
-Deterministic systems have some obvious drawbacks: 1) they can not
+Deterministic systems have some obvious drawbacks: 1) they cannot
 model the inherent uncertainties from images of ambiguous scenes, and
 2) without a proper modeling of the uncertainty, the subsequent
 process can yield overly confident predictions. To address these
@@ -40,13 +41,13 @@ geo-calibration.
 
 We also show that learning to geo-calibrate a camera allows us to
 learn about the scene of the image.
-As an essential part of scene understanding, how to extract image
-features is an important problem being studied for decades.  In
+As an essential part of understanding the scene, how to extract image
+features is an important problem has been studied for decades.  In
 recent years, learning based approaches for image feature extraction
 like convolutional neural networks have drawn a lot of attention due
 to the fact that they do not need expert knowledge about the target
-data. However, most of these feature learning methods require large
-quantity of manually labeled datasets.  In this thesis, we presented
+data. However, most of these feature learning methods require a large
+quantity of manually labeled datasets. In this thesis, we propose
 alternative ways to learn image features when the
 manually labeled data is either insufficient or absent.
 
@@ -55,9 +56,9 @@ To give a better understanding of our work, we would like to introduce
 some related computer vision concepts before we discuss the main topics.
 We start with the definition of geo-calibration,
 along with its literature. Next, we introduce the history of deep
-learning methods for geo-calibration, and a big category of approaches
-that use aerial imagery. In the end, we cover some related work
-of weakly supervised learning techniques.
+learning methods for geo-calibration, and data-driven scene matching
+approaches that use aerial imagery. In the end, we cover some related
+work of weakly supervised learning techniques.
 
 \subsection{Geo-Calibration of Outdoor Images}
 Automatic geo-calibration of outdoor images continues to grow in
@@ -65,8 +66,8 @@ importance as a direct result of the increasing amount of imagery
 available via the Internet. Solving this problem is of great value
 for a wide variety of fields, with potential applications ranging from
 the forensic sciences~\cite{stylianou13jane} to environmental
-monitoring~\cite{zhang2012mining}. Conceptually the geo-calibration
-task includes identifying: the camera pose ({\em pose estimation}),
+monitoring~\cite{zhang2012mining}. Conceptually, the geo-calibration
+task includes identifying the camera pose ({\em pose estimation}),
 the camera geographic location ({\em geo-localization}), and the time
 when the image was captured ({\em time estimation}).
 
@@ -74,7 +75,7 @@ when the image was captured ({\em time estimation}).
 
 \item \textbf{Pose Estimation:}
 Pose estimation is to estimate the camera yaw, pitch, and roll
-angles, $(\theta_{yaw}, \theta_{pitch}, \theta_{roll})$ from a
+angles, $(\theta_{yaw}, \theta_{pitch}, \theta_{roll})$ from an
 image. In the context of geo-calibration, the yaw angle
 $\theta_{yaw}$ is referred to as the geographic orientation angle of
 the camera.
@@ -91,13 +92,12 @@ Horizon line detection is an essential step for some pose
 estimation algorithms, because horizon lines are closely related to
 camera pitch and roll angles.
 Collins and Weiss~\cite{unitsphere1990} formulate horizon line
-detection as a statistical estimation problem on the Gaussian Sphere,
-which is similar to the geometry we use.  More recent work has
-explored the use of dual space~\cite{alignment2014,dualspace2013}
-representations. Among the clustering-based approaches, Xu et
-al.~\cite{kitware2013} improve this pipeline by introducing a new
-point-line consistency function that models errors in the line segment
-extraction step.
+detection as a statistical estimation problem on the Gaussian Sphere.
+More recent work has explored the use of dual
+space~\cite{alignment2014,dualspace2013} representations. Among the
+clustering-based approaches, Xu et al.~\cite{kitware2013} improve this
+pipeline by introducing a new point-line consistency function that
+models errors in the line segment extraction step.
 \newline
 
 \item \textbf{Geo-Localization:}
@@ -133,23 +133,23 @@ predictions range from hour to year.
 %
 Matzen and Snavely~\cite{matzen2014scene} predict
 timestamps for photos by matching against a time-varying
-reconstruction of a scene.  Hill~\cite{hill1994elephant} estimate the
+reconstruction of a scene.  Hill \etal~\cite{hill1994elephant} estimate the
 time of the day by measuring the light intensity profiles captured by
-cameras. Methods are proposed to date the
-year book photos by analyzing human
+cameras. Methods are proposed to date
+yearbook photos by analyzing human
 appearance~\cite{salem2016face2year,ginosar2015century}. Lee
-\etal~\cite{linking2015iccp} find visual paterns in the buildings,
+\etal~\cite{linking2015iccp} find visual patterns in buildings,
 relate them to certain time periods.
 \newline
 
 \end{itemize}
 
 In conclusion, most of the geo-calibration algorithms we mention above
-relies on finding visual cues from input images. To extract useful
-visual features majority of these algorithms require strong human
-expertise about the data, thus can only be applied in limited
+rely on finding visual cues from input images. To extract useful
+visual features, a majority of these algorithms require strong human
+expertise about the data, thus, they can only be applied in limited
 scenarios. Therefore, we contribute to developing geo-calibration
-algorithms without need of strong human expertise about the data.
+algorithms without the need of strong human expertise about the data.
 
 \subsection{Deep Learning in Geo-Calibration}
 In recent years, deep neural networks (DNNs) were proven to be
@@ -164,7 +164,7 @@ image. Walch \etal~\cite{walch2017image} aggregate learned CNN
 features with LSTM to generate global image representation for camera
 localization.  Studies about camera pose
 estimation~\cite{zhai2016horizon, workman2016horizon,
-hold2017perceptual} has been done by identifying the horizon line with
+hold2017perceptual} have been done by identifying the horizon line with
 CNNs (one can derive the camera roll and pitch angles from the horizon
 line position giving the camera focal length).
 
@@ -187,7 +187,7 @@ geo-calibration.
 When localizing a camera, data-driven algorithms search for k-nearest
 neighbors of the query image in a database of the geo-tagged imagery.
 To reduce the work of querying, the searching process is usually
-carried out in feature space of applicable number of  
+carried out in a feature space of an applicable number of  
 dimensions~\cite{im2gps, li2010location,zamir2010accurate}.
 However, due to limited accuracies of GPS signals and the biased
 distribution of human population, geo-tagged ground-level images
@@ -196,10 +196,10 @@ geographic space. To achieve better geo-calibration results, we
 need alternative image resources with more accurate geographic tags
 and more complete spatial coverage.
 
-Benefited from the fast growing monitoring satellite and drone markets,
-the geo-tagged aerial imagery becomes more publicly accessible
-than ever. Aerial imagery downloading services like
-Microsoft Bing Map provide aerial images of various
+Benefiting from the fast-growing monitoring satellite and drone markets,
+geo-tagged aerial imagery has become more publicly accessible
+than ever. Aerial imagery downloading service like
+Microsoft Bing Map provides aerial images of various
 resolutions, which cover most areas of the world with accurate
 geographic registration, making aerial imagery a rich source for
 reference databases. We refer to geo-calibration
@@ -207,7 +207,7 @@ methods which use the aerial imagery for geographic reference as
 ground-to-aerial geo-calibration. Data used for ground-to-aerial
 geo-calibration is referred to as cross-view pairs.
 A cross-view pair consists of a ground image and an aerial image at
-the same location, and but not necessarily aligned in orientation.
+the same location (sometimes aligned in orientation).
 
 Recent work on ground-to-aerial
 geo-calibration~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
@@ -222,7 +222,7 @@ state-of-the-art performance in geo-localization by extracting
 cross-domain global features using the
 NetVLAD~\cite{arandjelovic2016netvlad} technique.
 
-The key for the success of these methods is to learn good descriptive
+The key for the success of these methods is to learn descriptive
 features for ground-to-aerial imagery matching. In the following
 section, we will introduce literature about feature learning techniques.
 
