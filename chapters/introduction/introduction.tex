@@ -229,23 +229,23 @@ section, we will introduce literature about feature learning techniques.
 \subsection{Feature Learning with Weak Annotations}
 
 Manually engineering visual features is a common practice for
-computer vision tasks. One of the successful example of manual
+computer vision tasks. One of successful examples of manual
 feature is SIFT~\cite{lowe1999object}, which is widely used by many
 computer vision algorithms.
 In recent years, automatic feature engineering has drawn more
-attentions. Compared to the manual feature
-engineering, automatic feature engineering approaches allow to learn
-useful features without strong expert knowledge about the data. Among
-these learning approaches, deep neural networks are intensively studied.
-The most common approach for deep feature learning is full
-supervision, which usually requires large number of manual
+attention. Compared to the manual feature
+engineering, automatic feature engineering allows to learn
+useful features with much less (if not none) knowledge about the data.
+Among these learning approaches, deep neural networks are intensively
+studied.  The most common approach for deep feature learning is full
+supervision, which usually requires a large number of manual
 annotations~\cite{yosinski2014transferable,zhou2016learning,wen2016discriminative}.
 Unfortunately, such data is not always available for certain tasks or
-needs to invest a huge amount of human labors to create.  In contrast,
-unlabeled data is often plentiful (\ie cellphone photos in Instagram
+requires a huge amount of human labor. 
+In contrast, unlabeled data is often plentiful (\ie cellphone photos in Instagram
 or Youtube videos).
 
-To exploit these unlabeled data, recent work has explored
+To lavage these unlabeled data, recent work has explored
 self-supervision methods (sometimes referred to as unsupervised learning or
 pretext tasks) for training deep neural networks that capture useful
 visual representations~\cite{doersch2015unsupervised,pathak2016context}. 
@@ -254,13 +254,13 @@ exploit some known quantity of the data, like pixel color values, to
 avoid expensive manual annotation.
 By learning these quantities associated with the data, one
 can obtain useful features of the image.
-For example, Zhang et al.~\cite{zhang2016colorful} show how image
-colorization (synthesizing colors for a grayscale image) is a powerful
+For example, Zhang et al.~\cite{zhang2016colorful} show how
+synthesizing colors for a grayscale image is a powerful
 pretext task for learning visual representations. Pathak et
 al.~\cite{pathak2017learning} exploit low-level motion-based grouping
 cues for unsupervised feature learning.  
 %
-As new learning technique that addresses the lack of massive amounts
+As one of new learning techniques that address the lack of massive amounts
 of labeled data, domain adaptation forces the feature generating model
 to adapt another feature domain so that it improves the performance
 when dealing with new input
@@ -288,7 +288,7 @@ functions in a general model for geo-calibration.}
   \label{fig:intro:architecture}
 \end{figure}
 
-In this thesis, we make contributions in three main areas: 1) we
+We make contributions in three main areas: 1) we
 proposed a reflexible probabilistic model to jointly estimate the
 geo-calibration parameters, 2) we decomposed the full geo-calibration
 into several partial geo-calibration tasks, each of which provides a
@@ -315,17 +315,17 @@ over all geo-calibration parameters.
 First, we construct a scoring function to model the process of camera
 projecting the scene to image frame at given pose, location, and time.
 %
-The scoring function consists of a series of constraint functions,
-which measures the ``fitness'' between these geo-calibration
-parameters and the appearance of the image. 
+The scoring function measures the ``fitness'' between these
+geo-calibration parameters and the appearance of the image. 
+It consists of a series of constraint functions,
 %
 The scoring function is proportional to the probability distribution
 over the geo-calibration parameters. Since the integral over all
-possible parameters is intractable, We propose a Markov Chain Monte
+possible parameters is intractable, we propose a Markov Chain Monte
 Carlo (MCMC) sampling approach to approximate the underlying
 probability distribution. 
 %
-Our model is flexible that it allows different constraint functions
+Our model is flexible because it allows different constraint functions
 contribute to the scoring function. The details of this model can be
 found in \chapref{mcmc}.
 
@@ -343,7 +343,7 @@ sets of geo-calibration parameters.
   We build the constraint function for camera roll and pitch angles.
   Assuming the intrinsic parameters are known, camera roll and pitch
   angles can be derived from the horizon line position on the image.
-  Compared to directly detecting the camera pose, identifying horizon
+  Compared to directly detecting the camera pose, identifying the horizon
   line is easier because it can be explicitly estimated from the scene
   layout.
   In our work, we create a convolutional neural network to estimate the
@@ -397,7 +397,7 @@ sets of geo-calibration parameters.
 Understanding}
 Full supervision algorithms are powerful tools to learn useful image
 features. However, full supervision algorithms require large number
-of annotated data, which takes a lot of human labors and is usually
+of annotated data, which takes a lot of human labor and is usually
 unavailable.
 On the other hand, images with annotations like tags and GPS locations
 uploaded by individual users or captured automatically by smart
@@ -410,7 +410,7 @@ locations as weak annotations: 1) {\em ground-to-aerial segmentation}, and 2)
 \begin{itemize}[noitemsep]
   \item \textbf{Ground-to-Aerial Segmentation:}
   Semantic segmentation plays an important role in image understanding.
-  The training for semantic segmentation task requires a large number
+  The training for semantic segmentation tasks require a large number
   of annotated data.
   However, most large scale annotated datasets like ImageNet~\cite{ILSVRC15}
   and COCO~\cite{lin2014microsoft} are mostly made of ground-level
