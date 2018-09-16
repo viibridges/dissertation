@@ -45,9 +45,24 @@ this goal, we trained a CNN on a large dataset that consists of
 millions webcam frames and smart phone photos. The network takes image
 as input and output the discrete probability over location and time.
 In this work, we took the advantage that geo-tagged and
-temporal-tagged images are common nowadays, to build our training set.
+temporal-tagged images are common nowadays to build the training set.
 We demonstrate that geo-calibrating the camera helps learn image
 representations useful for image understanding.
 
-In \chapref{crosstransf}, we exploit the overhead image to construct
+In \chapref{crosstransf}, we exploit overhead imagery to construct
 the constraint function for the camera orientation and location.
+We trained a CNN that can estimate the semantic layout of the ground
+view image from the overhead image. During training, we learn the
+pixel-to-pixel correspondences from the aerial image to the ground. We
+project the semantic layout the of the overhead image to the ground
+view with the learned correspondence.
+When computing the output of the constraint function, we feed the
+aerial image of the gien location and orientation to the network. By
+comparing the aerial-to-ground with the real layout of the ground
+image, we measure the consistency between the two and use
+it as the value of our constraint function.
+We also demonstrate the efficiency of our method for CNN pre-training
+for aerial image segmentation.
+
+This thesis proposed a probability model for image geo-calibration. 
+Overall, we hope our work can provide xxx.
