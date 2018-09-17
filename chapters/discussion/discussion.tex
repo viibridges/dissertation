@@ -5,9 +5,12 @@ The goal of geo-calibration is to learn the camera pose, location and
 the time when the image was captured.
 Our thesis focused on developing deep geo-calibration algorithms for
 image understanding.
-Compared to previous work, our approaches give
-probabilistic outputs that are more flexible and are able to handle
-the uncertainty of the scene better.
+Compared to previous work, our approaches output probabilistic
+predictions that are able to handle the uncertainty of the scene
+better. Furthermore, we also show that
+learning to geo-calibrate a camera allows us to implicitly learn to
+understand the content of the scene.
+
 
 In \chapref{mcmc}, we proposed a flexible model to compute the
 probability over all geo-calibration parameters. In the high
@@ -19,8 +22,6 @@ constraint functions, and is proportional to the probability density
 function of the distribution. Since xxx is computationally
 intractable, in order to xxx, we approximated the probability
 density function using MCMC method.
-\todo{why grid method doesn't work here}
-\todo{evaluation}
 
 In \chapref{fasthorizon}, we focused on constraint function for the
 camera pose. Assuming the focal length is known, the camera roll and
@@ -64,5 +65,17 @@ it as the value of our constraint function.
 We also demonstrate the efficiency of our method for CNN pre-training
 for aerial image segmentation.
 
-This thesis proposed a probability model for image geo-calibration. 
-Overall, we hope our work can provide xxx.
+This thesis proposed a probabilistic model for image
+geo-calibration.
+The key to the success of this model is to find constraint
+functions that describe the relationship between geo-calibration
+parameters and the image content. We developed constraint
+functions for different set of parameters that can fit to the model.
+Furthermore, we also show that learning to geo-calibrate cameras helps learning
+useful features for image understanding.
+There are several possible future research directions for extending
+this work, including: exploiting map data in cross-view learning,
+replacing the CNN networks in our algorithms with Bayesian neural
+networks (BNNs).
+Overall, we hope our work can provide new ways for geo-calibration and
+pre-task training.
