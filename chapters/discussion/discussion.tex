@@ -14,31 +14,35 @@ understand the content of the scene.
 
 In \chapref{mcmc}, we proposed a flexible model to compute the
 probability over all geo-calibration parameters. In the high
-dimensional space of geo-calibration parameters, we defined an score
-function for every point in that space, to measure how well the
-geo-calibration parameters match the content of the input image. The
-score function is defined as a weighted summation of a series of
-constraint functions, and is proportional to the probability density
-function of the distribution. Since xxx is computationally
-intractable, in order to xxx, we approximated the probability
-density function using MCMC method.
+dimensional space of geo-calibration parameters, we defined a score
+function for every point, to measure how well the
+geo-calibration parameters match the content of the input image.
+The score function is a weighted summation of a series of
+constraint functions. It is proportional to the probability density
+function of the distribution. Since the analytic solution to the
+integral of the score function does not exist, we approximated the
+probability density function using MCMC method. Our model is flexible
+to any constraint function for geo-calibration parameters. We also
+demonstrated in our experiment that more accurate predictions can be
+obtained if the score function consists of more constraints.
 
-In \chapref{fasthorizon}, we focused on constraint function for the
-camera pose. Assuming the focal length is known, the camera roll and
-pitch angle can be derived from the horizon line position. Our
-algorithm identifies the horizon line from an input image that
-satisfied the Manhattan world assumption.
-Compared to most previous work which applies a bottom-up approach by
-fitting the horizon line from the vanishing points, we proposed a
-novel horizon-first approach to identify the horizon line.
-First we trained a CNN to estimate the distribution of the horizon
-line. Then we sample horizon line candidates from the horizon line
-distribution. For each horizon candidate, we find the possible
-vanishing points on it. Compared to previous work which searches for 
-vanishing points on image frame, our method accelerate the searching
-process by carrying it out in the 1D space. The probability of the
-horizon candidate to be the real horizon line is measured by how many
-and good vanishing points found on it. 
+In \chapref{fasthorizon}, we focused on developing constraint function
+for the camera pose. Assuming the focal length is known, the camera
+roll and pitch angle can be derived from the horizon line position.
+Our algorithm identifies the horizon line from the input image
+satisfying the Manhattan world assumption. Compared to the previous
+work, which applies a bottom-up approach where the horizon line is
+estimated after the vanishing point identification, we proposed a
+novel horizon-first approach where finding horizon line candidates is
+prior to identifying vanishing points.  As the first step, we trained
+a CNN to estimate the probability distribution over the horizon line.
+Then we sample horizon line candidates from the distribution. For each
+horizon candidate, we detect likely vanishing points on it. Compared
+to previous work which searches for vanishing points on the 2D image
+frame, our method is able to accelerate the searching process by
+reducing the searching space to 1D. The probability of the horizon
+line is measured by how convincing are the vanishing points found on
+it. 
 
 In \chapref{whenwhere}, we constructed the constraint function for 
 the image capture time and the camera location. In order to achieve
