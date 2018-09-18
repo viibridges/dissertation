@@ -44,15 +44,15 @@ reducing the searching space to 1D. The probability of the horizon
 line is measured by how convincing are the vanishing points found on
 it. 
 
-In \chapref{whenwhere}, we constructed the constraint function for 
-the image capture time and the camera location. In order to achieve
-this goal, we trained a CNN on a large dataset that consists of
-millions webcam frames and smart phone photos. The network takes image
-as input and output the discrete probability over location and time.
-In this work, we took the advantage that geo-tagged and
-temporal-tagged images are common nowadays to build the training set.
-We demonstrate that geo-calibrating the camera helps learn image
-representations useful for image understanding.
+In \chapref{whenwhere}, we developed the constraint function for 
+the image capture time and the camera location. 
+We trained a CNN on a large dataset to learn to predict the discrete
+probabilities over location and time given the input image.
+Unlike full supervision methods which require tedious work for manual
+annotations, our training dataset consists of millions webcam
+frames and smart phone photos with free time/location tags.
+In the experiments, we demonstrated that geo-calibrating the camera
+also helps learn useful image representations for image understanding.
 
 In \chapref{crosstransf}, we exploit overhead imagery to construct
 the constraint function for the camera orientation and location.
