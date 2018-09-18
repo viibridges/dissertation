@@ -54,32 +54,30 @@ frames and smart phone photos with free time/location tags.
 In the experiments, we demonstrated that geo-calibrating the camera
 also helps learn useful image representations for image understanding.
 
-In \chapref{crosstransf}, we exploit overhead imagery to construct
+In \chapref{crosstransf}, we exploited overhead imagery to construct
 the constraint function for the camera orientation and location.
 We trained a CNN that can estimate the semantic layout of the ground
-view image from the overhead image. During training, we learn the
-pixel-to-pixel correspondences from the aerial image to the ground. We
-project the semantic layout the of the overhead image to the ground
-view with the learned correspondence.
+view image from the overhead image. During training, the CNN learns the
+pixel-to-pixel correspondences from the aerial image to the ground
+image. 
+It then projects the semantic layout the of the overhead image to the
+ground view according to the learned correspondence.
 When computing the output of the constraint function, we feed the
-aerial image of the gien location and orientation to the network. By
-comparing the aerial-to-ground with the real layout of the ground
-image, we measure the consistency between the two and use
-it as the value of our constraint function.
-We also demonstrate the efficiency of our method for CNN pre-training
-for aerial image segmentation.
+aerial image of given location and orientation to the network. By
+comparing the aerial-to-ground layout with the layout computed from
+the ground image, we measure the consistency between these two and use
+consistency value as the output of the constraint function. 
+In our experiments, we also demonstrated the efficiency of our method
+for pre-training CNNs for aerial image segmentation.
 
-This thesis proposed a probabilistic model for image
-geo-calibration.
-The key to the success of this model is to find constraint
-functions that describe the relationship between geo-calibration
-parameters and the image content. We developed constraint
-functions for different set of parameters that can fit to the model.
-Furthermore, we also show that learning to geo-calibrate cameras helps learning
-useful features for image understanding.
-There are several possible future research directions for extending
-this work, including: exploiting map data in cross-view learning,
-replacing the CNN networks in our algorithms with Bayesian neural
-networks (BNNs).
-Overall, we hope our work can provide new ways for geo-calibration and
-pre-task training.
+This thesis proposed a probabilistic model for image geo-calibration.
+The key to the success of this model is to find constraint functions
+that describe the relationship between geo-calibration parameters and
+the image content. We developed constraint functions for different set
+of parameters that can fit to the model.  Furthermore, we also show
+that learning to geo-calibrate cameras helps learning useful features
+for image understanding.  There are several possible future research
+directions for extending this work, including: exploiting map data in
+cross-view learning, replacing the CNN networks in our algorithms with
+Bayesian neural networks (BNNs).  Overall, we hope our work can
+provide new ways for geo-calibration and pre-task training.
