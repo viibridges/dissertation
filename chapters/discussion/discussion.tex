@@ -6,80 +6,82 @@ the time when the image was captured.
 Our thesis focused on developing deep geo-calibration algorithms for
 image understanding.
 Compared to previous work, our approaches output probabilistic
-predictions that are able to handle the uncertainty of the scene
-better. Furthermore, we also show that
+predictions that handle the uncertainty of the scene
+better. Furthermore, we show that
 learning to geo-calibrate a camera allows us to implicitly learn to
 understand the content of the scene.
 
 
 In \chapref{mcmc}, we proposed a flexible model to compute the
-probability over all geo-calibration parameters. In the high
-dimensional space of geo-calibration parameters, we defined a score
-function for every point, to measure how well the
-geo-calibration parameters match the content of the input image.
-The score function is a weighted summation of a series of
+probability over geo-calibration parameters. We defined a score
+function in the space of geo-calibration parameters, to measure how
+well the geo-calibration parameters are able to describe the content
+of the input image.
+The score function is the summation of a series of weighted
 constraint functions. It is proportional to the probability density
-function of the distribution. Since the analytic solution to the
+function (PDF) of the distribution over the geo-calibration parameter setting.
+Since the analytic solution to the
 integral of the score function does not exist, we approximated the
-probability density function using MCMC method. Our model is flexible
-to any constraint function for geo-calibration parameters. We also
-demonstrated in our experiment that more accurate predictions can be
-obtained if the score function consists of more constraints.
+PDF using MCMC method. Our model is flexible such that one can apply
+any kind and number of constraint functions for geo-calibration
+parameters. We also demonstrated in our experiment that 
+score function with more constraint functions yields more accurate
+predictions.
 
-In \chapref{fasthorizon}, we focused on developing constraint function
-for the camera pose. Assuming the focal length is known, the camera
-roll and pitch angle can be derived from the horizon line position.
-Our algorithm identifies the horizon line from the input image
-satisfying the Manhattan world assumption. Compared to the previous
-work, which applies a bottom-up approach where the horizon line is
-estimated after the vanishing point identification, we proposed a
-novel horizon-first approach where finding horizon line candidates is
-prior to identifying vanishing points.  As the first step, we trained
-a CNN to estimate the probability distribution over the horizon line.
-Then we sample horizon line candidates from the distribution. For each
-horizon candidate, we detect likely vanishing points on it. Compared
-to previous work which searches for vanishing points on the 2D image
-frame, our method is able to accelerate the searching process by
-reducing the searching space to 1D. The probability of the horizon
-line is measured by how convincing are the vanishing points found on
-it. 
+In \chapref{fasthorizon}, we developed a constraint function for the
+camera pose. Since the camera roll and pitch angle can be derived from
+the horizon line position, our algorithm focuses on identifying the
+horizon line from the input image.
+Compared to the previous work, which applies bottom-up
+approaches where the horizon line is estimated after finding vanishing
+points, we proposed a novel horizon-first approach where
+identifying possible horizon lines is prior to detecting vanishing
+points. 
+Firstly, we trained a CNN to estimate the probability distribution
+over the horizon line. Then we sample horizon line candidates from
+it. For each horizon candidate, we detect likely
+vanishing points on it. Unlike the previous work which searches for
+vanishing points on the 2D image frame, our method is able to
+accelerate this process by reducing the searching space to
+1D (a line). The probability of the horizon line is measured by how
+convincing are the vanishing points found on it. 
 
 In \chapref{whenwhere}, we developed the constraint function for 
 the image capture time and the camera location. 
-We trained a CNN on a large dataset to learn to predict the discrete
-probabilities over location and time given the input image.
+We trained a CNN on a large dataset to predict the discrete
+probabilities over the capture time and the camera location given the
+input image.
 Unlike full supervision methods which require tedious work for manual
-annotations, our training dataset consists of millions webcam
+annotations, our training dataset consists of millions of webcam
 frames and smart phone photos with free time/location tags.
-In the experiments, we demonstrated that geo-calibrating the camera
-also helps learn useful image representations for image understanding.
+In the experiments, we demonstrated that learning to geo-calibrate the
+camera helps learn useful image representations for image understanding.
 
 In \chapref{crosstransf}, we exploited overhead imagery to construct
 the constraint function for the camera orientation and location.
-We trained a CNN that can estimate the semantic layout of the ground
-view image from the overhead image. During training, the CNN learns the
-pixel-to-pixel correspondences from the aerial image to the ground
-image. 
-It then projects the semantic layout the of the overhead image to the
-ground view according to the learned correspondence.
+We trained a CNN to estimate the semantic layout of the
+ground-view image from the overhead image. During training, the CNN
+learns the pixel-to-pixel correspondences from the aerial image to the
+ground image. Then it projects the semantic layout the of the overhead
+image to the ground view according to the learned correspondences.
 When computing the output of the constraint function, we feed the
 aerial image of given location and orientation to the network. By
 comparing the aerial-to-ground layout with the layout computed from
 the ground image, we measure the consistency between these two and use
-consistency value as the output of the constraint function. 
+the consistency value as the output of the constraint function. 
 In our experiments, we also demonstrated the efficiency of our method
 for pre-training CNNs for aerial image segmentation.
 
 This thesis proposed a flexible probabilistic framework for image
-geo-calibration. The key to the success of the framework is to find
+geo-calibration. The key to the success of this framework is to find
 constraint functions that can accurately model the relationship between
-geo-calibration parameters and the image content. 
+geo-calibration parameters and the content of the image. 
 We developed constraint functions for different set of parameters to
 fit to the framework. 
-Furthermore, we also show that learning to geo-calibrate cameras helps
+Furthermore, we also showed that learning to geo-calibrate cameras helps
 learning useful features for image understanding. There are several
 possible future research directions for extending this work,
 including: exploiting map data in cross-view learning, replacing the
 CNN networks in our algorithms with Bayesian neural networks (BNNs).
 Overall, we hope our work can provide new ways for geo-calibration and
-pretext task for learning image representations.
+image feature learning.
