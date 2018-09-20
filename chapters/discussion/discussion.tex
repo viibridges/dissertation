@@ -1,4 +1,4 @@
-\chapter{Discussion}
+\chapter{Summary}
 \label{chap:discussion}
 
 The goal of geo-calibration is to learn the camera pose, location and
@@ -22,11 +22,10 @@ constraint functions. It is proportional to the probability density
 function (PDF) of the distribution over the geo-calibration parameter setting.
 Since the analytic solution to the
 integral of the score function does not exist, we approximated the
-PDF using MCMC method. Our model is flexible such that one can apply
-any kind and number of constraint functions for geo-calibration
-parameters. We also demonstrated in our experiment that 
-score function with more constraint functions yields more accurate
-predictions.
+PDF using the MCMC method. Our model is flexible such that one can apply
+any kind and number of constraint functions.
+We also demonstrated in our experiments that score functions with more
+constraint functions yields more accurate predictions.
 
 In \chapref{fasthorizon}, we developed a constraint function for
 camera pose. Since the camera roll and pitch angle can be derived from
@@ -35,11 +34,11 @@ horizon line from the input image.
 Compared to the previous work, which applies bottom-up
 approaches where the horizon line is estimated after finding vanishing
 points, we proposed a novel horizon-first approach where
-identifying possible horizon lines is prior to detecting vanishing
+identifying possible horizon lines happens before detecting vanishing
 points. 
 Firstly, we trained a CNN to estimate the probability distribution
-over the horizon line. Then we sample horizon line candidates from
-it. For each horizon candidate, we detect likely
+over the horizon line. Then we sampled horizon line candidates from
+it. For each horizon candidate, we detected likely
 vanishing points on it. Unlike the previous work which searches for
 vanishing points on the 2D image frame, our method is able to
 accelerate this process by reducing the searching space to
@@ -62,10 +61,10 @@ the constraint function for the camera orientation and location.
 We trained a CNN to estimate the semantic layout of the
 ground-view image from the overhead image. During training, the CNN
 learns the pixel-to-pixel correspondences from the aerial image to the
-ground image. Then it projects the semantic layout the of the overhead
+ground image. Then it projects the semantic layout of the overhead
 image to the ground view according to the learned correspondences.
 When computing the output of the constraint function, we feed the
-aerial image of given location and orientation to the network. By
+aerial image of the given location and orientation to the network. By
 comparing the aerial-to-ground layout with the layout computed from
 the ground image, we measure the consistency between these two and use
 the consistency value as the output of the constraint function. 
@@ -76,12 +75,24 @@ This thesis proposed a flexible probabilistic framework for image
 geo-calibration. The key to the success of this framework is to find
 constraint functions that can accurately model the relationship between
 geo-calibration parameters and the content of the image. 
-We developed constraint functions for different set of parameters to
+We developed constraint functions for different sets of parameters to
 fit to the framework. 
 Furthermore, we also showed that learning to geo-calibrate cameras helps
-learning useful features for image understanding. There are several
-possible future research directions for extending this work,
-including: exploiting map data in cross-view learning, replacing the
-CNN networks in our algorithms with Bayesian neural networks (BNNs).
-Overall, we hope our work can provide new ways for geo-calibration and
-image feature learning.
+learning useful features for image understanding. 
+%
+There are several possible future research directions for extending
+this work. For example, like aerial imagery, map data also
+provides rich information about the environment from the top-view
+perspective. In \chapref{crosstransf}, we can incorporate map data in
+cross-view learning.
+%
+Bayesian neural networks (BNNs) have drawn a lot
+of attentions in recent years. The probabilistic nature of BNNs makes
+them excellent tools to model uncertainties. We can also replace CNNs
+with BNNs in our algorithms to achieve better performances.
+%There are several possible future research directions for extending
+%this work, including: exploiting map data in cross-view learning,
+%replacing the CNN networks in our algorithms with Bayesian neural
+%networks (BNNs).
+Overall, we hope our work can provide new ways for
+geo-calibration and image feature learning.
