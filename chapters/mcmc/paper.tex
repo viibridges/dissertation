@@ -185,15 +185,22 @@ functions:
 %
 where $w_i$ is a weight and $g(c_i, \Theta)$ is a constraint function
 which is larger if the calibration, $\Theta$, is more consistent with
-the image information, $c_i$. While the exact set of constraints
-depends on the image and database contents, we define a variety of
-% scott review
-functions in our implementation, including geometric configuration of
-multiple weak correspondences, constraints on geographic location, and
-priors over the field of view and camera orientation. 
+the image information, $c_i$. 
 %
-We focus on the first
-constraint, the latter are simple Gaussian and uniform distributions. 
+While the scoring function can take any type of constraint functions,
+we define a variety of functions in our implementation, including
+geometric configuration of multiple weak correspondences, constraints
+on geographic location, and priors over the field of view and camera
+orientation, to demonstrate the performance of our model. 
+%
+%While the exact set of constraints
+%depends on the image and database contents, we define a variety of
+%functions in our implementation, including geometric configuration of
+%multiple weak correspondences, constraints on geographic location, and
+%priors over the field of view and camera orientation. 
+%
+We focus on the first constraint specifically, the latter are simple
+Gaussian and uniform distributions. 
 
 \begin{figure}
 \begin{minipage}[b]{1\linewidth}
@@ -375,22 +382,6 @@ than the grid method.
 \subsection{Evaluation on Real Data}
 \label{sec:qualitative}
 
-We evaluate our method using two real query images obtained from
-Google Street View. We hand-picked two locations, downloaded the
-corresponding equirectangular panoramas and extracted a perspective
-image from each. For each query, we labeled objects and estimated the
-min/max distance from the camera to the object in the world.
-\figref{real-data} shows the qualitative result of this experiment.
-Our method generates high scoring samples that are close to the ground
-truth. We also found that simple prior constraints can dramatically
-affect localization accuracy. By restricting the range of the azimuth
-and FOV to be within $5^\circ$ of the ground truth, the distance from
-the top sample to the ground-truth location decreased from $12.5m$ to
-$0.6m$ and from $1.73m$ to $0.9m$, respectively, for two test
-cases.
-
-%azimuth estimated from the sun position~\cite{lalonde2010sun}
-
 \begin{figure}
   
   \centering
@@ -422,11 +413,31 @@ captures the  uncertainty.}
  \label{fig:real-data}
 \end{figure}
 
+We evaluate our method using two real query images obtained from
+Google Street View. We hand-picked two locations, downloaded the
+corresponding equirectangular panoramas and extracted a perspective
+image from each. For each query, we labeled objects and estimated the
+min/max distance from the camera to the object in the world.
+\figref{real-data} shows the qualitative result of this experiment.
+Our method generates high scoring samples that are close to the ground
+truth. We also found that simple prior constraints can dramatically
+affect localization accuracy. By restricting the range of the azimuth
+and FOV to be within $5^\circ$ of the ground truth, the distance from
+the top sample to the ground-truth location decreased from $12.5m$ to
+$0.6m$ and from $1.73m$ to $0.9m$, respectively, for two test
+cases.
+
+%azimuth estimated from the sun position~\cite{lalonde2010sun}
+
+
 \section{Conclusions}
 
 We proposed an MCMC-based approach framework for single image camera
 geo-calibration which leverages a large geographic database. Our
 results demonstrate the superiority of our method versus several
 baseline methods, without requiring nearby ground-level imagery as is
-typical for most vision techniques. For future work, we will explore
-methods for integrating approaches which use image-based matching. 
+typical for most vision techniques.
+While we applied only a small set of primitive constraints in this work,  
+the proposed framework is able to take any kind of constraints.
+In the following chapters, we will explore to develop more sophisticated
+constraint functions.
