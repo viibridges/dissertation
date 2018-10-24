@@ -41,7 +41,7 @@ dubbed filter flow, described by Seitz and Baker~\cite{filterflow}.
 
 There has been significant interest recently in predicting
 ground image features from aerial imagery for the task of
-ground image geolocalization~\cite{workman2015wide}. Our work is
+ground image geo-localization~\cite{workman2015wide}. Our work is
 unique in that it is the first to attempt to predict a dense
 pixel-level segmentation of the ground image. We demonstrate the
 value of this approach in several ways. 
@@ -112,12 +112,12 @@ Ghouaiel and Lef{\`e}vre~\cite{ghouaiel2016coupling} transform
 geo-tagged ground-level panoramas to a top-down view to enable
 comparisons with aerial imagery for the task of change detection.
 Recent work on cross-view image
-geolocalization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
+geo-localization~\cite{lin2013cross,lin2015learning,workman2015geocnn,workman2015wide}
  has shown that convolutional neural
 networks are capable of extracting features from aerial imagery
 that can be matched to features extracted from ground imagery.
 Vo \etal~\cite{vo2016localizing} extend this line of work,
-demonstrating improved geolocalization performance by applying an
+demonstrating improved geo-localization performance by applying an
 auxiliary loss function to regress the ground-level camera orientation
 with respect to the aerial image. To our knowledge, our work is the
 first work to explore predicting the semantic layout of a ground
@@ -374,7 +374,7 @@ feature map.
 \section{Evaluation and Applications}
 In this section, we will show that our network architecture can be
 used in four different tasks: 1) weakly supervised semantic learning, 
-2) aerial imagery labeling, 3) orientation regression and geocalibration, 
+2) aerial imagery labeling, 3) orientation regression and geo-calibration, 
 and 4) cross-view image synthesis. Additional qualitative results and 
 the complete network structure used for cross-view image synthesis 
 can be found in our supplemental materials.
@@ -570,7 +570,7 @@ training images and the $y$-axis is average precision.}
 \end{table}
 
 
-\subsection{Cross-view for Geocalibration}
+\subsection{Cross-view for Geo-Calibration}
 
 %estimated our algorithm is capable to estimate the orientation and
 %even the accurate location of the ground-level camera.
@@ -677,9 +677,9 @@ from the aerial point of view.}
 
 \item{\textbf{CVUSA:}} We use the test set introduced
 in~\secref{dataset_cross} to create this dataset, it has two parts for
-orientation estimation and geocalibration, respectively.  For the
+orientation estimation and geo-calibration, respectively.  For the
 orientation regression task, we rotate the aerial image to a random
-angle. For the fine-grained geocalibration experiment, we center-crop
+angle. For the fine-grained geo-calibration experiment, we center-crop
 the aerial image around a random $x,y$ offset, then rotate the image to a
 random angle.  In both experiments, the heading direction of the
 ground images are the same. We center crop a 224 $\times$ 448
@@ -718,7 +718,7 @@ CVUSA dataset in \figref{orient:err}.
 
 
 
-\paragraph{Fine-grained Geocalibration}
+\paragraph{Fine-grained Geo-Calibration}
 
 For this task, we assume that we know the focal length of the camera
 and have a rough estimate of the camera location (i.e., with 100
@@ -756,7 +756,7 @@ most likely location and orientation pair.
   \includegraphics[height=\aheight]{crosstransf/geocali/305_pred}
   \hfill
 
-  \caption{Fine-grained geocalibration results on CVUSA. (left) From
+  \caption{Fine-grained geo-calibration results on CVUSA. (left) From
 top to bottom are the $I_g$, $L_g$, and $L_{g'}$ respectively.  We
 visualize three classes on the labels: {\em road} (red), {\em
 vegetation} (green), and {\em man-made} (blue).  (right) Orientation
