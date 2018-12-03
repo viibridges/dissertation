@@ -162,11 +162,15 @@
 \if@pretty\relax\else
 \newcommand{\@theauthor}{}
 \newcommand{\@thetitle}{}
+\newcommand{\@theorcid}{}
 \renewcommand{\author}[1]{
   \renewcommand{\@theauthor}{#1}
 }
 \renewcommand{\title}[1]{
   \renewcommand{\@thetitle}{#1}
+}
+\newcommand{\orcid}[1]{
+  \renewcommand{\@theorcid}{#1}
 }
 \fi
 \newcommand{\@theabstract}{}
@@ -324,7 +328,8 @@
       \vspace{1.5\baselineskip}
       \@theyear
       \vfill
-      Copyright$^\copyright$\ \@theauthor\ \@theyear
+      Copyright$^\copyright$\ \@theauthor\ \@theyear\\
+      ORCID: \@theorcid
       \vspace{\@titlebottomskip}
     \end{center}
   %\end{titlingpage}
