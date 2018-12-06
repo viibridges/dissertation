@@ -8,5 +8,6 @@
 *.toc
 *.fdb_latexmk
 *.fls
+*.out
 /dissertation.pdf
 *.swp
