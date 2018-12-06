@@ -452,10 +452,10 @@
   \chapter[Acknowledgments]{\textnormal{\normalsize{ACKNOWLEDGMENTS}}}
   \thispagestyle{plain}
   %\begin{center}{\textnormal{\normalsize{ACKNOWLEDGMENTS}}}\end{center}
-  \begin{DoubleSpace}
+  \begin{OnehalfSpace}
 }{
   %\clearpage
-  \end{DoubleSpace}
+  \end{OnehalfSpace}
   \clearpage
 }
 \newenvironment{dedication}{
